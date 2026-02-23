@@ -1,6 +1,6 @@
 # Composable Component Library
 
-A React component library built with TypeScript, Vite, and Tailwind CSS. Includes composable UI components and visual editing with Puck.
+A ShadCN component library built with TypeScript, Vite, and Tailwind CSS. Includes composable UI components and visual editing with Puck.
 
 ## Tech stack
 
