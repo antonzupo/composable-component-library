@@ -6,8 +6,14 @@ import { alertPuckConfig, puckCategory as alertCategory } from "@/components/Ale
 import { aspectRatioPuckConfig, puckCategory as aspectRatioCategory } from "@/components/AspectRatio/puck";
 import { avatarPuckConfig, puckCategory as avatarCategory } from "@/components/Avatar/puck";
 import { badgePuckConfig, puckCategory as badgeCategory } from "@/components/Badge/puck";
+import { breadcrumbPuckConfig, puckCategory as breadcrumbCategory } from "@/components/Breadcrumb/puck";
 import { buttonPuckConfig, puckCategory as buttonCategory } from "@/components/Button/puck";
+import { calendarPuckConfig, puckCategory as calendarCategory } from "@/components/Calendar/puck";
 import { cardPuckConfig, puckCategory as cardCategory } from "@/components/Card/puck";
+import { carouselPuckConfig, puckCategory as carouselCategory } from "@/components/Carousel/puck";
+import { chartPuckConfig, puckCategory as chartCategory } from "@/components/Chart/puck";
+import { checkboxPuckConfig, puckCategory as checkboxCategory } from "@/components/Checkbox/puck";
+import { collapsiblePuckConfig, puckCategory as collapsibleCategory } from "@/components/Collapsible/puck";
 import { flexPuckConfig, puckCategory as flexCategory } from "@/components/Flex/puck";
 import { gridPuckConfig, puckCategory as gridCategory } from "@/components/Grid/puck";
 import { heroCardPuckConfig, puckCategory as heroCardCategory } from "@/components/HeroCard/puck";
@@ -29,9 +35,15 @@ const componentCategories: Array<{ name: keyof Components; category: PuckCategor
   { name: "Badge", category: badgeCategory },
   { name: "Text", category: textCategory },
   { name: "Image", category: imageCategory },
+  { name: "Checkbox", category: checkboxCategory },
+  { name: "Breadcrumb", category: breadcrumbCategory },
   { name: "Accordion", category: accordionCategory },
   { name: "Alert", category: alertCategory },
   { name: "AlertDialog", category: alertDialogCategory },
+  { name: "Calendar", category: calendarCategory },
+  { name: "Carousel", category: carouselCategory },
+  { name: "Chart", category: chartCategory },
+  { name: "Collapsible", category: collapsibleCategory },
   { name: "AspectRatio", category: aspectRatioCategory },
   { name: "Avatar", category: avatarCategory },
   { name: "Card", category: cardCategory },
@@ -63,11 +75,17 @@ export const config: Config<Components> = {
     ...alertPuckConfig,
     ...aspectRatioPuckConfig,
     ...avatarPuckConfig,
+    ...breadcrumbPuckConfig,
     ...buttonPuckConfig,
+    ...calendarPuckConfig,
+    ...cardPuckConfig,
+    ...carouselPuckConfig,
+    ...chartPuckConfig,
+    ...collapsiblePuckConfig,
+    ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,
     ...textPuckConfig,
-    ...cardPuckConfig,
     ...sectionPuckConfig,
     ...heroCardPuckConfig,
     ...gridPuckConfig,

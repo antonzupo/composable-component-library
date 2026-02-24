@@ -158,4 +158,70 @@ export type Components = {
     className: string;
     id: string;
   };
+  Breadcrumb: {
+    items: Array<{ label: string; href?: string }>;
+    separator: "slash" | "chevron" | "dot";
+    className: string;
+    id: string;
+  };
+  Calendar: {
+    month: number;
+    year: number;
+    showHeader: boolean;
+    showWeekdays: boolean;
+    variant: "default" | "outline";
+    className: string;
+    id: string;
+  };
+  Carousel: {
+    slides: Array<{ slide: unknown }>;
+    autoPlay: boolean;
+    interval: number;
+    showArrows: boolean;
+    showDots: boolean;
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    className: string;
+    id: string;
+  };
+  Chart: {
+    dataSourceMode: "manual" | "api";
+    dataSourceUrl: string;
+    type: "line" | "bar" | "pie";
+    data: Array<Record<string, string | number>>;
+    dataKey: string;
+    xAxisKey: string;
+    lines: string;
+    bars: string;
+    height: number;
+    showGrid: boolean;
+    showLegend: boolean;
+    showTooltip: boolean;
+    variant: "default" | "muted";
+    className: string;
+    id: string;
+  };
+  Checkbox: {
+    label: string;
+    checked: boolean;
+    disabled: boolean;
+    size: "default" | "sm" | "lg";
+    className: string;
+    id: string;
+  };
+  Collapsible: {
+    trigger: string;
+    content: unknown[];
+    defaultOpen: boolean;
+    triggerAlign: "left" | "center" | "right";
+    contentAlign: "left" | "center" | "right";
+    triggerPadding: "none" | "sm" | "md" | "lg";
+    contentPadding: "none" | "sm" | "md" | "lg";
+    showIcon: boolean;
+    iconPosition: "start" | "end";
+    variant: "default" | "bordered" | "ghost";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    fullWidth: boolean;
+    className: string;
+    id: string;
+  };
 };
