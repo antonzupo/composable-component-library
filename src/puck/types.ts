@@ -167,9 +167,21 @@ export type Components = {
   Calendar: {
     month: number;
     year: number;
+    defaultMonth?: string;
     showHeader: boolean;
     showWeekdays: boolean;
+    showOutsideDays: boolean;
+    showNavigation: boolean;
+    captionLayout: "label" | "dropdown";
+    weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    mode: "single" | "range";
+    showPresets: boolean;
+    presetKeys: Array<{ key: string }>;
+    showTime: boolean;
+    bookedDates: Array<{ date: string }>;
+    cellSize: "sm" | "default" | "lg";
     variant: "default" | "outline";
+    buttonVariant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     className: string;
     id: string;
   };

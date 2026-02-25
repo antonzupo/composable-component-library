@@ -1,9 +1,13 @@
 import type { Data } from "@puckeditor/core";
 
-/**
- * Sample template: hero, breadcrumb, feature grid, accordion FAQ, alert, and nested card.
- * Showcases components in a client-ready layout.
- */
+function localDateString(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/** Sample template: hero, breadcrumb, feature grid, calendar, accordion FAQ, alert, and nested card. */
 export const sampleData: Data = {
   root: { props: {} },
   content: [
@@ -278,6 +282,102 @@ export const sampleData: Data = {
       },
     },
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-1fe08a5e-29f1-426a-8c91-b6d87add34dd" } },
+
+    // Calendar
+    {
+      type: "Section",
+      props: {
+        content: [
+          {
+            type: "Text",
+            props: {
+              content: "Pick a date",
+              as: "h2",
+              align: "center",
+              className: "text-foreground font-semibold tracking-tight",
+              id: "calendar-heading",
+            },
+          },
+          { type: "Space", props: { size: "md", direction: "vertical", className: "", id: "Space-calendar-1" } },
+          {
+            type: "Calendar",
+            props: {
+              month: new Date().getMonth() + 1,
+              year: new Date().getFullYear(),
+              showHeader: true,
+              showWeekdays: true,
+              showOutsideDays: false,
+              showNavigation: true,
+              captionLayout: "label",
+              weekStartsOn: 0,
+              mode: "single",
+              showPresets: true,
+              presetKeys: [
+                { key: "today" },
+                { key: "tomorrow" },
+                { key: "next7days" },
+              ],
+              showTime: false,
+              bookedDates: (() => {
+                const today = new Date();
+                const d2 = new Date(today);
+                d2.setDate(today.getDate() + 2);
+                const d5 = new Date(today);
+                d5.setDate(today.getDate() + 5);
+                return [{ date: localDateString(d2) }, { date: localDateString(d5) }];
+              })(),
+              cellSize: "default",
+              variant: "default",
+              buttonVariant: "ghost",
+              className: "mx-auto",
+              id: "calendar-single",
+            },
+          },
+          { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-calendar-2" } },
+          {
+            type: "Text",
+            props: {
+              content: "Select a range",
+              as: "h3",
+              align: "center",
+              className: "text-foreground font-medium",
+              id: "calendar-range-heading",
+            },
+          },
+          { type: "Space", props: { size: "md", direction: "vertical", className: "", id: "Space-calendar-3" } },
+          {
+            type: "Calendar",
+            props: {
+              month: new Date().getMonth() + 1,
+              year: new Date().getFullYear(),
+              showHeader: true,
+              showWeekdays: true,
+              showOutsideDays: true,
+              showNavigation: true,
+              captionLayout: "label",
+              weekStartsOn: 0,
+              mode: "range",
+              showPresets: true,
+              presetKeys: [
+                { key: "thisWeek" },
+                { key: "next7days" },
+                { key: "thisMonth" },
+              ],
+              showTime: false,
+              bookedDates: [],
+              cellSize: "default",
+              variant: "outline",
+              buttonVariant: "ghost",
+              className: "mx-auto",
+              id: "calendar-range",
+            },
+          },
+        ],
+        id: "calendar-section",
+        className: "bg-muted/10 rounded-xl py-8",
+      },
+    },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-calendar-after" } },
 
     // Alert CTA
     {
