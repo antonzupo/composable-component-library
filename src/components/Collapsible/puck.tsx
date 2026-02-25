@@ -44,6 +44,14 @@ export const collapsiblePuckConfig = {
           { label: "Open", value: true },
         ],
       },
+      appearance: {
+        type: "select",
+        label: "Appearance",
+        options: [
+          { label: "Default", value: "default" },
+          { label: "File Tree", value: "fileTree" },
+        ],
+      },
       triggerAlign: {
         type: "select",
         label: "Trigger alignment",
@@ -133,6 +141,7 @@ export const collapsiblePuckConfig = {
       trigger: "Click to expand",
       content: [],
       defaultOpen: false,
+      appearance: "default" as const,
       triggerAlign: "left" as const,
       contentAlign: "left" as const,
       triggerPadding: "md" as const,
@@ -149,6 +158,7 @@ export const collapsiblePuckConfig = {
       trigger,
       content,
       defaultOpen,
+      appearance,
       triggerAlign,
       contentAlign,
       triggerPadding,
@@ -167,6 +177,7 @@ export const collapsiblePuckConfig = {
         <Collapsible
           trigger={trigger}
           defaultOpen={defaultOpen}
+          appearance={appearance}
           triggerAlign={triggerAlign}
           contentAlign={contentAlign}
           triggerPadding={triggerPadding}

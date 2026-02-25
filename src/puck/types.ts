@@ -191,6 +191,9 @@ export type Components = {
     interval: number;
     showArrows: boolean;
     showDots: boolean;
+    size: "1" | "2" | "3";
+    spacing: "none" | "sm" | "md" | "lg";
+    orientation: "horizontal" | "vertical";
     rounded: "none" | "sm" | "md" | "lg" | "full";
     className: string;
     id: string;
@@ -224,6 +227,7 @@ export type Components = {
     trigger: string;
     content: unknown[];
     defaultOpen: boolean;
+    appearance: "default" | "fileTree";
     triggerAlign: "left" | "center" | "right";
     contentAlign: "left" | "center" | "right";
     triggerPadding: "none" | "sm" | "md" | "lg";

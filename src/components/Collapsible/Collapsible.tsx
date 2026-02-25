@@ -48,6 +48,7 @@ export type CollapsibleProps = React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof collapsibleVariants> & {
     trigger: string;
     defaultOpen?: boolean;
+    appearance?: "default" | "fileTree";
     triggerAlign?: "left" | "center" | "right";
     contentAlign?: "left" | "center" | "right";
     triggerPadding?: "none" | "sm" | "md" | "lg";
@@ -58,11 +59,27 @@ export type CollapsibleProps = React.HTMLAttributes<HTMLDivElement> &
     children?: React.ReactNode;
   };
 
+const FolderIcon = ({ open }: { open: boolean }) => (
+  <span className="inline-flex size-4 shrink-0 text-muted-foreground" aria-hidden>
+    {open ? (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+        <path d="M2 10h20" />
+      </svg>
+    )}
+  </span>
+);
+
 const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
   (
     {
       trigger,
       defaultOpen = false,
+      appearance = "default",
       triggerAlign = "left",
       contentAlign = "left",
       triggerPadding = "md",
@@ -83,14 +100,17 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
     const triggerId = React.useId();
     const contentId = React.useId();
 
-    const icon = showIcon ? <ChevronIcon open={open} /> : null;
+    const isFileTree = appearance === "fileTree";
+    const icon = showIcon ? (isFileTree ? <FolderIcon open={open} /> : <ChevronIcon open={open} />) : null;
 
     return (
       <div
         ref={ref}
         data-state={open ? "open" : "closed"}
+        data-appearance={appearance}
         className={cn(
           collapsibleVariants({ variant, rounded }),
+          isFileTree && "border-0 bg-transparent rounded-none",
           fullWidth && "w-full",
           className
         )}
@@ -105,8 +125,9 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
           onClick={() => setOpen((prev) => !prev)}
           className={cn(
             "flex w-full items-center gap-2 font-medium transition-[color,background-color] hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            triggerPaddingClass(triggerPadding),
-            "px-4",
+            isFileTree && "pl-0 pr-2 py-1.5 text-sm font-normal hover:bg-muted/30 rounded-md",
+            !isFileTree && triggerPaddingClass(triggerPadding),
+            !isFileTree && "px-4",
             iconPosition === "start" ? "flex-row" : "flex-row-reverse",
             alignClass(triggerAlign)
           )}
@@ -126,7 +147,8 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
             className={cn(
               "text-muted-foreground text-sm",
               contentPaddingClass(contentPadding),
-              "px-4",
+              isFileTree && "pl-6 pr-2 border-l border-border ml-2",
+              !isFileTree && "px-4",
               alignClass(contentAlign)
             )}
           >

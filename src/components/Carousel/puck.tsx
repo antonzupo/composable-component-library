@@ -50,6 +50,33 @@ export const carouselPuckConfig = {
           { label: "No", value: false },
         ],
       },
+      size: {
+        type: "select",
+        label: "Size",
+        options: [
+          { label: "1 slide", value: "1" },
+          { label: "2 slides (basis-1/2)", value: "2" },
+          { label: "3 slides (basis-1/3)", value: "3" },
+        ],
+      },
+      spacing: {
+        type: "select",
+        label: "Spacing",
+        options: [
+          { label: "None", value: "none" },
+          { label: "Small", value: "sm" },
+          { label: "Medium", value: "md" },
+          { label: "Large", value: "lg" },
+        ],
+      },
+      orientation: {
+        type: "select",
+        label: "Orientation",
+        options: [
+          { label: "Horizontal", value: "horizontal" },
+          { label: "Vertical", value: "vertical" },
+        ],
+      },
       rounded: {
         type: "select",
         label: "Rounded",
@@ -70,11 +97,14 @@ export const carouselPuckConfig = {
       interval: 5000,
       showArrows: true,
       showDots: true,
+      size: "1" as const,
+      spacing: "md" as const,
+      orientation: "horizontal" as const,
       rounded: "md" as const,
       className: "",
       id: "",
     },
-    render: ({ slides, autoPlay, interval, showArrows, showDots, rounded, className, id }: Components["Carousel"]) => {
+    render: ({ slides, autoPlay, interval, showArrows, showDots, size, spacing, orientation, rounded, className, id }: Components["Carousel"]) => {
       const slideComponents = (slides ?? []).map((item, i) => {
         const Slide = item.slide as ComponentType<AreaContentProps> | undefined;
         return Slide ? <Slide key={i} minEmptyHeight={200} /> : <div key={i} className="flex min-h-[200px] items-center justify-center bg-muted text-muted-foreground">Slide</div>;
@@ -85,6 +115,9 @@ export const carouselPuckConfig = {
           interval={interval}
           showArrows={showArrows}
           showDots={showDots}
+          size={size}
+          spacing={spacing}
+          orientation={orientation}
           rounded={rounded}
           className={className || undefined}
           id={id || undefined}
