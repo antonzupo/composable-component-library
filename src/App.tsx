@@ -26,7 +26,10 @@ function App() {
         <Puck
           config={config as Config}
           data={data}
-          onPublish={(d) => setData(d)}
+          onPublish={(d) => {
+            setData(d);
+            console.log(JSON.stringify(d));
+          }}
         />
       ) : (
         <div className="mx-auto max-w-6xl p-6">
