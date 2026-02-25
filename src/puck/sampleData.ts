@@ -30,7 +30,7 @@ export const sampleData: Data = {
     },
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-4c4cee8e-1ae5-4585-bc14-f93150a6ee4a" } },
 
-    // Breadcrumb
+    // Breadcrumb (shows per-item node: default, dropdown, collapsed)
     {
       type: "Section",
       props: {
@@ -39,9 +39,12 @@ export const sampleData: Data = {
             type: "Breadcrumb",
             props: {
               items: [
-                { label: "Home", href: "/" },
-                { label: "Templates", href: "/templates" },
-                { label: "Overview" },
+                { label: "Home", href: "/", node: "default" },
+                { label: "Products", href: "/products", node: "default" },
+                { label: "Wines", href: "/products/wines", node: "dropdown" },
+                { label: "Red", href: "/products/wines/red", node: "dropdown" },
+                { label: "Region", href: "/products/wines/red/region", node: "collapsed" },
+                { label: "Current" },
               ],
               separator: "chevron",
               className: "",

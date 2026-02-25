@@ -159,7 +159,7 @@ export type Components = {
     id: string;
   };
   Breadcrumb: {
-    items: Array<{ label: string; href?: string }>;
+    items: Array<{ label: string; href?: string; node?: "default" | "dropdown" | "collapsed" }>;
     separator: "slash" | "chevron" | "dot";
     className: string;
     id: string;

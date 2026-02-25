@@ -10,10 +10,20 @@ export const breadcrumbPuckConfig = {
       items: {
         type: "array",
         label: "Items",
-        getItemSummary: (item: { label: string; href?: string }) => item?.label ?? "Item",
+        getItemSummary: (item: { label: string; href?: string; node?: string }) =>
+          item?.label ? (item.node && item.node !== "default" ? `${item.label} (${item.node})` : item.label) : "Item",
         arrayFields: {
           label: { type: "text", label: "Label" },
           href: { type: "text", label: "Link (optional)" },
+          node: {
+            type: "select",
+            label: "Node (middle items only)",
+            options: [
+              { label: "Default", value: "default" },
+              { label: "Collapsed", value: "collapsed" },
+              { label: "Dropdown", value: "dropdown" },
+            ],
+          },
         },
       },
       separator: {
@@ -30,8 +40,9 @@ export const breadcrumbPuckConfig = {
     },
     defaultProps: {
       items: [
-        { label: "Home", href: "/" },
-        { label: "Products", href: "/products" },
+        { label: "Home", href: "/", node: "default" },
+        { label: "Products", href: "/products", node: "default" },
+        { label: "Category", href: "/category", node: "dropdown" },
         { label: "Current" },
       ],
       separator: "slash" as const,
