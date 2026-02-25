@@ -240,4 +240,94 @@ export type Components = {
     className: string;
     id: string;
   };
+  Combobox: {
+    placeholder: string;
+    emptyText: string;
+    options: Array<{ value: string; label: string }>;
+    multiple: boolean;
+    disabled: boolean;
+    size: "sm" | "default" | "lg";
+    variant: "default" | "outline";
+    position: "start" | "end";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    className: string;
+    id: string;
+  };
+  Command: {
+    placeholder: string;
+    emptyText: string;
+    groups: Array<{
+      heading?: string;
+      items: Array<{ label: string; value?: string; shortcut?: string }>;
+    }>;
+    disabled: boolean;
+    size: "sm" | "default" | "lg";
+    variant: "default" | "outline";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    className: string;
+    id: string;
+  };
+  ContextMenu: {
+    items: Array<{ label: string; shortcut?: string; disabled?: boolean }>;
+    triggerContent: unknown[];
+    side: "top" | "right" | "bottom" | "left";
+    align: "start" | "center" | "end";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    className: string;
+    id: string;
+  };
+  DataTable: {
+    columns: Array<{ key: string; label: string; width?: string }>;
+    data: Array<Record<string, string | number>>;
+    size: "sm" | "default" | "lg";
+    variant: "default" | "bordered" | "striped";
+    showHeader: boolean;
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    className: string;
+    id: string;
+  };
+  DatePicker: {
+    triggerLabel: string;
+    placeholder: string;
+    defaultMonth: string;
+    mode: "single" | "range";
+    showTime: boolean;
+    weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    cellSize: "sm" | "default" | "lg";
+    variant: "default" | "outline";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    className: string;
+    id: string;
+  };
+  Dialog: {
+    title: string;
+    description: string;
+    content: unknown[];
+    showClose: boolean;
+    titleAlign: "left" | "center" | "right";
+    descriptionAlign: "left" | "center" | "right";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    padding: "none" | "sm" | "md" | "lg";
+    className: string;
+    id: string;
+  };
+  Direction: {
+    dir: "ltr" | "rtl";
+    content: unknown[];
+    className: string;
+    id: string;
+  };
+  Drawer: {
+    title: string;
+    description: string;
+    content: unknown[];
+    side: "top" | "right" | "bottom" | "left";
+    showHandle: boolean;
+    titleAlign: "left" | "center" | "right";
+    descriptionAlign: "left" | "center" | "right";
+    rounded: "none" | "sm" | "md" | "lg" | "full";
+    padding: "none" | "sm" | "md" | "lg";
+    className: string;
+    id: string;
+  };
 };

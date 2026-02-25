@@ -14,6 +14,14 @@ import { carouselPuckConfig, puckCategory as carouselCategory } from "@/componen
 import { chartPuckConfig, puckCategory as chartCategory } from "@/components/Chart/puck";
 import { checkboxPuckConfig, puckCategory as checkboxCategory } from "@/components/Checkbox/puck";
 import { collapsiblePuckConfig, puckCategory as collapsibleCategory } from "@/components/Collapsible/puck";
+import { comboboxPuckConfig, puckCategory as comboboxCategory } from "@/components/Combobox/puck";
+import { commandPuckConfig, puckCategory as commandCategory } from "@/components/Command/puck";
+import { contextMenuPuckConfig, puckCategory as contextMenuCategory } from "@/components/ContextMenu/puck";
+import { dataTablePuckConfig, puckCategory as dataTableCategory } from "@/components/DataTable/puck";
+import { datePickerPuckConfig, puckCategory as datePickerCategory } from "@/components/DatePicker/puck";
+import { dialogPuckConfig, puckCategory as dialogCategory } from "@/components/Dialog/puck";
+import { directionPuckConfig, puckCategory as directionCategory } from "@/components/Direction/puck";
+import { drawerPuckConfig, puckCategory as drawerCategory } from "@/components/Drawer/puck";
 import { flexPuckConfig, puckCategory as flexCategory } from "@/components/Flex/puck";
 import { gridPuckConfig, puckCategory as gridCategory } from "@/components/Grid/puck";
 import { heroCardPuckConfig, puckCategory as heroCardCategory } from "@/components/HeroCard/puck";
@@ -44,6 +52,14 @@ const componentCategories: Array<{ name: keyof Components; category: PuckCategor
   { name: "Carousel", category: carouselCategory },
   { name: "Chart", category: chartCategory },
   { name: "Collapsible", category: collapsibleCategory },
+  { name: "Combobox", category: comboboxCategory },
+  { name: "Command", category: commandCategory },
+  { name: "ContextMenu", category: contextMenuCategory },
+  { name: "DataTable", category: dataTableCategory },
+  { name: "DatePicker", category: datePickerCategory },
+  { name: "Dialog", category: dialogCategory },
+  { name: "Direction", category: directionCategory },
+  { name: "Drawer", category: drawerCategory },
   { name: "AspectRatio", category: aspectRatioCategory },
   { name: "Avatar", category: avatarCategory },
   { name: "Card", category: cardCategory },
@@ -82,6 +98,14 @@ export const config: Config<Components> = {
     ...carouselPuckConfig,
     ...chartPuckConfig,
     ...collapsiblePuckConfig,
+    ...comboboxPuckConfig,
+    ...commandPuckConfig,
+    ...contextMenuPuckConfig,
+    ...dataTablePuckConfig,
+    ...datePickerPuckConfig,
+    ...dialogPuckConfig,
+    ...directionPuckConfig,
+    ...drawerPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,
