@@ -7,25 +7,21 @@ export const comboboxPuckConfig = {
   Combobox: {
     label: "Combobox",
     fields: {
-      placeholder: { type: "text", label: "Placeholder" },
-      emptyText: { type: "text", label: "Empty state text" },
       options: {
         type: "array",
         label: "Options",
-        getItemSummary: (item: { value: string; label: string }) => item?.label ?? item?.value ?? "Option",
+        getItemSummary: (item: { value: string; label: string }) =>
+          item?.label ? `${item.label} (${item.value})` : "Option",
         arrayFields: {
           value: { type: "text", label: "Value" },
           label: { type: "text", label: "Label" },
         },
+        defaultItemProps: () => ({ value: "", label: "" }),
       },
-      multiple: {
-        type: "select",
-        label: "Multiple selection",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
+      value: { type: "text", label: "Selected value" },
+      placeholder: { type: "text", label: "Placeholder" },
+      searchPlaceholder: { type: "text", label: "Search placeholder" },
+      emptyText: { type: "text", label: "Empty state text" },
       disabled: {
         type: "select",
         label: "Disabled",
@@ -34,71 +30,42 @@ export const comboboxPuckConfig = {
           { label: "Yes", value: true },
         ],
       },
-      size: {
-        type: "select",
-        label: "Size",
-        options: [
-          { label: "Small", value: "sm" },
-          { label: "Default", value: "default" },
-          { label: "Large", value: "lg" },
-        ],
-      },
-      variant: {
-        type: "select",
-        label: "Variant",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Outline", value: "outline" },
-        ],
-      },
-      position: {
-        type: "select",
-        label: "Position",
-        options: [
-          { label: "Start", value: "start" },
-          { label: "End", value: "end" },
-        ],
-      },
-      rounded: {
-        type: "select",
-        label: "Rounded",
-        options: [
-          { label: "None", value: "none" },
-          { label: "Small", value: "sm" },
-          { label: "Medium", value: "md" },
-          { label: "Large", value: "lg" },
-          { label: "Full", value: "full" },
-        ],
-      },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      placeholder: "Search...",
-      emptyText: "No results found.",
-      options: [] as Array<{ value: string; label: string }>,
-      multiple: false,
+      options: [
+        { value: "one", label: "One" },
+        { value: "two", label: "Two" },
+        { value: "three", label: "Three" },
+      ],
+      value: "",
+      placeholder: "Select option...",
+      searchPlaceholder: "Search option...",
+      emptyText: "No option found.",
       disabled: false,
-      size: "default" as const,
-      variant: "default" as const,
-      position: "start" as const,
-      rounded: "md" as const,
       className: "",
       id: "",
     },
-    render: (props: Components["Combobox"]) => (
+    render: ({
+      options,
+      value,
+      placeholder,
+      searchPlaceholder,
+      emptyText,
+      disabled,
+      className,
+      id,
+    }: Components["Combobox"]) => (
       <Combobox
-        placeholder={props.placeholder}
-        emptyText={props.emptyText}
-        options={props.options}
-        multiple={props.multiple}
-        disabled={props.disabled}
-        size={props.size}
-        variant={props.variant}
-        position={props.position}
-        rounded={props.rounded}
-        className={props.className || undefined}
-        id={props.id || undefined}
+        options={options}
+        value={value}
+        placeholder={placeholder}
+        searchPlaceholder={searchPlaceholder}
+        emptyText={emptyText}
+        disabled={disabled}
+        className={className || undefined}
+        id={id || undefined}
       />
     ),
   },

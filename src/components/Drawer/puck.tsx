@@ -1,135 +1,108 @@
 import type { ComponentType } from "react";
-import { DrawerContent } from "@/components/Drawer/Drawer";
-import { cn } from "@/lib/utils";
+import { Drawer } from "@/components/Drawer/Drawer";
+import { Button } from "@/components/ui/button";
 import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
 
 export const puckCategory: PuckCategory = "molecules";
 
-const SLOT_ALLOW = [
-  "Text", "Badge", "Button", "Image", "Checkbox", "Card", "Accordion", "Alert",
-  "AlertDialog", "AspectRatio", "Avatar", "Breadcrumb", "Calendar", "Carousel",
-  "Chart", "Collapsible", "Combobox", "Command", "ContextMenu", "DataTable",
-  "DatePicker", "Dialog", "Direction", "Drawer", "Flex", "Grid", "HeroCard",
-  "Section", "Space",
-];
+const slotAllow = [
+  "Text",
+  "Badge",
+  "Button",
+  "Image",
+  "Checkbox",
+  "Card",
+  "Accordion",
+  "Alert",
+  "AlertDialog",
+  "AspectRatio",
+  "Avatar",
+  "Breadcrumb",
+  "Calendar",
+  "Carousel",
+  "Chart",
+  "Collapsible",
+  "Combobox",
+  "Command",
+  "ContextMenu",
+  "DataTable",
+  "DatePicker",
+  "Direction",
+  "Dialog",
+  "Drawer",
+  "Flex",
+  "Grid",
+  "HeroCard",
+  "Section",
+  "Space",
+] as const;
 
 export const drawerPuckConfig = {
   Drawer: {
     label: "Drawer",
     fields: {
-      title: { type: "text", label: "Title" },
-      description: { type: "textarea", label: "Description" },
+      triggerLabel: {
+        type: "text",
+        label: "Trigger button label",
+      },
+      trigger: {
+        type: "slot",
+        label: "Trigger (e.g. button that opens the drawer)",
+        allow: [...slotAllow],
+      },
       content: {
         type: "slot",
-        label: "Content",
-        allow: SLOT_ALLOW,
+        label: "Drawer content",
+        allow: [...slotAllow],
       },
-      side: {
-        type: "select",
-        label: "Side",
-        options: [
-          { label: "Top", value: "top" },
-          { label: "Right", value: "right" },
-          { label: "Bottom", value: "bottom" },
-          { label: "Left", value: "left" },
-        ],
-      },
-      showHandle: {
-        type: "select",
-        label: "Show handle",
-        options: [
-          { label: "Yes", value: true },
-          { label: "No", value: false },
-        ],
-      },
-      titleAlign: {
-        type: "select",
-        label: "Title alignment",
-        options: [
-          { label: "Left", value: "left" },
-          { label: "Center", value: "center" },
-          { label: "Right", value: "right" },
-        ],
-      },
-      descriptionAlign: {
-        type: "select",
-        label: "Description alignment",
-        options: [
-          { label: "Left", value: "left" },
-          { label: "Center", value: "center" },
-          { label: "Right", value: "right" },
-        ],
-      },
-      rounded: {
-        type: "select",
-        label: "Rounded",
-        options: [
-          { label: "None", value: "none" },
-          { label: "Small", value: "sm" },
-          { label: "Medium", value: "md" },
-          { label: "Large", value: "lg" },
-          { label: "Full", value: "full" },
-        ],
-      },
-      padding: {
-        type: "select",
-        label: "Padding",
-        options: [
-          { label: "None", value: "none" },
-          { label: "Small", value: "sm" },
-          { label: "Medium", value: "md" },
-          { label: "Large", value: "lg" },
-        ],
-      },
-      className: { type: "text", label: "Class name" },
+      contentClassName: { type: "text", label: "Content class name" },
+      className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      title: "Drawer title",
-      description: "Drawer description.",
+      triggerLabel: "Open drawer",
+      trigger: [],
       content: [],
-      side: "right" as const,
-      showHandle: true,
-      titleAlign: "left" as const,
-      descriptionAlign: "left" as const,
-      rounded: "lg" as const,
-      padding: "md" as const,
+      contentClassName: "",
       className: "",
       id: "",
     },
     render: ({
-      title,
-      description,
+      trigger,
+      triggerLabel,
       content,
-      side,
-      showHandle,
-      titleAlign,
-      descriptionAlign,
-      rounded,
-      padding,
+      contentClassName,
       className,
       id,
     }: Components["Drawer"]) => {
-      const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
+      const TriggerContent = trigger as unknown as
+        | ComponentType<AreaContentProps>
+        | undefined;
+      const Content = content as unknown as
+        | ComponentType<AreaContentProps>
+        | undefined;
+      const hasTrigger = TriggerContent && !Array.isArray(trigger);
       const hasContent = Content && !Array.isArray(content);
+      const triggerNode = hasTrigger ? (
+        <TriggerContent />
+      ) : (
+        <Button type="button">{triggerLabel || "Open drawer"}</Button>
+      );
       return (
-        <div className="relative min-h-[120px] rounded-lg border border-dashed border-border bg-muted/20 p-4">
-          <span className="text-xs text-muted-foreground">Drawer (side: {side})</span>
-          <DrawerContent
-            title={title}
-            description={description}
-            side={side}
-            showHandle={showHandle}
-            titleAlign={titleAlign}
-            descriptionAlign={descriptionAlign}
-            rounded={rounded}
-            padding={padding}
-            className={cn("relative !inset-auto !mt-2 block border", className || undefined)}
-            id={id}
-          >
-            {hasContent ? <Content /> : <span className="text-muted-foreground">Add content</span>}
-          </DrawerContent>
-        </div>
+        <Drawer
+          trigger={triggerNode}
+          contentClassName={contentClassName || undefined}
+          className={className || undefined}
+          id={id || undefined}
+        >
+          {hasContent ? (
+            <Content />
+          ) : (
+            <span className="text-muted-foreground text-sm p-4 block">
+              Add content to the drawer
+            </span>
+          )}
+        </Drawer>
       );
     },
   },

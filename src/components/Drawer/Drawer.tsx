@@ -1,81 +1,48 @@
+"use client";
+
 import * as React from "react";
+import {
+  Drawer as UIDrawer,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 
-const roundedClass = (r: string) =>
-  r === "none" ? "rounded-none" : r === "sm" ? "rounded-sm" : r === "md" ? "rounded-md" : r === "lg" ? "rounded-lg" : "rounded-full";
+export interface DrawerProps {
+  trigger?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  contentClassName?: string;
+  className?: string;
+  id?: string;
+  children?: React.ReactNode;
+}
 
-const paddingClass = (p: string) =>
-  p === "none" ? "p-0" : p === "sm" ? "p-4" : p === "md" ? "p-6" : "p-8";
-
-const alignClass = (a: string) =>
-  a === "left" ? "text-left" : a === "center" ? "text-center" : "text-right";
-
-const sideClasses = {
-  top: "inset-x-0 top-0 border-b",
-  right: "inset-y-0 right-0 border-l h-full w-full max-w-sm",
-  bottom: "inset-x-0 bottom-0 border-t",
-  left: "inset-y-0 left-0 border-r h-full w-full max-w-sm",
-};
-
-export type DrawerContentProps = React.HTMLAttributes<HTMLDivElement> & {
-    title?: string;
-    description?: string;
-    side?: "top" | "right" | "bottom" | "left";
-    showHandle?: boolean;
-    titleAlign?: "left" | "center" | "right";
-    descriptionAlign?: "left" | "center" | "right";
-    rounded?: "none" | "sm" | "md" | "lg" | "full";
-    padding?: "none" | "sm" | "md" | "lg";
-    children?: React.ReactNode;
-  };
-
-export function DrawerContent({
-  title,
-  description,
-  side = "right",
-  showHandle = true,
-  titleAlign = "left",
-  descriptionAlign = "left",
-  rounded = "lg",
-  padding = "md",
+export function Drawer({
+  trigger,
+  open,
+  onOpenChange,
+  contentClassName,
   className,
   id,
   children,
-  ...props
-}: DrawerContentProps) {
+}: DrawerProps) {
+  const hasTrigger = trigger != null && React.Children.count(trigger) > 0;
+  const isControlled = open !== undefined && onOpenChange !== undefined;
+
   return (
-    <div
-      className={cn(
-        "fixed z-50 border-border bg-background shadow-lg",
-        sideClasses[side],
-        roundedClass(rounded),
-        paddingClass(padding),
-        className
+    <UIDrawer open={open} onOpenChange={onOpenChange}>
+      {hasTrigger && (
+        <span
+          className={cn("inline-block", className)}
+          id={id}
+          role={isControlled ? "presentation" : undefined}
+          onClick={isControlled ? () => onOpenChange?.(true) : undefined}
+        >
+          {isControlled ? trigger : <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
+        </span>
       )}
-      id={id}
-      {...props}
-    >
-      {showHandle && (
-        <div className="absolute left-1/2 top-2 h-1.5 w-8 -translate-x-1/2 rounded-full bg-muted-foreground/30" />
-      )}
-      <div className={showHandle ? "mt-4" : ""}>
-        {title && (
-          <h2 className={cn("text-lg font-semibold", alignClass(titleAlign))}>
-            {title}
-          </h2>
-        )}
-        {description && (
-          <p
-            className={cn(
-              "mt-1 text-sm text-muted-foreground",
-              alignClass(descriptionAlign)
-            )}
-          >
-            {description}
-          </p>
-        )}
-        {children && <div className="mt-4">{children}</div>}
-      </div>
-    </div>
+      <DrawerContent className={contentClassName}>{children}</DrawerContent>
+    </UIDrawer>
   );
 }

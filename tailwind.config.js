@@ -39,6 +39,10 @@ export default {
         },
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
       },
     },
   },

@@ -124,6 +124,15 @@ export type Components = {
     className: string;
     id: string;
   };
+  Dialog: {
+    trigger: unknown[];
+    triggerLabel: string;
+    content: unknown[];
+    contentLabel: string;
+    contentClassName: string;
+    className: string;
+    id: string;
+  };
   AspectRatio: {
     ratio: "1/1" | "4/3" | "3/4" | "16/9" | "9/16" | "21/9" | "9/21";
     objectFit: "cover" | "contain" | "fill" | "none";
@@ -241,73 +250,56 @@ export type Components = {
     id: string;
   };
   Combobox: {
-    placeholder: string;
-    emptyText: string;
     options: Array<{ value: string; label: string }>;
-    multiple: boolean;
+    value: string;
+    placeholder: string;
+    searchPlaceholder: string;
+    emptyText: string;
     disabled: boolean;
-    size: "sm" | "default" | "lg";
-    variant: "default" | "outline";
-    position: "start" | "end";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
     className: string;
     id: string;
   };
   Command: {
-    placeholder: string;
+    showInput: boolean;
+    inputPlaceholder: string;
     emptyText: string;
-    groups: Array<{
-      heading?: string;
-      items: Array<{ label: string; value?: string; shortcut?: string }>;
-    }>;
-    disabled: boolean;
-    size: "sm" | "default" | "lg";
-    variant: "default" | "outline";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
+    items: Array<{ value: string; label: string; groupHeading: string }>;
     className: string;
     id: string;
   };
   ContextMenu: {
-    items: Array<{ label: string; shortcut?: string; disabled?: boolean }>;
-    triggerContent: unknown[];
-    side: "top" | "right" | "bottom" | "left";
-    align: "start" | "center" | "end";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
+    trigger: unknown[];
+    modal: boolean;
+    contentClassName: string;
+    items: Array<{
+      type: "item" | "separator" | "label" | "sub" | "checkbox" | "radioGroup";
+      label: string;
+      disabled: boolean;
+      shortcut: string;
+      subItemsText: string;
+      inset: boolean;
+      groupHeading: string;
+      checked: boolean;
+      value: string;
+      optionsText: string;
+    }>;
     className: string;
     id: string;
   };
   DataTable: {
-    columns: Array<{ key: string; label: string; width?: string }>;
-    data: Array<Record<string, string | number>>;
-    size: "sm" | "default" | "lg";
-    variant: "default" | "bordered" | "striped";
-    showHeader: boolean;
-    rounded: "none" | "sm" | "md" | "lg" | "full";
+    columns: Array<{ id: string; header: string }>;
+    rows: Array<{ values: string }>;
+    caption: string;
     className: string;
     id: string;
   };
   DatePicker: {
-    triggerLabel: string;
+    appearance: "basic" | "dateOfBirth" | "input" | "timePicker" | "naturalLanguage";
     placeholder: string;
-    defaultMonth: string;
     mode: "single" | "range";
-    showTime: boolean;
-    weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-    cellSize: "sm" | "default" | "lg";
-    variant: "default" | "outline";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
-    className: string;
-    id: string;
-  };
-  Dialog: {
-    title: string;
-    description: string;
-    content: unknown[];
-    showClose: boolean;
-    titleAlign: "left" | "center" | "right";
-    descriptionAlign: "left" | "center" | "right";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
-    padding: "none" | "sm" | "md" | "lg";
+    triggerVariant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+    triggerSize: "default" | "sm" | "lg" | "icon";
+    contentClassName: string;
     className: string;
     id: string;
   };
@@ -318,15 +310,10 @@ export type Components = {
     id: string;
   };
   Drawer: {
-    title: string;
-    description: string;
+    trigger: unknown[];
+    triggerLabel: string;
     content: unknown[];
-    side: "top" | "right" | "bottom" | "left";
-    showHandle: boolean;
-    titleAlign: "left" | "center" | "right";
-    descriptionAlign: "left" | "center" | "right";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
-    padding: "none" | "sm" | "md" | "lg";
+    contentClassName: string;
     className: string;
     id: string;
   };

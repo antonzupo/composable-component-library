@@ -19,9 +19,9 @@ import { commandPuckConfig, puckCategory as commandCategory } from "@/components
 import { contextMenuPuckConfig, puckCategory as contextMenuCategory } from "@/components/ContextMenu/puck";
 import { dataTablePuckConfig, puckCategory as dataTableCategory } from "@/components/DataTable/puck";
 import { datePickerPuckConfig, puckCategory as datePickerCategory } from "@/components/DatePicker/puck";
-import { dialogPuckConfig, puckCategory as dialogCategory } from "@/components/Dialog/puck";
 import { directionPuckConfig, puckCategory as directionCategory } from "@/components/Direction/puck";
 import { drawerPuckConfig, puckCategory as drawerCategory } from "@/components/Drawer/puck";
+import { dialogPuckConfig, puckCategory as dialogCategory } from "@/components/Dialog/puck";
 import { flexPuckConfig, puckCategory as flexCategory } from "@/components/Flex/puck";
 import { gridPuckConfig, puckCategory as gridCategory } from "@/components/Grid/puck";
 import { heroCardPuckConfig, puckCategory as heroCardCategory } from "@/components/HeroCard/puck";
@@ -57,9 +57,9 @@ const componentCategories: Array<{ name: keyof Components; category: PuckCategor
   { name: "ContextMenu", category: contextMenuCategory },
   { name: "DataTable", category: dataTableCategory },
   { name: "DatePicker", category: datePickerCategory },
-  { name: "Dialog", category: dialogCategory },
   { name: "Direction", category: directionCategory },
   { name: "Drawer", category: drawerCategory },
+  { name: "Dialog", category: dialogCategory },
   { name: "AspectRatio", category: aspectRatioCategory },
   { name: "Avatar", category: avatarCategory },
   { name: "Card", category: cardCategory },
@@ -103,9 +103,9 @@ export const config: Config<Components> = {
     ...contextMenuPuckConfig,
     ...dataTablePuckConfig,
     ...datePickerPuckConfig,
-    ...dialogPuckConfig,
     ...directionPuckConfig,
     ...drawerPuckConfig,
+    ...dialogPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,
@@ -117,6 +117,10 @@ export const config: Config<Components> = {
     ...spacePuckConfig,
   } as Config<Components>["components"],
   root: {
-    render: ({ children }) => <div>{children}</div>,
+    render: ({ children }) => (
+      <div className="min-h-full bg-background">
+        {children}
+      </div>
+    ),
   },
 };

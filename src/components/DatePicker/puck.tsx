@@ -7,99 +7,65 @@ export const datePickerPuckConfig = {
   DatePicker: {
     label: "Date Picker",
     fields: {
-      triggerLabel: { type: "text", label: "Trigger label" },
-      placeholder: { type: "text", label: "Placeholder" },
-      defaultMonth: {
+      appearance: {
+        type: "select",
+        label: "Appearance",
+        options: [
+          { label: "Basic", value: "basic" },
+          { label: "Date of Birth", value: "dateOfBirth" },
+          { label: "Input", value: "input" },
+          { label: "Time Picker", value: "timePicker" },
+          { label: "Natural Language Picker", value: "naturalLanguage" },
+        ],
+      },
+      placeholder: {
         type: "text",
-        label: "Default month (YYYY-MM)",
+        label: "Placeholder",
       },
       mode: {
         type: "select",
         label: "Mode",
         options: [
-          { label: "Single", value: "single" },
+          { label: "Single date", value: "single" },
           { label: "Range", value: "range" },
         ],
       },
-      showTime: {
+      triggerVariant: {
         type: "select",
-        label: "Show time",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      weekStartsOn: {
-        type: "select",
-        label: "Week starts on",
-        options: [
-          { label: "Sunday", value: 0 },
-          { label: "Monday", value: 1 },
-          { label: "Tuesday", value: 2 },
-          { label: "Wednesday", value: 3 },
-          { label: "Thursday", value: 4 },
-          { label: "Friday", value: 5 },
-          { label: "Saturday", value: 6 },
-        ],
-      },
-      cellSize: {
-        type: "select",
-        label: "Cell size",
-        options: [
-          { label: "Small", value: "sm" },
-          { label: "Default", value: "default" },
-          { label: "Large", value: "lg" },
-        ],
-      },
-      variant: {
-        type: "select",
-        label: "Variant",
+        label: "Trigger button variant",
         options: [
           { label: "Default", value: "default" },
+          { label: "Destructive", value: "destructive" },
           { label: "Outline", value: "outline" },
+          { label: "Secondary", value: "secondary" },
+          { label: "Ghost", value: "ghost" },
+          { label: "Link", value: "link" },
         ],
       },
-      rounded: {
+      triggerSize: {
         type: "select",
-        label: "Rounded",
+        label: "Trigger button size",
         options: [
-          { label: "None", value: "none" },
+          { label: "Default", value: "default" },
           { label: "Small", value: "sm" },
-          { label: "Medium", value: "md" },
           { label: "Large", value: "lg" },
-          { label: "Full", value: "full" },
+          { label: "Icon", value: "icon" },
         ],
       },
-      className: { type: "text", label: "Class name" },
+      contentClassName: { type: "text", label: "Popover content class name" },
+      className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      triggerLabel: "Pick a date",
-      placeholder: "Select date",
-      defaultMonth: "",
-      mode: "single" as const,
-      showTime: false,
-      weekStartsOn: 0 as const,
-      cellSize: "default" as const,
-      variant: "default" as const,
-      rounded: "md" as const,
+      appearance: "basic",
+      placeholder: "Pick a date",
+      mode: "single",
+      triggerVariant: "outline",
+      triggerSize: "default",
+      contentClassName: "",
       className: "",
       id: "",
     },
-    render: (props: Components["DatePicker"]) => (
-      <DatePicker
-        triggerLabel={props.triggerLabel}
-        placeholder={props.placeholder}
-        defaultMonth={props.defaultMonth || undefined}
-        mode={props.mode}
-        showTime={props.showTime}
-        weekStartsOn={props.weekStartsOn}
-        cellSize={props.cellSize}
-        variant={props.variant}
-        rounded={props.rounded}
-        className={props.className || undefined}
-        id={props.id || undefined}
-      />
-    ),
+    render: (props: Components["DatePicker"]) => <DatePicker {...props} />,
   },
 };

@@ -1,118 +1,105 @@
 import type { ComponentType } from "react";
-import { DialogContent } from "@/components/Dialog/Dialog";
+import { Dialog } from "@/components/Dialog/Dialog";
+import { Button } from "@/components/ui/button";
 import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
 
 export const puckCategory: PuckCategory = "molecules";
 
-const SLOT_ALLOW = [
-  "Text", "Badge", "Button", "Image", "Checkbox", "Card", "Accordion", "Alert",
-  "AlertDialog", "AspectRatio", "Avatar", "Breadcrumb", "Calendar", "Carousel",
-  "Chart", "Collapsible", "Combobox", "Command", "ContextMenu", "DataTable",
-  "DatePicker", "Dialog", "Direction", "Drawer", "Flex", "Grid", "HeroCard",
-  "Section", "Space",
-];
+const slotAllow = [
+  "Text",
+  "Badge",
+  "Button",
+  "Image",
+  "Checkbox",
+  "Card",
+  "Accordion",
+  "Alert",
+  "AlertDialog",
+  "AspectRatio",
+  "Avatar",
+  "Breadcrumb",
+  "Calendar",
+  "Carousel",
+  "Chart",
+  "Collapsible",
+  "Combobox",
+  "Command",
+  "ContextMenu",
+  "Dialog",
+  "Flex",
+  "Grid",
+  "HeroCard",
+  "Section",
+  "Space",
+] as const;
 
 export const dialogPuckConfig = {
   Dialog: {
     label: "Dialog",
     fields: {
-      title: { type: "text", label: "Title" },
-      description: { type: "textarea", label: "Description" },
+      triggerLabel: {
+        type: "text",
+        label: "Trigger button label",
+      },
+      trigger: {
+        type: "slot",
+        label: "Trigger (e.g. button that opens the dialog)",
+        allow: [...slotAllow],
+      },
       content: {
         type: "slot",
-        label: "Content",
-        allow: SLOT_ALLOW,
+        label: "Dialog content",
+        allow: [...slotAllow],
       },
-      showClose: {
-        type: "select",
-        label: "Show close button",
-        options: [
-          { label: "Yes", value: true },
-          { label: "No", value: false },
-        ],
-      },
-      titleAlign: {
-        type: "select",
-        label: "Title alignment",
-        options: [
-          { label: "Left", value: "left" },
-          { label: "Center", value: "center" },
-          { label: "Right", value: "right" },
-        ],
-      },
-      descriptionAlign: {
-        type: "select",
-        label: "Description alignment",
-        options: [
-          { label: "Left", value: "left" },
-          { label: "Center", value: "center" },
-          { label: "Right", value: "right" },
-        ],
-      },
-      rounded: {
-        type: "select",
-        label: "Rounded",
-        options: [
-          { label: "None", value: "none" },
-          { label: "Small", value: "sm" },
-          { label: "Medium", value: "md" },
-          { label: "Large", value: "lg" },
-          { label: "Full", value: "full" },
-        ],
-      },
-      padding: {
-        type: "select",
-        label: "Padding",
-        options: [
-          { label: "None", value: "none" },
-          { label: "Small", value: "sm" },
-          { label: "Medium", value: "md" },
-          { label: "Large", value: "lg" },
-        ],
-      },
-      className: { type: "text", label: "Class name" },
+      contentClassName: { type: "text", label: "Content class name" },
+      className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      title: "Dialog title",
-      description: "Dialog description goes here.",
+      triggerLabel: "Open dialog",
+      trigger: [],
       content: [],
-      showClose: true,
-      titleAlign: "left" as const,
-      descriptionAlign: "left" as const,
-      rounded: "lg" as const,
-      padding: "md" as const,
+      contentClassName: "",
       className: "",
       id: "",
     },
     render: ({
-      title,
-      description,
+      trigger,
+      triggerLabel,
       content,
-      showClose,
-      titleAlign,
-      descriptionAlign,
-      rounded,
-      padding,
+      contentClassName,
       className,
       id,
     }: Components["Dialog"]) => {
-      const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
+      const TriggerContent = trigger as unknown as
+        | ComponentType<AreaContentProps>
+        | undefined;
+      const Content = content as unknown as
+        | ComponentType<AreaContentProps>
+        | undefined;
+      const hasTrigger =
+        TriggerContent && !Array.isArray(trigger);
       const hasContent = Content && !Array.isArray(content);
+      const triggerNode = hasTrigger ? (
+        <TriggerContent />
+      ) : (
+        <Button type="button">{triggerLabel || "Open dialog"}</Button>
+      );
       return (
-        <DialogContent
-          title={title}
-          description={description}
-          showClose={showClose}
-          titleAlign={titleAlign}
-          descriptionAlign={descriptionAlign}
-          rounded={rounded}
-          padding={padding}
+        <Dialog
+          trigger={triggerNode}
+          contentClassName={contentClassName || undefined}
           className={className || undefined}
           id={id || undefined}
         >
-          {hasContent ? <Content /> : null}
-        </DialogContent>
+          {hasContent ? (
+            <Content />
+          ) : (
+            <span className="text-muted-foreground text-sm">
+              Add content to the dialog
+            </span>
+          )}
+        </Dialog>
       );
     },
   },
