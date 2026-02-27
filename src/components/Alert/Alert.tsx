@@ -1,64 +1,40 @@
+import * as React from "react";
 import { Alert as AlertRoot, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 import type { Components } from "@/puck/types";
 
-type AlertProps = Components["Alert"];
-
-const variantMap = {
-  default: "default",
-  destructive: "destructive",
-  success: "default",
-  warning: "default",
-} as const;
-
-const variantClass = {
-  success: "border-green-500/50 text-green-700 dark:text-green-400 [&>svg]:text-green-600",
-  warning: "border-amber-500/50 text-amber-700 dark:text-amber-400 [&>svg]:text-amber-600",
-};
-
-const alignClass = { left: "text-left", center: "text-center", right: "text-right" };
-const roundedClass = { none: "rounded-none", sm: "rounded-sm", md: "rounded-md", lg: "rounded-lg", full: "rounded-full" };
-const paddingClass = { none: "p-0", sm: "px-3 py-2", md: "px-4 py-3", lg: "px-5 py-4" };
+type AlertProps = Components["Alert"] & { children?: React.ReactNode };
 
 export function Alert({
-  title,
-  description,
+  title = "",
+  description = "",
   showTitle = true,
   variant = "default",
-  titleAlign = "left",
-  descriptionAlign = "left",
-  rounded = "lg",
-  padding = "md",
-  fullWidth = true,
-  ariaLive = "polite",
+  showAction = false,
   className,
   id,
+  children,
 }: AlertProps) {
-  const radixVariant = variantMap[variant];
-  const extraVariantClass = variant === "success" ? variantClass.success : variant === "warning" ? variantClass.warning : "";
-
   return (
     <AlertRoot
-      variant={radixVariant}
+      variant={variant}
       role="alert"
-      aria-live={ariaLive}
       className={cn(
-        fullWidth && "w-full",
-        roundedClass[rounded],
-        paddingClass[padding],
-        extraVariantClass,
+        "w-full",
+        showAction && "flex flex-row items-start gap-3",
         className
       )}
       id={id || undefined}
     >
-      {showTitle && title ? (
-        <AlertTitle className={alignClass[titleAlign]}>{title}</AlertTitle>
-      ) : null}
-      {description ? (
-        <AlertDescription className={alignClass[descriptionAlign]}>
-          {description}
-        </AlertDescription>
-      ) : null}
+      <div className={cn(showAction && "min-w-0 flex-1 space-y-1")}>
+        {showTitle && title ? <AlertTitle>{title}</AlertTitle> : null}
+        {description ? <AlertDescription>{description}</AlertDescription> : null}
+      </div>
+      {showAction && (
+        <div className="flex shrink-0 flex-wrap items-center justify-end gap-2 pl-0 ml-auto">
+          {children ?? null}
+        </div>
+      )}
     </AlertRoot>
   );
 }

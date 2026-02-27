@@ -108,14 +108,9 @@ export type Components = {
     title: string;
     description: string;
     showTitle: boolean;
-    variant: "default" | "destructive" | "success" | "warning";
-    titleAlign: "left" | "center" | "right";
-    descriptionAlign: "left" | "center" | "right";
-    rounded: "none" | "sm" | "md" | "lg" | "full";
-    padding: "none" | "sm" | "md" | "lg";
-    fullWidth: boolean;
-    showIcon: boolean;
-    ariaLive: "polite" | "assertive" | "off";
+    variant: "default" | "destructive";
+    showAction: boolean;
+    alertAction: unknown[];
     className: string;
     id: string;
   };

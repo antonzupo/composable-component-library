@@ -4,48 +4,74 @@ import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
 
 export const puckCategory: PuckCategory = "molecules";
 
+const contentAllow = [
+  "Text",
+  "Badge",
+  "Button",
+  "Image",
+  "Checkbox",
+  "Card",
+  "Accordion",
+  "Alert",
+  "AlertDialog",
+  "AspectRatio",
+  "Avatar",
+  "Breadcrumb",
+  "Calendar",
+  "Carousel",
+  "Chart",
+  "Collapsible",
+  "Combobox",
+  "Command",
+  "ContextMenu",
+  "Dialog",
+  "DropdownMenu",
+  "Empty",
+  "Field",
+  "HoverCard",
+  "Input",
+  "InputGroup",
+  "Flex",
+  "Grid",
+  "HeroCard",
+  "Section",
+  "Space",
+] as const;
+
+const defaultProps: Components["Collapsible"] = {
+  trigger: "Toggle",
+  content: [],
+  defaultOpen: false,
+  appearance: "default",
+  triggerAlign: "left",
+  contentAlign: "left",
+  triggerPadding: "md",
+  contentPadding: "md",
+  showIcon: true,
+  iconPosition: "end",
+  variant: "default",
+  rounded: "lg",
+  fullWidth: true,
+  className: "",
+  id: "",
+};
+
 export const collapsiblePuckConfig = {
   Collapsible: {
     label: "Collapsible",
     fields: {
-      trigger: { type: "text", label: "Trigger label" },
+      trigger: { type: "text", label: "Trigger" },
       content: {
         type: "slot",
         label: "Content",
-        allow: [
-          "Text",
-          "Badge",
-          "Button",
-          "Image",
-          "Checkbox",
-          "Card",
-          "Accordion",
-          "Alert",
-          "AlertDialog",
-          "AspectRatio",
-          "Avatar",
-          "Breadcrumb",
-          "Calendar",
-          "Carousel",
-          "Chart",
-          "Collapsible",
-          "Combobox",
-          "Command",
-          "ContextMenu",
-          "Dialog",
-          "Flex",
-          "Grid",
-          "HeroCard",
-          "Section",
-          "Space",
-        ],
+        allow: [...contentAllow],
       },
       defaultOpen: {
         type: "select",
         label: "Default open",
         options: [
-          { label: "Closed", value: false },
-          { label: "Open", value: true },
+          { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       appearance: {
@@ -53,7 +79,7 @@ export const collapsiblePuckConfig = {
         label: "Appearance",
         options: [
           { label: "Default", value: "default" },
-          { label: "File Tree", value: "fileTree" },
+          { label: "File tree", value: "fileTree" },
         ],
       },
       triggerAlign: {
@@ -141,42 +167,29 @@ export const collapsiblePuckConfig = {
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },
-    defaultProps: {
-      trigger: "Click to expand",
-      content: [],
-      defaultOpen: false,
-      appearance: "default" as const,
-      triggerAlign: "left" as const,
-      contentAlign: "left" as const,
-      triggerPadding: "md" as const,
-      contentPadding: "md" as const,
-      showIcon: true,
-      iconPosition: "end" as const,
-      variant: "default" as const,
-      rounded: "lg" as const,
-      fullWidth: false,
-      className: "",
-      id: "",
-    },
+    defaultProps,
     render: ({
       trigger,
       content,
-      defaultOpen,
-      appearance,
-      triggerAlign,
-      contentAlign,
-      triggerPadding,
-      contentPadding,
-      showIcon,
-      iconPosition,
-      variant,
-      rounded,
-      fullWidth,
+      defaultOpen = false,
+      appearance = "default",
+      triggerAlign = "left",
+      contentAlign = "left",
+      triggerPadding = "md",
+      contentPadding = "md",
+      showIcon = true,
+      iconPosition = "end",
+      variant = "default",
+      rounded = "lg",
+      fullWidth = true,
       className,
       id,
     }: Components["Collapsible"]) => {
-      const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
-      const isEmpty = !Content || Array.isArray(content);
+      const Content = content as unknown as
+        | ComponentType<AreaContentProps>
+        | undefined;
+      const isSlotFunction = typeof Content === "function";
+
       return (
         <Collapsible
           trigger={trigger}
@@ -194,10 +207,10 @@ export const collapsiblePuckConfig = {
           className={className || undefined}
           id={id || undefined}
         >
-          {isEmpty ? (
-            <span className="text-muted-foreground">Add content</span>
+          {isSlotFunction ? (
+            <Content className="min-w-0" minEmptyHeight={44} />
           ) : (
-            <Content />
+            <span className="text-muted-foreground text-sm">Add content</span>
           )}
         </Collapsible>
       );

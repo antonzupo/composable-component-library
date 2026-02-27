@@ -1,164 +1,114 @@
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-
+import {
+  Collapsible as CollapsibleRoot,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import { ChevronDown } from "lucide-react";
+import type { ReactNode } from "react";
 
-const collapsibleVariants = cva("", {
-  variants: {
-    variant: {
-      default: "border border-border bg-card",
-      bordered: "border border-border bg-card",
-      ghost: "border-0 bg-transparent",
-    },
-    rounded: {
-      none: "rounded-none",
-      sm: "rounded-sm",
-      md: "rounded-md",
-      lg: "rounded-lg",
-      full: "rounded-full",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    rounded: "lg",
-  },
-});
+export type CollapsibleProps = {
+  trigger: string;
+  children?: ReactNode;
+  defaultOpen?: boolean;
+  appearance?: "default" | "fileTree";
+  triggerAlign?: "left" | "center" | "right";
+  contentAlign?: "left" | "center" | "right";
+  triggerPadding?: "none" | "sm" | "md" | "lg";
+  contentPadding?: "none" | "sm" | "md" | "lg";
+  showIcon?: boolean;
+  iconPosition?: "start" | "end";
+  variant?: "default" | "bordered" | "ghost";
+  rounded?: "none" | "sm" | "md" | "lg" | "full";
+  fullWidth?: boolean;
+  className?: string;
+  id?: string;
+};
 
-const triggerPaddingClass = (p: string) =>
-  p === "none" ? "py-0" : p === "sm" ? "py-2" : p === "md" ? "py-4" : "py-5";
+const roundedMap = {
+  none: "rounded-none",
+  sm: "rounded-sm",
+  md: "rounded-md",
+  lg: "rounded-lg",
+  full: "rounded-full",
+} as const;
 
-const contentPaddingClass = (p: string) =>
-  p === "none" ? "pb-0" : p === "sm" ? "pb-2" : p === "md" ? "pb-4" : "pb-5";
+const alignMap = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+} as const;
 
-const alignClass = (a: string) =>
-  a === "left" ? "text-left" : a === "center" ? "text-center" : "text-right";
+const paddingMap = {
+  none: "py-0",
+  sm: "py-2",
+  md: "py-4",
+  lg: "py-6",
+} as const;
 
-const ChevronIcon = ({ open }: { open: boolean }) => (
-  <span
-    className={cn("inline-flex size-5 shrink-0 transition-transform duration-200", open && "rotate-180")}
-    aria-hidden
-  >
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  </span>
-);
+const contentPaddingMap = {
+  none: "pb-0 pt-0",
+  sm: "pb-2 pt-0",
+  md: "pb-4 pt-0",
+  lg: "pb-6 pt-0",
+} as const;
 
-export type CollapsibleProps = React.HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof collapsibleVariants> & {
-    trigger: string;
-    defaultOpen?: boolean;
-    appearance?: "default" | "fileTree";
-    triggerAlign?: "left" | "center" | "right";
-    contentAlign?: "left" | "center" | "right";
-    triggerPadding?: "none" | "sm" | "md" | "lg";
-    contentPadding?: "none" | "sm" | "md" | "lg";
-    showIcon?: boolean;
-    iconPosition?: "start" | "end";
-    fullWidth?: boolean;
-    children?: React.ReactNode;
-  };
+export function Collapsible({
+  trigger,
+  children,
+  defaultOpen = false,
+  appearance = "default",
+  triggerAlign = "left",
+  contentAlign = "left",
+  triggerPadding = "md",
+  contentPadding = "md",
+  showIcon = true,
+  iconPosition = "end",
+  variant = "default",
+  rounded = "lg",
+  fullWidth = true,
+  className,
+  id,
+}: CollapsibleProps) {
+  const rootClassName = cn(
+    "p-4",
+    variant === "bordered" && "border border-border",
+    variant === "ghost" && "border-0",
+    roundedMap[rounded],
+    fullWidth && "w-full",
+    appearance === "fileTree" && "pl-6 border-l-2 border-border",
+    className
+  );
 
-const FolderIcon = ({ open }: { open: boolean }) => (
-  <span className="inline-flex size-4 shrink-0 text-muted-foreground" aria-hidden>
-    {open ? (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
-      </svg>
-    ) : (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
-        <path d="M2 10h20" />
-      </svg>
-    )}
-  </span>
-);
+  const triggerClassName = cn(
+    "flex w-full items-center gap-2 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+    paddingMap[triggerPadding],
+    !showIcon && "[&>svg]:hidden",
+    iconPosition === "start" && "[&>svg]:order-first [&>svg]:mr-2",
+    alignMap[triggerAlign]
+  );
 
-const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
-  (
-    {
-      trigger,
-      defaultOpen = false,
-      appearance = "default",
-      triggerAlign = "left",
-      contentAlign = "left",
-      triggerPadding = "md",
-      contentPadding = "md",
-      showIcon = true,
-      iconPosition = "end",
-      variant,
-      rounded,
-      fullWidth = false,
-      className,
-      id,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const [open, setOpen] = React.useState(defaultOpen);
-    const triggerId = React.useId();
-    const contentId = React.useId();
+  const triggerLabelClassName = cn("flex-1 min-w-0", alignMap[triggerAlign]);
 
-    const isFileTree = appearance === "fileTree";
-    const icon = showIcon ? (isFileTree ? <FolderIcon open={open} /> : <ChevronIcon open={open} />) : null;
+  const contentClassName = cn(
+    "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+    alignMap[contentAlign],
+    contentPaddingMap[contentPadding]
+  );
 
-    return (
-      <div
-        ref={ref}
-        data-state={open ? "open" : "closed"}
-        data-appearance={appearance}
-        className={cn(
-          collapsibleVariants({ variant, rounded }),
-          isFileTree && "border-0 bg-transparent rounded-none",
-          fullWidth && "w-full",
-          className
-        )}
-        id={id}
-        {...props}
-      >
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls={contentId}
-          id={triggerId}
-          onClick={() => setOpen((prev) => !prev)}
-          className={cn(
-            "flex w-full items-center gap-2 font-medium transition-[color,background-color] hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            isFileTree && "pl-0 pr-2 py-1.5 text-sm font-normal hover:bg-muted/30 rounded-md",
-            !isFileTree && triggerPaddingClass(triggerPadding),
-            !isFileTree && "px-4",
-            iconPosition === "start" ? "flex-row" : "flex-row-reverse",
-            alignClass(triggerAlign)
-          )}
-        >
-          {iconPosition === "start" && icon}
-          <span className="flex-1 min-w-0">{trigger}</span>
-          {iconPosition === "end" && icon}
-        </button>
-        <div
-          id={contentId}
-          role="region"
-          aria-labelledby={triggerId}
-          hidden={!open}
-          className="overflow-hidden data-[state=closed]:hidden"
-        >
-          <div
-            className={cn(
-              "text-muted-foreground text-sm",
-              contentPaddingClass(contentPadding),
-              isFileTree && "pl-6 pr-2 border-l border-border ml-2",
-              !isFileTree && "px-4",
-              alignClass(contentAlign)
-            )}
-          >
-            {children}
-          </div>
-        </div>
-      </div>
-    );
-  }
-);
-Collapsible.displayName = "Collapsible";
-
-export { Collapsible, collapsibleVariants };
+  return (
+    <CollapsibleRoot
+      defaultOpen={defaultOpen}
+      className={rootClassName}
+      id={id}
+    >
+      <CollapsibleTrigger className={triggerClassName}>
+        <span className={triggerLabelClassName}>{trigger || "Toggle"}</span>
+        <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className={contentClassName}>{children}</div>
+      </CollapsibleContent>
+    </CollapsibleRoot>
+  );
+}
