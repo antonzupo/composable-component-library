@@ -30,8 +30,14 @@ import { gridPuckConfig, puckCategory as gridCategory } from "@/components/Grid/
 import { heroCardPuckConfig, puckCategory as heroCardCategory } from "@/components/HeroCard/puck";
 import { hoverCardPuckConfig, puckCategory as hoverCardCategory } from "@/components/HoverCard/puck";
 import { imagePuckConfig, puckCategory as imageCategory } from "@/components/Image/puck";
+import { inputOtpPuckConfig, puckCategory as inputOtpCategory } from "@/components/InputOTP/puck";
 import { inputPuckConfig, puckCategory as inputCategory } from "@/components/Input/puck";
 import { inputGroupPuckConfig, puckCategory as inputGroupCategory } from "@/components/InputGroup/puck";
+import { itemPuckConfig, puckCategory as itemCategory } from "@/components/Item/puck";
+import { kbdPuckConfig, puckCategory as kbdCategory } from "@/components/Kbd/puck";
+import { labelPuckConfig, puckCategory as labelCategory } from "@/components/Label/puck";
+import { menubarPuckConfig, puckCategory as menubarCategory } from "@/components/Menubar/puck";
+import { nativeSelectPuckConfig, puckCategory as nativeSelectCategory } from "@/components/NativeSelect/puck";
 import { sectionPuckConfig, puckCategory as sectionCategory } from "@/components/Section/puck";
 import { spacePuckConfig, puckCategory as spaceCategory } from "@/components/Space/puck";
 import { textPuckConfig, puckCategory as textCategory } from "@/components/Text/puck";
@@ -71,7 +77,13 @@ const componentCategories: Array<{ name: keyof Components; category: PuckCategor
   { name: "Field", category: fieldCategory },
   { name: "HoverCard", category: hoverCardCategory },
   { name: "Input", category: inputCategory },
+  { name: "InputOTP", category: inputOtpCategory },
   { name: "InputGroup", category: inputGroupCategory },
+  { name: "Item", category: itemCategory },
+  { name: "Kbd", category: kbdCategory },
+  { name: "Label", category: labelCategory },
+  { name: "Menubar", category: menubarCategory },
+  { name: "NativeSelect", category: nativeSelectCategory },
   { name: "AspectRatio", category: aspectRatioCategory },
   { name: "Avatar", category: avatarCategory },
   { name: "Card", category: cardCategory },
@@ -123,7 +135,13 @@ export const config: Config<Components> = {
     ...fieldPuckConfig,
     ...hoverCardPuckConfig,
     ...inputPuckConfig,
+    ...inputOtpPuckConfig,
     ...inputGroupPuckConfig,
+    ...itemPuckConfig,
+    ...kbdPuckConfig,
+    ...labelPuckConfig,
+    ...menubarPuckConfig,
+    ...nativeSelectPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,

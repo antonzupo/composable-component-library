@@ -392,4 +392,95 @@ export type Components = {
     className: string;
     id: string;
   };
+  InputOTP: {
+    maxLength: number;
+    value: string;
+    patternPreset: "none" | "digits" | "letters" | "alphanumeric" | "custom";
+    patternCustom: string;
+    separatorEvery: 0 | 2 | 3 | 4;
+    disabled: boolean;
+    className: string;
+    id: string;
+  };
+  Item: {
+    displayMode: "single" | "group";
+    variant: "default" | "outline" | "muted";
+    size: "default" | "sm";
+    title: string;
+    description: string;
+    mediaVariant: "none" | "icon" | "image" | "avatar";
+    mediaIcon: string;
+    mediaImageSrc: string;
+    mediaImageAlt: string;
+    mediaAvatarSrc: string;
+    mediaAvatarAlt: string;
+    mediaAvatarFallback: string;
+    showHeader: boolean;
+    headerLeft: string;
+    headerRight: string;
+    useAsLink: boolean;
+    href: string;
+    openInNewTab: boolean;
+    showFooter: boolean;
+    footerLeft: string;
+    footerRight: string;
+    items: Array<{
+      title: string;
+      description: string;
+      mediaVariant: "none" | "icon" | "image" | "avatar";
+      mediaIcon: string;
+      mediaImageSrc: string;
+      mediaImageAlt: string;
+      mediaAvatarSrc: string;
+      mediaAvatarAlt: string;
+      mediaAvatarFallback: string;
+    }>;
+    className: string;
+    id: string;
+  };
+  Kbd: {
+    displayMode: "single" | "group";
+    text: string;
+    keys: Array<{ key: string }>;
+    className: string;
+    id: string;
+  };
+  Label: {
+    text: string;
+    htmlFor: string;
+    className: string;
+    id: string;
+  };
+  Menubar: {
+    menus: Array<{
+      trigger: string;
+      items: Array<{
+        type: "item" | "separator" | "label" | "checkbox" | "radioGroup" | "sub";
+        label: string;
+        disabled: boolean;
+        shortcut: string;
+        inset: boolean;
+        checked: boolean;
+        value: string;
+        optionsText: string;
+        subItemsText: string;
+      }>;
+    }>;
+    className: string;
+    id: string;
+  };
+  NativeSelect: {
+    optionMode: "flat" | "grouped";
+    options: Array<{ value: string; label: string }>;
+    optionGroups: Array<{
+      groupLabel: string;
+      options: Array<{ value: string; label: string }>;
+    }>;
+    placeholder: string;
+    defaultValue: string;
+    disabled: boolean;
+    size: "sm" | "default";
+    className: string;
+    id: string;
+  };
 };
