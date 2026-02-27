@@ -1,5 +1,7 @@
-import { Alert, AlertDescription, AlertTitle, AlertIcon, alertAlignClass } from "@/components/Alert/Alert";
+import { Alert } from "@/components/Alert/Alert";
 import type { Components, PuckCategory } from "@/puck/types";
+
+type AlertProps = Components["Alert"];
 
 export const puckCategory: PuckCategory = "molecules";
 
@@ -70,8 +72,8 @@ export const alertPuckConfig = {
         type: "select",
         label: "Full width",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showIcon: {
@@ -84,7 +86,7 @@ export const alertPuckConfig = {
       },
       ariaLive: {
         type: "select",
-        label: "Announce (aria-live)",
+        label: "Aria live",
         options: [
           { label: "Polite", value: "polite" },
           { label: "Assertive", value: "assertive" },
@@ -96,7 +98,7 @@ export const alertPuckConfig = {
     },
     defaultProps: {
       title: "Alert title",
-      description: "Alert description or message content.",
+      description: "Alert description text.",
       showTitle: true,
       variant: "default" as const,
       titleAlign: "left" as const,
@@ -104,31 +106,11 @@ export const alertPuckConfig = {
       rounded: "lg" as const,
       padding: "md" as const,
       fullWidth: true,
-      showIcon: false,
+      showIcon: true,
       ariaLive: "polite" as const,
       className: "",
       id: "",
     },
-    render: (props: Components["Alert"]) => (
-      <Alert
-        variant={props.variant}
-        rounded={props.rounded}
-        padding={props.padding}
-        fullWidth={props.fullWidth}
-        ariaLive={props.ariaLive}
-        className={props.className || undefined}
-        id={props.id || undefined}
-      >
-        {props.showIcon && <AlertIcon variant={props.variant} />}
-        <div className={props.showIcon ? "pl-7" : ""}>
-          {props.showTitle && (
-            <AlertTitle className={alertAlignClass(props.titleAlign)}>{props.title}</AlertTitle>
-          )}
-          <AlertDescription className={alertAlignClass(props.descriptionAlign)}>
-            {props.description}
-          </AlertDescription>
-        </div>
-      </Alert>
-    ),
+    render: (props: AlertProps) => <Alert {...props} />,
   },
 };

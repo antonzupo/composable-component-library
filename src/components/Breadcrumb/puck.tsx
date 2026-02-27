@@ -1,7 +1,9 @@
 import { Breadcrumb } from "@/components/Breadcrumb/Breadcrumb";
 import type { Components, PuckCategory } from "@/puck/types";
 
-export const puckCategory: PuckCategory = "atoms";
+type BreadcrumbProps = Components["Breadcrumb"];
+
+export const puckCategory: PuckCategory = "molecules";
 
 export const breadcrumbPuckConfig = {
   Breadcrumb: {
@@ -11,17 +13,17 @@ export const breadcrumbPuckConfig = {
         type: "array",
         label: "Items",
         getItemSummary: (item: { label: string; href?: string; node?: string }) =>
-          item?.label ? (item.node && item.node !== "default" ? `${item.label} (${item.node})` : item.label) : "Item",
+          item?.label || "Item",
         arrayFields: {
           label: { type: "text", label: "Label" },
           href: { type: "text", label: "Link (optional)" },
           node: {
             type: "select",
-            label: "Node (middle items only)",
+            label: "Node type",
             options: [
               { label: "Default", value: "default" },
-              { label: "Collapsed", value: "collapsed" },
               { label: "Dropdown", value: "dropdown" },
+              { label: "Collapsed", value: "collapsed" },
             ],
           },
         },
@@ -41,21 +43,13 @@ export const breadcrumbPuckConfig = {
     defaultProps: {
       items: [
         { label: "Home", href: "/", node: "default" },
-        { label: "Products", href: "/products", node: "default" },
-        { label: "Category", href: "/category", node: "dropdown" },
+        { label: "Page", href: "/page", node: "default" },
         { label: "Current" },
       ],
-      separator: "slash" as const,
+      separator: "chevron" as const,
       className: "",
       id: "",
     },
-    render: ({ items, separator, className, id }: Components["Breadcrumb"]) => (
-      <Breadcrumb
-        items={items}
-        separator={separator}
-        className={className || undefined}
-        id={id || undefined}
-      />
-    ),
+    render: (props: BreadcrumbProps) => <Breadcrumb {...props} />,
   },
 };

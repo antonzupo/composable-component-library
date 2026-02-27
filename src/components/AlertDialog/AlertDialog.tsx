@@ -1,81 +1,66 @@
+import {
+  AlertDialog as AlertDialogRoot,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/Button/Button";
+import type { Components } from "@/puck/types";
 
-const roundedClass = (r: string) =>
-  r === "none" ? "rounded-none" : r === "sm" ? "rounded-sm" : r === "md" ? "rounded-md" : r === "lg" ? "rounded-lg" : "rounded-full";
+type AlertDialogProps = Components["AlertDialog"];
 
-const paddingClass = (p: string) =>
-  p === "none" ? "p-0" : p === "sm" ? "p-4" : p === "md" ? "p-6" : "p-8";
+const alignClass = { left: "text-left", center: "text-center", right: "text-right" };
+const actionsAlignClass = { start: "justify-start", center: "justify-center", end: "justify-end" };
+const roundedClass = { none: "rounded-none", sm: "rounded-sm", md: "rounded-md", lg: "rounded-lg", full: "rounded-full" };
+const paddingClass = { none: "p-0", sm: "p-3", md: "p-6", lg: "p-8" };
 
-const alignClass = (a: string) =>
-  a === "left" ? "text-left" : a === "center" ? "text-center" : "text-right";
-
-const actionsJustifyClass = (a: string) =>
-  a === "start" ? "justify-start" : a === "center" ? "justify-center" : "justify-end";
-
-export type AlertDialogContentProps = {
-  title: string;
-  description: string;
-  cancelLabel: string;
-  confirmLabel: string;
-  confirmVariant: "default" | "destructive";
-  showCancel: boolean;
-  titleAlign: "left" | "center" | "right";
-  descriptionAlign: "left" | "center" | "right";
-  actionsAlign: "start" | "center" | "end";
-  rounded: "none" | "sm" | "md" | "lg" | "full";
-  padding: "none" | "sm" | "md" | "lg";
-  className?: string;
-  id?: string;
-};
-
-export function AlertDialogContent({
+export function AlertDialog({
   title,
   description,
-  cancelLabel,
-  confirmLabel,
-  confirmVariant,
-  showCancel,
-  titleAlign,
-  descriptionAlign,
-  actionsAlign,
-  rounded,
-  padding,
+  cancelLabel = "Cancel",
+  confirmLabel = "Confirm",
+  confirmVariant = "default",
+  showCancel = true,
+  titleAlign = "left",
+  descriptionAlign = "left",
+  actionsAlign = "end",
+  rounded = "lg",
+  padding = "md",
   className,
   id,
-}: AlertDialogContentProps) {
+}: AlertDialogProps) {
   return (
-    <div
-      role="alertdialog"
-      aria-modal="true"
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      className={cn(
-        "w-full max-w-lg border border-border bg-background shadow-lg",
-        roundedClass(rounded),
-        paddingClass(padding),
-        className
-      )}
-      id={id}
-    >
-      <h2 id="alert-dialog-title" className={cn("text-lg font-semibold", alignClass(titleAlign))}>
-        {title}
-      </h2>
-      <p id="alert-dialog-description" className={cn("mt-2 text-sm text-muted-foreground", alignClass(descriptionAlign))}>
-        {description}
-      </p>
-      <div className={cn("mt-6 flex flex-wrap gap-3", actionsJustifyClass(actionsAlign))}>
-        {showCancel && (
-          <Button type="button" variant="outline">
-            {cancelLabel}
-          </Button>
-        )}
-        <Button type="button" variant={confirmVariant}>
-          {confirmLabel}
-        </Button>
-      </div>
-    </div>
+    <AlertDialogRoot>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Open dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent
+        className={cn(roundedClass[rounded], paddingClass[padding], className)}
+        id={id || undefined}
+      >
+        <AlertDialogHeader>
+          <AlertDialogTitle className={alignClass[titleAlign]}>
+            {title}
+          </AlertDialogTitle>
+          <AlertDialogDescription className={alignClass[descriptionAlign]}>
+            {description}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className={actionsAlignClass[actionsAlign]}>
+          {showCancel && (
+            <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
+          )}
+          <AlertDialogAction className={cn(confirmVariant === "destructive" && "bg-destructive text-destructive-foreground hover:bg-destructive/90")}>
+            {confirmLabel}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialogRoot>
   );
 }
-
-export { alignClass as alertDialogAlignClass, actionsJustifyClass as alertDialogActionsJustifyClass };

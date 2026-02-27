@@ -1,6 +1,8 @@
 import { Avatar } from "@/components/Avatar/Avatar";
 import type { Components, PuckCategory } from "@/puck/types";
 
+type AvatarProps = Components["Avatar"];
+
 export const puckCategory: PuckCategory = "atoms";
 
 export const avatarPuckConfig = {
@@ -9,7 +11,7 @@ export const avatarPuckConfig = {
     fields: {
       src: { type: "text", label: "Image URL" },
       alt: { type: "text", label: "Alt text" },
-      fallback: { type: "text", label: "Fallback (e.g. name for initials)" },
+      fallback: { type: "text", label: "Fallback text" },
       size: {
         type: "select",
         label: "Size",
@@ -23,7 +25,7 @@ export const avatarPuckConfig = {
         type: "select",
         label: "Rounded",
         options: [
-          { label: "Full (circle)", value: "full" },
+          { label: "Full", value: "full" },
           { label: "None", value: "none" },
           { label: "Small", value: "sm" },
           { label: "Medium", value: "md" },
@@ -36,22 +38,12 @@ export const avatarPuckConfig = {
     defaultProps: {
       src: "",
       alt: "",
-      fallback: "AB",
+      fallback: "?",
       size: "md" as const,
       rounded: "full" as const,
       className: "",
       id: "",
     },
-    render: (props: Components["Avatar"]) => (
-      <Avatar
-        src={props.src || undefined}
-        alt={props.alt}
-        fallback={props.fallback}
-        size={props.size}
-        rounded={props.rounded}
-        className={props.className || undefined}
-        id={props.id || undefined}
-      />
-    ),
+    render: (props: AvatarProps) => <Avatar {...props} />,
   },
 };

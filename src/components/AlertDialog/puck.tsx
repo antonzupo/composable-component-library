@@ -1,5 +1,7 @@
-import { AlertDialogContent } from "@/components/AlertDialog/AlertDialog";
+import { AlertDialog } from "@/components/AlertDialog/AlertDialog";
 import type { Components, PuckCategory } from "@/puck/types";
+
+type AlertDialogProps = Components["AlertDialog"];
 
 export const puckCategory: PuckCategory = "molecules";
 
@@ -21,7 +23,7 @@ export const alertDialogPuckConfig = {
       },
       showCancel: {
         type: "select",
-        label: "Show cancel button",
+        label: "Show cancel",
         options: [
           { label: "Yes", value: true },
           { label: "No", value: false },
@@ -93,22 +95,6 @@ export const alertDialogPuckConfig = {
       className: "",
       id: "",
     },
-    render: (props: Components["AlertDialog"]) => (
-      <AlertDialogContent
-        title={props.title}
-        description={props.description}
-        cancelLabel={props.cancelLabel}
-        confirmLabel={props.confirmLabel}
-        confirmVariant={props.confirmVariant}
-        showCancel={props.showCancel}
-        titleAlign={props.titleAlign}
-        descriptionAlign={props.descriptionAlign}
-        actionsAlign={props.actionsAlign}
-        rounded={props.rounded}
-        padding={props.padding}
-        className={props.className || undefined}
-        id={props.id || undefined}
-      />
-    ),
+    render: (props: AlertDialogProps) => <AlertDialog {...props} />,
   },
 };

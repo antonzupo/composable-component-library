@@ -1,6 +1,8 @@
 import { Checkbox } from "@/components/Checkbox/Checkbox";
 import type { Components, PuckCategory } from "@/puck/types";
 
+type CheckboxProps = Components["Checkbox"];
+
 export const puckCategory: PuckCategory = "atoms";
 
 export const checkboxPuckConfig = {
@@ -37,22 +39,13 @@ export const checkboxPuckConfig = {
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      label: "Accept terms",
+      label: "Option",
       checked: false,
       disabled: false,
       size: "default" as const,
       className: "",
       id: "",
     },
-    render: ({ label, checked, disabled, size, className, id }: Components["Checkbox"]) => (
-      <Checkbox
-        label={label || undefined}
-        defaultChecked={checked}
-        disabled={disabled}
-        size={size}
-        className={className || undefined}
-        id={id || undefined}
-      />
-    ),
+    render: (props: CheckboxProps) => <Checkbox {...props} />,
   },
 };

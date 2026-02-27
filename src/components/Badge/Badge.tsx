@@ -1,41 +1,87 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-
+import { Badge as BaseBadge } from "@/components/ui/badge";
+import { Spinner } from "@/components/ui/spinner";
+import { DynamicIcon } from "lucide-react/dynamic";
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
-        outline: "text-foreground",
-        ghost: "border-transparent hover:bg-accent hover:text-accent-foreground",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+export type { BadgeProps } from "@/components/ui/badge";
+export { badgeVariants } from "@/components/ui/badge";
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+export interface ComposableBadgeProps extends React.ComponentProps<typeof BaseBadge> {
+  showIcon?: boolean;
+  icon?: string;
+  iconPosition?: "left" | "right";
+  showSpinner?: boolean;
+  spinnerPosition?: "left" | "right";
+  useAsLink?: boolean;
+  href?: string;
+  openInNewTab?: boolean;
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <div
-      data-slot="badge"
-      className={cn(badgeVariants({ variant }), className)}
-      {...props}
+const BADGE_ICON_SIZE = 12;
+
+function Badge({
+  showIcon,
+  icon,
+  iconPosition = "left",
+  showSpinner,
+  spinnerPosition = "right",
+  useAsLink,
+  href,
+  openInNewTab,
+  children,
+  className,
+  ...props
+}: ComposableBadgeProps) {
+  const showIconNode = Boolean(showIcon && icon);
+  const iconEl = showIconNode ? (
+    <DynamicIcon
+      name={icon as React.ComponentProps<typeof DynamicIcon>["name"]}
+      size={BADGE_ICON_SIZE}
+      className="shrink-0"
+      aria-hidden
     />
+  ) : null;
+
+  const spinnerEl = showSpinner ? (
+    <Spinner className="size-3 shrink-0" aria-hidden />
+  ) : null;
+
+  const hasLeftOrRight = showIconNode || showSpinner;
+
+  const content = (
+    <>
+      {iconPosition === "left" && iconEl}
+      {spinnerPosition === "left" && spinnerEl}
+      {children}
+      {spinnerPosition === "right" && spinnerEl}
+      {iconPosition === "right" && iconEl}
+    </>
+  );
+
+  if (useAsLink && href) {
+    return (
+      <BaseBadge
+        asChild
+        className={cn(hasLeftOrRight && "gap-1", className)}
+        {...props}
+      >
+        <a
+          href={href}
+          target={openInNewTab ? "_blank" : undefined}
+          rel={openInNewTab ? "noopener noreferrer" : undefined}
+        >
+          {content}
+        </a>
+      </BaseBadge>
+    );
+  }
+
+  return (
+    <BaseBadge className={cn(hasLeftOrRight && "gap-1", className)} {...props}>
+      {content}
+    </BaseBadge>
   );
 }
 
-export { Badge, badgeVariants };
+export { Badge };

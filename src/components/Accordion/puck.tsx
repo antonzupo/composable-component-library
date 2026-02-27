@@ -1,6 +1,8 @@
 import { Accordion } from "@/components/Accordion/Accordion";
 import type { Components, PuckCategory } from "@/puck/types";
 
+type AccordionProps = Components["Accordion"];
+
 export const puckCategory: PuckCategory = "molecules";
 
 export const accordionPuckConfig = {
@@ -10,18 +12,26 @@ export const accordionPuckConfig = {
       items: {
         type: "array",
         label: "Items",
+        getItemSummary: (item: { trigger: string; content: string; disabled?: boolean }) =>
+          item?.trigger || "Item",
         arrayFields: {
-          trigger: { type: "text", label: "Title" },
+          trigger: { type: "text", label: "Trigger" },
           content: { type: "textarea", label: "Content" },
+          disabled: {
+            type: "select",
+            label: "Disabled",
+            options: [
+              { label: "No", value: false },
+              { label: "Yes", value: true },
+            ],
+          },
         },
-        getItemSummary: (item: { trigger?: string }) => item?.trigger || "Item",
-        defaultItemProps: () => ({ trigger: "Item", content: "" }),
       },
       type: {
         type: "select",
-        label: "Behaviour",
+        label: "Type",
         options: [
-          { label: "Single (one open)", value: "single" },
+          { label: "Single", value: "single" },
           { label: "Multiple", value: "multiple" },
         ],
       },
@@ -29,16 +39,16 @@ export const accordionPuckConfig = {
         type: "select",
         label: "Default open",
         options: [
-          { label: "First item", value: "first" },
+          { label: "First", value: "first" },
           { label: "None", value: "none" },
           { label: "All", value: "all" },
         ],
       },
       collapsible: {
         type: "select",
-        label: "Collapsible",
+        label: "Collapsible (single only)",
         options: [
-          { label: "Yes (can close open item)", value: true },
+          { label: "Yes", value: true },
           { label: "No", value: false },
         ],
       },
@@ -124,13 +134,21 @@ export const accordionPuckConfig = {
           { label: "Yes", value: true },
         ],
       },
+      showBorder: {
+        type: "select",
+        label: "Show border",
+        options: [
+          { label: "Yes", value: true },
+          { label: "No", value: false },
+        ],
+      },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
       items: [
-        { trigger: "First item", content: "Content for the first item." },
-        { trigger: "Second item", content: "Content for the second item." },
+        { trigger: "First item", content: "Content for the first item.", disabled: false },
+        { trigger: "Second item", content: "Content for the second item.", disabled: false },
       ],
       type: "single" as const,
       defaultOpen: "first" as const,
@@ -143,34 +161,47 @@ export const accordionPuckConfig = {
       iconPosition: "end" as const,
       rounded: "lg" as const,
       variant: "default" as const,
-      fullWidth: false,
+      fullWidth: true,
+      showBorder: true,
       className: "",
       id: "",
     },
-    render: (props: Components["Accordion"]) => {
-      const accordionItems = (props.items ?? []).map((item, index) => ({
-        ...item,
-        value: `item-${index}`,
-      }));
-      return (
-        <Accordion
-          items={accordionItems}
-          type={props.type}
-          defaultOpen={props.defaultOpen}
-          collapsible={props.collapsible}
-          triggerAlign={props.triggerAlign}
-          contentAlign={props.contentAlign}
-          triggerPadding={props.triggerPadding}
-          contentPadding={props.contentPadding}
-          showIcon={props.showIcon}
-          iconPosition={props.iconPosition}
-          rounded={props.rounded}
-          variant={props.variant}
-          fullWidth={props.fullWidth}
-          className={props.className || undefined}
-          id={props.id || undefined}
-        />
-      );
-    },
+    render: ({
+      items = [],
+      type = "single",
+      defaultOpen = "first",
+      collapsible = true,
+      triggerAlign = "left",
+      contentAlign = "left",
+      triggerPadding = "md",
+      contentPadding = "md",
+      showIcon = true,
+      iconPosition = "end",
+      rounded = "lg",
+      variant = "default",
+      fullWidth = true,
+      showBorder = true,
+      className,
+      id,
+    }: AccordionProps) => (
+      <Accordion
+        items={items}
+        type={type}
+        defaultOpen={defaultOpen}
+        collapsible={collapsible}
+        triggerAlign={triggerAlign}
+        contentAlign={contentAlign}
+        triggerPadding={triggerPadding}
+        contentPadding={contentPadding}
+        showIcon={showIcon}
+        iconPosition={iconPosition}
+        rounded={rounded}
+        variant={variant}
+        fullWidth={fullWidth}
+        showBorder={showBorder}
+        className={className || undefined}
+        id={id || undefined}
+      />
+    ),
   },
 };

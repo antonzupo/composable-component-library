@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Calendar } from "@/components/Calendar/Calendar";
-import type { DateRange } from "@/components/Calendar/Calendar";
+import { Calendar } from "@/components/ui/calendar";
+import type { DateRange } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -78,23 +78,27 @@ export function DatePicker({
   const labelShort = mode === "single" && value instanceof Date ? formatDateShort(value) : label;
 
   const isInputLike = appearance === "input" || appearance === "naturalLanguage";
-  const showTime = appearance === "timePicker";
   const captionLayout = appearance === "dateOfBirth" ? "dropdown" : "label";
   const effectivePlaceholder =
     appearance === "naturalLanguage" ? "e.g. next Friday, tomorrow" : placeholder;
 
-  const calendar = (
-    <Calendar
-      mode={mode}
-      value={mode === "range" ? range : date}
-      onSelect={handleSelect}
-      showHeader
-      showWeekdays
-      showNavigation={appearance !== "dateOfBirth"}
-      captionLayout={captionLayout}
-      showTime={showTime}
-    />
-   );
+  const calendar =
+    mode === "range" ? (
+      <Calendar
+        mode="range"
+        required
+        selected={range}
+        onSelect={handleSelect as (range: DateRange | undefined) => void}
+        captionLayout={captionLayout}
+      />
+    ) : (
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={handleSelect as (date: Date | undefined) => void}
+        captionLayout={captionLayout}
+      />
+    );
 
   const trigger = isInputLike ? (
     <button

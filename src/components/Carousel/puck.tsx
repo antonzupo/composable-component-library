@@ -1,6 +1,9 @@
-import type { ComponentType } from "react";
 import { Carousel } from "@/components/Carousel/Carousel";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
+import type { Components, PuckCategory } from "@/puck/types";
+
+type CarouselProps = Components["Carousel"];
+
+const slideAllow = ["Image", "Text", "Badge", "Button", "Card", "Section", "Flex", "Grid", "AspectRatio", "Avatar"] as const;
 
 export const puckCategory: PuckCategory = "molecules";
 
@@ -16,7 +19,7 @@ export const carouselPuckConfig = {
           slide: {
             type: "slot",
             label: "Slide content",
-            allow: ["Card", "Image", "Section", "Text"],
+            allow: [...slideAllow],
           },
         },
       },
@@ -28,12 +31,7 @@ export const carouselPuckConfig = {
           { label: "Yes", value: true },
         ],
       },
-      interval: {
-        type: "number",
-        label: "Interval (ms)",
-        min: 2000,
-        max: 15000,
-      },
+      interval: { type: "number", label: "Interval (ms)" },
       showArrows: {
         type: "select",
         label: "Show arrows",
@@ -52,11 +50,11 @@ export const carouselPuckConfig = {
       },
       size: {
         type: "select",
-        label: "Size",
+        label: "Slide size",
         options: [
-          { label: "1 slide", value: "1" },
-          { label: "2 slides (basis-1/2)", value: "2" },
-          { label: "3 slides (basis-1/3)", value: "3" },
+          { label: "1", value: "1" },
+          { label: "2", value: "2" },
+          { label: "3", value: "3" },
         ],
       },
       spacing: {
@@ -100,31 +98,10 @@ export const carouselPuckConfig = {
       size: "1" as const,
       spacing: "md" as const,
       orientation: "horizontal" as const,
-      rounded: "md" as const,
+      rounded: "lg" as const,
       className: "",
       id: "",
     },
-    render: ({ slides, autoPlay, interval, showArrows, showDots, size, spacing, orientation, rounded, className, id }: Components["Carousel"]) => {
-      const slideComponents = (slides ?? []).map((item, i) => {
-        const Slide = item.slide as ComponentType<AreaContentProps> | undefined;
-        return Slide ? <Slide key={i} minEmptyHeight={200} /> : <div key={i} className="flex min-h-[200px] items-center justify-center bg-muted text-muted-foreground">Slide</div>;
-      });
-      return (
-        <Carousel
-          autoPlay={autoPlay}
-          interval={interval}
-          showArrows={showArrows}
-          showDots={showDots}
-          size={size}
-          spacing={spacing}
-          orientation={orientation}
-          rounded={rounded}
-          className={className || undefined}
-          id={id || undefined}
-        >
-          {slideComponents.length > 0 ? slideComponents : <div className="flex min-h-[200px] items-center justify-center bg-muted text-muted-foreground">Add slides</div>}
-        </Carousel>
-      );
-    },
+    render: (props: CarouselProps) => <Carousel {...props} />,
   },
 };

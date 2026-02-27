@@ -1,204 +1,139 @@
-import * as React from "react";
 import {
-  LineChart,
-  Line,
-  BarChart,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+} from "@/components/ui/chart";
+import type { ChartConfig } from "@/components/ui/chart";
+import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
+import {
   Bar,
-  PieChart,
+  BarChart as RechartsBarChart,
+  CartesianGrid,
+  Line,
+  LineChart as RechartsLineChart,
   Pie,
-  Cell,
+  PieChart as RechartsPieChart,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
+  Cell,
 } from "recharts";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
 
-const chartVariants = cva("w-full", {
-  variants: {
-    variant: {
-      default: "text-foreground",
-      muted: "text-muted-foreground",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
+type ChartProps = Components["Chart"];
 
-const COLORS = ["hsl(var(--primary))", "hsl(var(--secondary))", "hsl(var(--destructive))", "hsl(var(--muted-foreground))", "#22c55e", "#eab308"];
+const COLORS = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))"];
 
-export type ChartDataPoint = Record<string, string | number>;
+function buildConfig(_data: Array<Record<string, string | number>>, dataKey: string, xAxisKey: string, linesKeys: string[], barsKeys: string[]): ChartConfig {
+  const config: ChartConfig = {};
+  [xAxisKey, dataKey, ...linesKeys, ...barsKeys].forEach((key) => {
+    if (key && !config[key]) config[key] = { label: key };
+  });
+  return config;
+}
 
-export type ChartProps = React.HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof chartVariants> & {
-    type: "line" | "bar" | "pie";
-    data?: ChartDataPoint[];
-    dataSourceMode?: "manual" | "api";
-    dataSourceUrl?: string;
-    dataKey?: string;
-    xAxisKey?: string;
-    lines?: string[];
-    bars?: string[];
-    height?: number;
-    showGrid?: boolean;
-    showLegend?: boolean;
-    showTooltip?: boolean;
-  };
-
-function Chart({
-  type,
-  data: dataProp,
-  dataSourceMode = "manual",
-  dataSourceUrl,
+export function Chart({
+  type = "line",
+  data = [],
   dataKey = "value",
   xAxisKey = "name",
-  lines = ["value"],
-  bars = ["value"],
+  lines = "",
+  bars = "",
   height = 300,
   showGrid = true,
   showLegend = true,
   showTooltip = true,
-  variant,
+  variant = "default",
   className,
   id,
-  ...props
 }: ChartProps) {
-  const [fetchedData, setFetchedData] = React.useState<ChartDataPoint[] | null>(null);
-  const [fetchError, setFetchError] = React.useState<string | null>(null);
-  const [loading, setLoading] = React.useState(false);
+  const linesKeys = lines ? lines.split(",").map((s) => s.trim()).filter(Boolean) : [dataKey];
+  const barsKeys = bars ? bars.split(",").map((s) => s.trim()).filter(Boolean) : [dataKey];
+  const config = buildConfig(data, dataKey, xAxisKey, linesKeys, barsKeys);
 
-  React.useEffect(() => {
-    if (dataSourceMode !== "api" || !dataSourceUrl?.trim()) {
-      setFetchedData(null);
-      setFetchError(null);
-      return;
-    }
-    let cancelled = false;
-    setLoading(true);
-    setFetchError(null);
-    fetch(dataSourceUrl.trim())
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((json) => {
-        if (cancelled) return;
-        const arr = Array.isArray(json) ? json : json?.data ?? json?.items ?? [];
-        setFetchedData(Array.isArray(arr) ? arr : []);
-      })
-      .catch((err) => {
-        if (!cancelled) setFetchError(err?.message ?? "Failed to load data");
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [dataSourceMode, dataSourceUrl]);
-
-  const data =
-    dataSourceMode === "api" && dataSourceUrl?.trim()
-      ? (fetchedData ?? [])
-      : (dataProp ?? []);
-
-  if (loading) {
+  if (data.length === 0) {
     return (
       <div
-        className={cn(chartVariants({ variant }), "flex items-center justify-center border border-dashed rounded-md bg-muted/30", className)}
-        id={id}
+        className={cn("flex items-center justify-center bg-muted/30 text-muted-foreground text-sm", variant === "muted" && "bg-muted/50", className)}
         style={{ height }}
-        {...props}
+        id={id || undefined}
       >
-        <span className="text-muted-foreground text-sm">Loading chart data…</span>
+        Add chart data
       </div>
     );
   }
 
-  if (fetchError) {
-    return (
-      <div
-        className={cn(chartVariants({ variant }), "flex items-center justify-center border border-dashed rounded-md bg-destructive/10 border-destructive/30", className)}
-        id={id}
-        style={{ height }}
-        {...props}
-      >
-        <span className="text-destructive text-sm">{fetchError}</span>
-      </div>
-    );
-  }
-
-  if (!data?.length) {
-    return (
-      <div
-        className={cn(chartVariants({ variant }), "flex items-center justify-center border border-dashed rounded-md bg-muted/30", className)}
-        id={id}
-        style={{ height }}
-        {...props}
-      >
-        <span className="text-muted-foreground text-sm">
-          {dataSourceMode === "api" ? "No data from URL" : "Add data to display chart"}
-        </span>
-      </div>
-    );
-  }
-
-  const chartNode =
-    type === "line" ? (
-      <LineChart data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-        {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />}
-        <XAxis dataKey={xAxisKey} className="text-xs" tick={{ fill: "currentColor" }} />
-        <YAxis className="text-xs" tick={{ fill: "currentColor" }} />
-        {showTooltip && <Tooltip contentStyle={{ backgroundColor: "hsl(var(--background))", border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }} />}
-        {showLegend && <Legend />}
-        {lines.map((key, i) => (
-          <Line key={key} type="monotone" dataKey={key} stroke={COLORS[i % COLORS.length]} strokeWidth={2} dot={{ r: 4 }} />
-        ))}
-      </LineChart>
-    ) : type === "bar" ? (
-      <BarChart data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-        {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />}
-        <XAxis dataKey={xAxisKey} className="text-xs" tick={{ fill: "currentColor" }} />
-        <YAxis className="text-xs" tick={{ fill: "currentColor" }} />
-        {showTooltip && <Tooltip contentStyle={{ backgroundColor: "hsl(var(--background))", border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }} />}
-        {showLegend && <Legend />}
-        {bars.map((key, i) => (
-          <Bar key={key} dataKey={key} fill={COLORS[i % COLORS.length]} radius={[4, 4, 0, 0]} />
-        ))}
-      </BarChart>
-    ) : (
-      <PieChart margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-        {showTooltip && <Tooltip contentStyle={{ backgroundColor: "hsl(var(--background))", border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }} />}
-        {showLegend && <Legend />}
-        <Pie
-          data={data}
-          dataKey={dataKey}
-          nameKey={xAxisKey}
-          cx="50%"
-          cy="50%"
-          outerRadius={Math.min(height, 120) / 2 - 10}
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-        >
-          {data.map((_, i) => (
-            <Cell key={i} fill={COLORS[i % COLORS.length]} />
+  const chartContent = () => {
+    if (type === "line") {
+      return (
+        <RechartsLineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
+          {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />}
+          <XAxis dataKey={xAxisKey} tick={{ fontSize: 12 }} />
+          <YAxis tick={{ fontSize: 12 }} />
+          {showTooltip && (
+            <ChartTooltip content={<ChartTooltipContent />} />
+          )}
+          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          {linesKeys.map((key, i) => (
+            <Line key={key} type="monotone" dataKey={key} stroke={COLORS[i % COLORS.length]} strokeWidth={2} />
           ))}
-        </Pie>
-      </PieChart>
+        </RechartsLineChart>
+      );
+    }
+    if (type === "bar") {
+      return (
+        <RechartsBarChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
+          {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />}
+          <XAxis dataKey={xAxisKey} tick={{ fontSize: 12 }} />
+          <YAxis tick={{ fontSize: 12 }} />
+          {showTooltip && (
+            <ChartTooltip content={<ChartTooltipContent />} />
+          )}
+          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          {barsKeys.map((key, i) => (
+            <Bar key={key} dataKey={key} fill={COLORS[i % COLORS.length]} radius={[4, 4, 0, 0]} />
+          ))}
+        </RechartsBarChart>
+      );
+    }
+    if (type === "pie") {
+      const pieDataKey = linesKeys[0] || barsKeys[0] || dataKey;
+      return (
+        <RechartsPieChart>
+          <ChartTooltip content={<ChartTooltipContent />} />
+          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          <Pie
+            data={data}
+            dataKey={pieDataKey}
+            nameKey={xAxisKey}
+            cx="50%"
+            cy="50%"
+            outerRadius="80%"
+            label
+          >
+            {data.map((_, index) => (
+              <Cell key={index} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </RechartsPieChart>
+      );
+    }
+    return (
+      <RechartsLineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
+        {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />}
+        <XAxis dataKey={xAxisKey} tick={{ fontSize: 12 }} />
+        <YAxis tick={{ fontSize: 12 }} />
+        {showTooltip && <ChartTooltip content={<ChartTooltipContent />} />}
+        {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+        <Line type="monotone" dataKey={dataKey} stroke={COLORS[0]} strokeWidth={2} />
+      </RechartsLineChart>
     );
-
-  const content = <ResponsiveContainer width="100%" height={height}>{chartNode}</ResponsiveContainer>;
+  };
 
   return (
-    <div className={cn(chartVariants({ variant }), className)} id={id} {...props}>
-      {content}
-    </div>
+    <ChartContainer config={config} className={cn("w-full", variant === "muted" && "opacity-90", className)} id={id || undefined} style={{ height }}>
+      {chartContent()}
+    </ChartContainer>
   );
 }
-
-Chart.displayName = "Chart";
-
-export { Chart, chartVariants };

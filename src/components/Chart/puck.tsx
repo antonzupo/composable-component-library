@@ -1,6 +1,8 @@
 import { Chart } from "@/components/Chart/Chart";
 import type { Components, PuckCategory } from "@/puck/types";
 
+type ChartProps = Components["Chart"];
+
 export const puckCategory: PuckCategory = "molecules";
 
 export const chartPuckConfig = {
@@ -12,14 +14,10 @@ export const chartPuckConfig = {
         label: "Data source",
         options: [
           { label: "Manual", value: "manual" },
-          { label: "From API / URL", value: "api" },
+          { label: "API", value: "api" },
         ],
       },
-      dataSourceUrl: {
-        type: "text",
-        label: "Data URL (JSON array)",
-        description: "When using API: URL that returns a JSON array of objects, e.g. [{ name: \"Jan\", value: 400 }, ...]",
-      },
+      dataSourceUrl: { type: "text", label: "Data source URL (API mode)" },
       type: {
         type: "select",
         label: "Chart type",
@@ -31,32 +29,19 @@ export const chartPuckConfig = {
       },
       data: {
         type: "array",
-        label: "Data (when Manual)",
-        getItemSummary: (item: Record<string, string | number>) => (item?.name ?? item?.value ?? "Row") as string,
+        label: "Data rows",
+        getItemSummary: (item: Record<string, string | number>) =>
+          String(item?.name ?? item?.value ?? "Row"),
         arrayFields: {
           name: { type: "text", label: "Name" },
           value: { type: "number", label: "Value" },
-          uv: { type: "number", label: "UV (optional)" },
-          pv: { type: "number", label: "PV (optional)" },
-          amt: { type: "number", label: "AMT (optional)" },
         },
       },
-      dataKey: { type: "text", label: "Data key (pie)" },
-      xAxisKey: { type: "text", label: "X axis key" },
-      lines: {
-        type: "text",
-        label: "Line keys (comma-separated)",
-      },
-      bars: {
-        type: "text",
-        label: "Bar keys (comma-separated)",
-      },
-      height: {
-        type: "number",
-        label: "Height",
-        min: 150,
-        max: 600,
-      },
+      dataKey: { type: "text", label: "Data key (value key)" },
+      xAxisKey: { type: "text", label: "X axis key (category)" },
+      lines: { type: "text", label: "Line keys (comma-separated)" },
+      bars: { type: "text", label: "Bar keys (comma-separated)" },
+      height: { type: "number", label: "Height" },
       showGrid: {
         type: "select",
         label: "Show grid",
@@ -97,16 +82,14 @@ export const chartPuckConfig = {
       dataSourceUrl: "",
       type: "line" as const,
       data: [
-        { name: "Jan", value: 400, uv: 2400, pv: 2400 },
-        { name: "Feb", value: 300, uv: 1398, pv: 2210 },
-        { name: "Mar", value: 200, uv: 9800, pv: 2290 },
-        { name: "Apr", value: 278, uv: 3908, pv: 2000 },
-        { name: "May", value: 189, uv: 4800, pv: 2181 },
+        { name: "A", value: 40 },
+        { name: "B", value: 60 },
+        { name: "C", value: 80 },
       ],
       dataKey: "value",
       xAxisKey: "name",
-      lines: "value, uv, pv",
-      bars: "value, uv, pv",
+      lines: "value",
+      bars: "",
       height: 300,
       showGrid: true,
       showLegend: true,
@@ -115,20 +98,6 @@ export const chartPuckConfig = {
       className: "",
       id: "",
     },
-    render: (props: Components["Chart"]) => {
-      const lines = props.lines ? props.lines.split(",").map((s) => s.trim()).filter(Boolean) : ["value"];
-      const bars = props.bars ? props.bars.split(",").map((s) => s.trim()).filter(Boolean) : ["value"];
-      return (
-        <Chart
-          {...props}
-          dataSourceMode={props.dataSourceMode}
-          dataSourceUrl={props.dataSourceUrl || undefined}
-          lines={lines}
-          bars={bars}
-          className={props.className || undefined}
-          id={props.id || undefined}
-        />
-      );
-    },
+    render: (props: ChartProps) => <Chart {...props} />,
   },
 };

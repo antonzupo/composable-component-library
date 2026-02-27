@@ -1,8 +1,12 @@
-import * as React from "react";
+import type { ComponentType } from "react";
+import { AspectRatio as AspectRatioRoot } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import type { AreaContentProps, Components } from "@/puck/types";
 
-const ratioMap: Record<string, number> = {
-  "1/1": 1,
+type AspectRatioProps = Components["AspectRatio"];
+
+const ratioMap = {
+  "1/1": 1 / 1,
   "4/3": 4 / 3,
   "3/4": 3 / 4,
   "16/9": 16 / 9,
@@ -11,45 +15,33 @@ const ratioMap: Record<string, number> = {
   "9/21": 9 / 21,
 };
 
-const roundedClass = (r: string) =>
-  r === "none" ? "rounded-none" : r === "sm" ? "rounded-sm" : r === "md" ? "rounded-md" : r === "lg" ? "rounded-lg" : "rounded-full";
-
-export type AspectRatioProps = {
-  ratio: keyof typeof ratioMap;
-  objectFit?: "cover" | "contain" | "fill" | "none";
-  rounded?: "none" | "sm" | "md" | "lg" | "full";
-  className?: string;
-  id?: string;
-  children?: React.ReactNode;
-};
-
-const objectFitImgClass = (o: string) =>
-  o === "cover" ? "[&_img]:object-cover" : o === "contain" ? "[&_img]:object-contain" : o === "fill" ? "[&_img]:object-fill" : "[&_img]:object-none";
+const roundedClass = { none: "rounded-none", sm: "rounded-sm", md: "rounded-md", lg: "rounded-lg", full: "rounded-full" };
+const objectFitClass = { cover: "object-cover", contain: "object-contain", fill: "object-fill", none: "object-none" };
 
 export function AspectRatio({
-  ratio,
+  ratio = "16/9",
   objectFit = "cover",
   rounded = "none",
+  content,
   className,
   id,
-  children,
 }: AspectRatioProps) {
-  const value = ratioMap[ratio] ?? 16 / 9;
+  const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
   return (
-    <div
-      className={cn("w-full overflow-hidden", roundedClass(rounded), className)}
-      id={id}
-      style={{ aspectRatio: value }}
+    <AspectRatioRoot
+      ratio={ratioMap[ratio]}
+      className={cn(roundedClass[rounded], "overflow-hidden", className)}
+      id={id || undefined}
     >
-      <div className={cn("flex h-full w-full items-center justify-center overflow-hidden bg-muted", objectFitImgClass(objectFit))}>
-        {children ? (
-          <div className={cn("size-full [&>img]:size-full", objectFitImgClass(objectFit))}>
-            {children}
-          </div>
-        ) : (
-          <span className="text-muted-foreground text-sm">Content</span>
-        )}
-      </div>
-    </div>
+      {Content ? (
+        <div className={cn("h-full w-full", objectFitClass[objectFit])}>
+          <Content minEmptyHeight={120} />
+        </div>
+      ) : (
+        <div className={cn("flex h-full w-full items-center justify-center bg-muted", objectFitClass[objectFit])}>
+          <span className="text-muted-foreground text-sm">Add content</span>
+        </div>
+      )}
+    </AspectRatioRoot>
   );
 }

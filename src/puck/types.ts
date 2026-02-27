@@ -1,5 +1,5 @@
 /** Props passed by Puck to slot/area content components */
-export type AreaContentProps = { className?: string; minEmptyHeight?: number };
+export type AreaContentProps = { className?: string; minEmptyHeight?: number; style?: React.CSSProperties };
 
 export type PuckCategory = "atoms" | "molecules" | "organisms" | "layout";
 
@@ -11,12 +11,6 @@ export type Components = {
     size: "default" | "sm" | "lg" | "icon";
     type: "button" | "submit" | "reset";
     disabled: boolean;
-    align: "left" | "center" | "right";
-    fullWidth: boolean;
-    showBadge: boolean;
-    badgeText: string;
-    badgeVariant: "default" | "secondary" | "destructive" | "outline" | "ghost";
-    badgePosition: "start" | "end" | "top-right";
     className: string;
     id: string;
     ariaLabel: string;
@@ -24,6 +18,14 @@ export type Components = {
   Badge: {
     text: string;
     variant: "default" | "secondary" | "destructive" | "outline" | "ghost";
+    showIcon: boolean;
+    icon: string;
+    iconPosition: "left" | "right";
+    showSpinner: boolean;
+    spinnerPosition: "left" | "right";
+    useAsLink: boolean;
+    href: string;
+    openInNewTab: boolean;
     className: string;
     id: string;
   };
@@ -46,11 +48,19 @@ export type Components = {
   Card: {
     title: string;
     description: string;
+    header: unknown[];
     content: unknown[];
+    cardAction: unknown[];
+    footer: unknown[];
+    size: "sm" | "default" | "lg";
+    showImageSection: boolean;
+    imageSectionSize: "sm" | "md" | "lg";
     className: string;
     id: string;
     showHeader: boolean;
     showDescription: boolean;
+    showCardAction: boolean;
+    showFooter: boolean;
   };
   Section: {
     content: unknown[];
@@ -151,7 +161,7 @@ export type Components = {
     id: string;
   };
   Accordion: {
-    items: Array<{ trigger: string; content: string }>;
+    items: Array<{ trigger: string; content: string; disabled?: boolean }>;
     type: "single" | "multiple";
     defaultOpen: "first" | "none" | "all";
     collapsible: boolean;
@@ -164,6 +174,7 @@ export type Components = {
     rounded: "none" | "sm" | "md" | "lg" | "full";
     variant: "default" | "bordered" | "ghost";
     fullWidth: boolean;
+    showBorder: boolean;
     className: string;
     id: string;
   };

@@ -1,32 +1,17 @@
 import { Calendar } from "@/components/Calendar/Calendar";
 import type { Components, PuckCategory } from "@/puck/types";
 
-export const puckCategory: PuckCategory = "molecules";
+type CalendarProps = Components["Calendar"];
 
-const PRESET_OPTIONS = [
-  { label: "Today", value: "today" },
-  { label: "Tomorrow", value: "tomorrow" },
-  { label: "This week", value: "thisWeek" },
-  { label: "Next 7 days", value: "next7days" },
-  { label: "This month", value: "thisMonth" },
-];
+export const puckCategory: PuckCategory = "molecules";
 
 export const calendarPuckConfig = {
   Calendar: {
     label: "Calendar",
     fields: {
-      month: {
-        type: "number",
-        label: "Month (1–12)",
-        min: 1,
-        max: 12,
-      },
-      year: {
-        type: "number",
-        label: "Year",
-        min: 2000,
-        max: 2100,
-      },
+      month: { type: "number", label: "Month (1-12)" },
+      year: { type: "number", label: "Year" },
+      defaultMonth: { type: "text", label: "Default month (YYYY-MM-DD)" },
       showHeader: {
         type: "select",
         label: "Show header",
@@ -82,58 +67,31 @@ export const calendarPuckConfig = {
       },
       mode: {
         type: "select",
-        label: "Calendar mode",
+        label: "Mode",
         options: [
-          { label: "Single date", value: "single" },
+          { label: "Single", value: "single" },
           { label: "Range", value: "range" },
         ],
       },
-      showPresets: {
-        type: "select",
-        label: "Show presets",
-        options: [
-          { label: "Yes", value: true },
-          { label: "No", value: false },
-        ],
-      },
-      presetKeys: {
-        type: "array",
-        label: "Presets",
-        getItemSummary: (item: { key: string }) => PRESET_OPTIONS.find((o) => o.value === item.key)?.label ?? item.key,
-        arrayFields: {
-          key: {
-            type: "select",
-            label: "Preset",
-            options: PRESET_OPTIONS,
-          },
-        },
-      },
-      showTime: {
-        type: "select",
-        label: "Date & Time Picker (show time)",
-        options: [
-          { label: "Yes", value: true },
-          { label: "No", value: false },
-        ],
-      },
-      bookedDates: {
-        type: "array",
-        label: "Booked dates",
-        getItemSummary: (item: { date: string }) => item?.date ?? "Date",
-        arrayFields: {
-          date: {
-            type: "text",
-            label: "Date (YYYY-MM-DD)",
-          },
-        },
-      },
       cellSize: {
         type: "select",
-        label: "Custom cell size",
+        label: "Cell size",
         options: [
           { label: "Small", value: "sm" },
           { label: "Default", value: "default" },
           { label: "Large", value: "lg" },
+        ],
+      },
+      buttonVariant: {
+        type: "select",
+        label: "Button variant",
+        options: [
+          { label: "Default", value: "default" },
+          { label: "Destructive", value: "destructive" },
+          { label: "Outline", value: "outline" },
+          { label: "Secondary", value: "secondary" },
+          { label: "Ghost", value: "ghost" },
+          { label: "Link", value: "link" },
         ],
       },
       variant: {
@@ -144,17 +102,33 @@ export const calendarPuckConfig = {
           { label: "Outline", value: "outline" },
         ],
       },
-      buttonVariant: {
+      showPresets: {
         type: "select",
-        label: "Navigation button variant",
+        label: "Show presets",
         options: [
-          { label: "Default", value: "default" },
-          { label: "Destructive", value: "destructive" },
-          { label: "Outline", value: "outline" },
-          { label: "Secondary", value: "secondary" },
-          { label: "Ghost", value: "ghost" },
-          { label: "Link", value: "link" },
+          { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
+      },
+      presetKeys: {
+        type: "array",
+        label: "Preset keys",
+        getItemSummary: (item: { key: string }) => item?.key || "Preset",
+        arrayFields: { key: { type: "text", label: "Key" } },
+      },
+      showTime: {
+        type: "select",
+        label: "Show time",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      bookedDates: {
+        type: "array",
+        label: "Booked dates",
+        getItemSummary: (item: { date: string }) => item?.date || "Date",
+        arrayFields: { date: { type: "text", label: "Date" } },
       },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
@@ -162,84 +136,24 @@ export const calendarPuckConfig = {
     defaultProps: {
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
+      defaultMonth: "",
       showHeader: true,
       showWeekdays: true,
-      showOutsideDays: false,
-      showNavigation: false,
+      showOutsideDays: true,
+      showNavigation: true,
       captionLayout: "label" as const,
       weekStartsOn: 0 as const,
       mode: "single" as const,
       showPresets: false,
-      presetKeys: [] as { key: string }[],
+      presetKeys: [],
       showTime: false,
-      bookedDates: [] as { date: string }[],
+      bookedDates: [],
       cellSize: "default" as const,
       variant: "default" as const,
       buttonVariant: "ghost" as const,
       className: "",
       id: "",
     },
-    render: ({
-      month,
-      year,
-      showHeader,
-      showWeekdays,
-      showOutsideDays,
-      showNavigation,
-      captionLayout,
-      weekStartsOn,
-      mode,
-      showPresets,
-      presetKeys,
-      showTime,
-      bookedDates,
-      cellSize,
-      variant,
-      buttonVariant,
-      className,
-      id,
-    }: Components["Calendar"]) => {
-      const parseLocalDate = (s: string): Date | null => {
-        const parts = s.trim().match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-        if (!parts) return null;
-        const [, y, m, d] = parts.map(Number);
-        if (m < 1 || m > 12 || d < 1 || d > 31) return null;
-        const date = new Date(y, m - 1, d);
-        return isNaN(date.getTime()) ? null : date;
-      };
-      const bookedDatesParsed =
-        bookedDates?.length > 0
-          ? bookedDates
-              .map((item) => {
-                const d = typeof item === "string" ? item : (item as { date: string })?.date;
-                if (!d) return null;
-                return parseLocalDate(d);
-              })
-              .filter((d): d is Date => d !== null)
-          : undefined;
-      const presetKeyStrings = Array.isArray(presetKeys) ? presetKeys.map((p) => (typeof p === "string" ? p : (p as { key: string }).key)) : [];
-      return (
-        <Calendar
-          month={month}
-          year={year}
-          showHeader={showHeader}
-          showWeekdays={showWeekdays}
-          showOutsideDays={showOutsideDays}
-          showNavigation={showNavigation}
-          captionLayout={captionLayout}
-          weekStartsOn={weekStartsOn}
-          mode={mode}
-          showPresets={showPresets}
-          presetKeys={presetKeyStrings.length > 0 ? presetKeyStrings : undefined}
-          showTime={showTime}
-          bookedDates={bookedDatesParsed}
-          cellSize={cellSize}
-          variant={variant}
-          buttonVariant={buttonVariant}
-          className={className || undefined}
-          id={id || undefined}
-        />
-      );
-    },
+    render: (props: CalendarProps) => <Calendar {...props} />,
   },
 };

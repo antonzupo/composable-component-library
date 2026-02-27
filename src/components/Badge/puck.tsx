@@ -1,5 +1,13 @@
 import { Badge } from "@/components/Badge/Badge";
+import { iconNames } from "lucide-react/dynamic";
 import type { Components, PuckCategory } from "@/puck/types";
+
+type BadgeProps = Components["Badge"];
+
+const lucideIconOptions = [
+  { label: "None", value: "" },
+  ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
+];
 
 export const puckCategory: PuckCategory = "atoms";
 
@@ -19,19 +27,108 @@ export const badgePuckConfig = {
           { label: "Ghost", value: "ghost" },
         ],
       },
+      showIcon: {
+        type: "radio",
+        label: "Show icon",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      icon: {
+        type: "select",
+        label: "Icon",
+        options: lucideIconOptions,
+      },
+      iconPosition: {
+        type: "select",
+        label: "Icon position",
+        options: [
+          { label: "Left", value: "left" },
+          { label: "Right", value: "right" },
+        ],
+      },
+      showSpinner: {
+        type: "radio",
+        label: "Show spinner",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      spinnerPosition: {
+        type: "select",
+        label: "Spinner position",
+        options: [
+          { label: "Left", value: "left" },
+          { label: "Right", value: "right" },
+        ],
+      },
+      useAsLink: {
+        type: "radio",
+        label: "Render as link",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      href: { type: "text", label: "Link URL" },
+      openInNewTab: {
+        type: "radio",
+        label: "Open in new tab",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
       text: "Badge",
       variant: "default" as const,
+      showIcon: false,
+      icon: "",
+      iconPosition: "left" as const,
+      showSpinner: false,
+      spinnerPosition: "right" as const,
+      useAsLink: false,
+      href: "",
+      openInNewTab: false,
       className: "",
       id: "",
     },
-    render: ({ text, variant, className, id }: Components["Badge"]) => (
-      <Badge variant={variant} className={className || undefined} id={id || undefined}>
-        {text}
-      </Badge>
-    ),
+    render: ({
+      text = "Badge",
+      variant,
+      showIcon,
+      icon,
+      iconPosition,
+      showSpinner,
+      spinnerPosition,
+      useAsLink,
+      href,
+      openInNewTab,
+      className,
+      id,
+    }: BadgeProps) => {
+      return (
+        <Badge
+          variant={variant}
+          showIcon={showIcon}
+          icon={icon || undefined}
+          iconPosition={iconPosition}
+          showSpinner={showSpinner}
+          spinnerPosition={spinnerPosition}
+          useAsLink={useAsLink}
+          href={href || undefined}
+          openInNewTab={openInNewTab}
+          className={className || undefined}
+          id={id || undefined}
+        >
+          {text}
+        </Badge>
+      );
+    },
   },
 };

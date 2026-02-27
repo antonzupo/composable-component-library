@@ -1,14 +1,16 @@
-import type { ComponentType } from "react";
 import { AspectRatio } from "@/components/AspectRatio/AspectRatio";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
+import type { Components, PuckCategory } from "@/puck/types";
 
-export const puckCategory: PuckCategory = "layout";
+type AspectRatioProps = Components["AspectRatio"];
+
+const slotAllow = ["Image", "Text", "Badge", "Button", "Card", "Section", "Flex", "Grid"] as const;
+
+export const puckCategory: PuckCategory = "atoms";
 
 export const aspectRatioPuckConfig = {
   AspectRatio: {
     label: "Aspect Ratio",
     fields: {
-      content: { type: "slot", label: "Content" },
       ratio: {
         type: "select",
         label: "Ratio",
@@ -43,30 +45,31 @@ export const aspectRatioPuckConfig = {
           { label: "Full", value: "full" },
         ],
       },
+      content: {
+        type: "slot",
+        label: "Content",
+        allow: [...slotAllow],
+      },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      content: [],
       ratio: "16/9" as const,
       objectFit: "cover" as const,
       rounded: "none" as const,
+      content: [],
       className: "",
       id: "",
     },
-    render: ({ content, ratio, objectFit, rounded, className, id }: Components["AspectRatio"]) => {
-      const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
-      return (
-        <AspectRatio
-          ratio={ratio}
-          objectFit={objectFit}
-          rounded={rounded}
-          className={className || undefined}
-          id={id || undefined}
-        >
-          {Content ? <Content minEmptyHeight={120} /> : null}
-        </AspectRatio>
-      );
-    },
+    render: (props: AspectRatioProps) => (
+      <AspectRatio
+        ratio={props.ratio}
+        objectFit={props.objectFit}
+        rounded={props.rounded}
+        content={props.content}
+        className={props.className ?? ""}
+        id={props.id ?? ""}
+      />
+    ),
   },
 };
