@@ -7,7 +7,7 @@ function localDateString(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-/** Sample template: hero, breadcrumb, feature grid, calendar, accordion FAQ, alert, and nested card. */
+/** Sample template: hero, breadcrumb, Item group (draggable list), feature grid, calendar, accordion FAQ, alert, CTA. */
 export const sampleData: Data = {
   root: { props: {} },
   content: [
@@ -32,9 +32,9 @@ export const sampleData: Data = {
       },
       readOnly: { title: false, description: false, ctaLabel: false },
     },
-    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-4c4cee8e-1ae5-4585-bc14-f93150a6ee4a" } },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-hero-after" } },
 
-    // Breadcrumb (shows per-item node: default, dropdown, collapsed)
+    // Breadcrumb
     {
       type: "Section",
       props: {
@@ -57,12 +57,98 @@ export const sampleData: Data = {
           },
         ],
         className: "bg-muted/20 rounded-xl border-border/80",
-        id: "Section-75fed3e9-44a1-4072-9cec-43c170052dc9",
+        id: "Section-breadcrumb",
       },
     },
-    { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-8d01516c-d8ce-4c78-bf56-925188b68a24" } },
+    { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-after-breadcrumb" } },
 
-    // Features grid
+    // Item group (draggable list) — showcase existing Item component
+    {
+      type: "Section",
+      props: {
+        content: [
+          {
+            type: "Text",
+            props: {
+              content: "How it works",
+              as: "h2",
+              align: "center",
+              className: "text-foreground font-semibold tracking-tight",
+              id: "item-section-heading",
+            },
+          },
+          { type: "Space", props: { size: "md", direction: "vertical", className: "", id: "Space-before-items" } },
+          {
+            type: "Item",
+            props: {
+              displayMode: "group",
+              variant: "outline",
+              size: "default",
+              title: "",
+              description: "",
+              mediaVariant: "none",
+              mediaIcon: "",
+              mediaImageSrc: "",
+              mediaImageAlt: "",
+              mediaAvatarSrc: "",
+              mediaAvatarAlt: "",
+              mediaAvatarFallback: "?",
+              showHeader: false,
+              headerLeft: "",
+              headerRight: "",
+              useAsLink: false,
+              href: "",
+              openInNewTab: false,
+              showFooter: false,
+              footerLeft: "",
+              footerRight: "",
+              items: [
+                {
+                  title: "Drag & drop",
+                  description: "Arrange components on the canvas. Reorder, nest, and style without touching code.",
+                  mediaVariant: "icon",
+                  mediaIcon: "GripVertical",
+                  mediaImageSrc: "",
+                  mediaImageAlt: "",
+                  mediaAvatarSrc: "",
+                  mediaAvatarAlt: "",
+                  mediaAvatarFallback: "?",
+                },
+                {
+                  title: "Real-time preview",
+                  description: "See changes as you edit. Switch to preview mode to experience the final page.",
+                  mediaVariant: "icon",
+                  mediaIcon: "Eye",
+                  mediaImageSrc: "",
+                  mediaImageAlt: "",
+                  mediaAvatarSrc: "",
+                  mediaAvatarAlt: "",
+                  mediaAvatarFallback: "?",
+                },
+                {
+                  title: "Export & ship",
+                  description: "Publish your layout as data. Integrate with your CMS or app and keep full control.",
+                  mediaVariant: "icon",
+                  mediaIcon: "Rocket",
+                  mediaImageSrc: "",
+                  mediaImageAlt: "",
+                  mediaAvatarSrc: "",
+                  mediaAvatarAlt: "",
+                  mediaAvatarFallback: "?",
+                },
+              ],
+              className: "rounded-xl border-border bg-card/80 shadow-sm",
+              id: "item-group-features",
+            },
+          },
+        ],
+        id: "Section-item-group",
+        className: "bg-muted/10 rounded-xl py-6",
+      },
+    },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-items" } },
+
+    // Feature cards grid
     {
       type: "Section",
       props: {
@@ -81,7 +167,7 @@ export const sampleData: Data = {
                     id: "section-heading",
                   },
                 },
-                { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-b7b3e72c-7e1c-4cdb-b354-ccaef28d1a5d" } },
+                { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-before-grid" } },
                 {
                   type: "Grid",
                   props: {
@@ -104,7 +190,7 @@ export const sampleData: Data = {
                                       type: "button",
                                       disabled: false,
                                       className: "",
-                                      id: "Button-2abc2335-3460-4d56-91ad-3393510cfee3",
+                                      id: "Button-card-1",
                                       ariaLabel: "",
                                     },
                                   },
@@ -113,7 +199,7 @@ export const sampleData: Data = {
                                 objectFit: "cover",
                                 rounded: "none",
                                 className: "",
-                                id: "AspectRatio-02fbcb4c-728f-4f33-b9f3-d06696ffd0d1",
+                                id: "AspectRatio-card-1",
                               },
                             },
                           ],
@@ -159,7 +245,7 @@ export const sampleData: Data = {
                                 objectFit: "cover",
                                 rounded: "none",
                                 className: "",
-                                id: "AspectRatio-ac976573-c206-4798-92ae-31e394d287a5",
+                                id: "AspectRatio-card-2",
                               },
                             },
                           ],
@@ -202,7 +288,7 @@ export const sampleData: Data = {
                                 objectFit: "cover",
                                 rounded: "none",
                                 className: "",
-                                id: "AspectRatio-a2e94786-bb67-4c99-8a72-3ce3e08f68a8",
+                                id: "AspectRatio-card-3",
                               },
                             },
                           ],
@@ -237,10 +323,10 @@ export const sampleData: Data = {
           },
         ],
         className: "bg-muted/10 rounded-xl py-1",
-        id: "Section-53c92d02-0141-4abd-bb6c-ae598600d239",
+        id: "Section-features",
       },
     },
-    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-411ef11e-296f-49a8-8ded-4b8ba96bb904" } },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-features" } },
 
     // FAQ
     {
@@ -257,7 +343,7 @@ export const sampleData: Data = {
               id: "faq-heading",
             },
           },
-          { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-cbf1ed3a-77e4-402d-b986-0dbe10cb9a92" } },
+          { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-before-faq" } },
           {
             type: "Accordion",
             props: {
@@ -299,7 +385,7 @@ export const sampleData: Data = {
         className: "",
       },
     },
-    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-1fe08a5e-29f1-426a-8c91-b6d87add34dd" } },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-faq" } },
 
     // Calendar
     {
@@ -416,10 +502,10 @@ export const sampleData: Data = {
           },
         ],
         className: "rounded-xl",
-        id: "Section-9341c4c8-dcc7-4a26-9aea-147a5038474f",
+        id: "Section-alert",
       },
     },
-    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-e96cad57-5b14-496e-b63f-0e6c03f03660" } },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-before-cta" } },
 
     // CTA card
     {
