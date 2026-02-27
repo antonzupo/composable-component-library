@@ -1,8 +1,36 @@
 import type { ComponentType } from "react";
-import { ContextMenu } from "@/components/ContextMenu/ContextMenu";
+import { DropdownMenu } from "@/components/DropdownMenu/DropdownMenu";
 import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
 
 export const puckCategory: PuckCategory = "molecules";
+
+const slotAllow = [
+  "Text",
+  "Badge",
+  "Button",
+  "Image",
+  "Checkbox",
+  "Card",
+  "Accordion",
+  "Alert",
+  "AlertDialog",
+  "AspectRatio",
+  "Avatar",
+  "Breadcrumb",
+  "Calendar",
+  "Carousel",
+  "Chart",
+  "Collapsible",
+  "Combobox",
+  "Command",
+  "ContextMenu",
+  "Dialog",
+  "Flex",
+  "Grid",
+  "HeroCard",
+  "Section",
+  "Space",
+] as const;
 
 const itemTypeOptions = [
   { label: "Item", value: "item" },
@@ -13,47 +41,18 @@ const itemTypeOptions = [
   { label: "Radio group", value: "radioGroup" },
 ];
 
-export const contextMenuPuckConfig = {
-  ContextMenu: {
-    label: "Context Menu",
+export const dropdownMenuPuckConfig = {
+  DropdownMenu: {
+    label: "Dropdown Menu",
     fields: {
+      triggerLabel: {
+        type: "text",
+        label: "Trigger button label (when no trigger slot)",
+      },
       trigger: {
         type: "slot",
-        label: "Trigger (right-click area)",
-        allow: [
-          "Text",
-          "Badge",
-          "Button",
-          "Image",
-          "Checkbox",
-          "Card",
-          "Accordion",
-          "Alert",
-          "AspectRatio",
-          "Avatar",
-          "Breadcrumb",
-          "Calendar",
-          "Carousel",
-          "Chart",
-          "Collapsible",
-          "Combobox",
-          "Command",
-          "Dialog",
-          "DropdownMenu",
-          "Flex",
-          "Grid",
-          "HeroCard",
-          "Section",
-          "Space",
-        ],
-      },
-      modal: {
-        type: "select",
-        label: "Modal",
-        options: [
-          { label: "Yes", value: true },
-          { label: "No", value: false },
-        ],
+        label: "Trigger (e.g. button that opens the menu)",
+        allow: [...slotAllow],
       },
       contentClassName: { type: "text", label: "Content class name" },
       items: {
@@ -131,19 +130,19 @@ export const contextMenuPuckConfig = {
           optionsText: "",
         }),
       },
-      className: { type: "text", label: "Trigger class name" },
+      className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
+      triggerLabel: "Open menu",
       trigger: [],
-      modal: true,
       contentClassName: "",
       items: [
         {
           type: "item",
-          label: "Back",
+          label: "Edit",
           disabled: false,
-          shortcut: "⌘[",
+          shortcut: "⌘E",
           subItemsText: "",
           inset: false,
           groupHeading: "",
@@ -153,9 +152,9 @@ export const contextMenuPuckConfig = {
         },
         {
           type: "item",
-          label: "Forward",
+          label: "Duplicate",
           disabled: false,
-          shortcut: "⌘]",
+          shortcut: "⌘D",
           subItemsText: "",
           inset: false,
           groupHeading: "",
@@ -177,7 +176,7 @@ export const contextMenuPuckConfig = {
         },
         {
           type: "checkbox",
-          label: "Show toolbar",
+          label: "Show preview",
           disabled: false,
           shortcut: "",
           subItemsText: "",
@@ -188,23 +187,11 @@ export const contextMenuPuckConfig = {
           optionsText: "",
         },
         {
-          type: "radioGroup",
-          label: "View",
-          disabled: false,
-          shortcut: "",
-          subItemsText: "",
-          inset: false,
-          groupHeading: "View",
-          checked: false,
-          value: "Compact",
-          optionsText: "Compact\nWide",
-        },
-        {
           type: "sub",
           label: "More",
           disabled: false,
           shortcut: "",
-          subItemsText: "Reload\nSave",
+          subItemsText: "Reload\nSave as",
           inset: false,
           groupHeading: "",
           checked: false,
@@ -217,20 +204,24 @@ export const contextMenuPuckConfig = {
     },
     render: ({
       trigger,
-      modal,
+      triggerLabel,
       contentClassName,
       items,
       className,
       id,
-    }: Components["ContextMenu"]) => {
+    }: Components["DropdownMenu"]) => {
       const TriggerContent = trigger as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
-      const isEmpty = !TriggerContent || Array.isArray(trigger);
+      const hasTrigger =
+        TriggerContent && !Array.isArray(trigger);
+      const triggerNode = hasTrigger ? (
+        <TriggerContent />
+      ) : undefined;
       return (
-        <ContextMenu
-          trigger={isEmpty ? undefined : <TriggerContent />}
-          modal={modal}
+        <DropdownMenu
+          trigger={triggerNode}
+          triggerLabel={triggerLabel || "Open menu"}
           contentClassName={contentClassName || undefined}
           items={items}
           className={className || undefined}

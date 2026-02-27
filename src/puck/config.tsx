@@ -22,10 +22,16 @@ import { datePickerPuckConfig, puckCategory as datePickerCategory } from "@/comp
 import { directionPuckConfig, puckCategory as directionCategory } from "@/components/Direction/puck";
 import { drawerPuckConfig, puckCategory as drawerCategory } from "@/components/Drawer/puck";
 import { dialogPuckConfig, puckCategory as dialogCategory } from "@/components/Dialog/puck";
+import { dropdownMenuPuckConfig, puckCategory as dropdownMenuCategory } from "@/components/DropdownMenu/puck";
+import { emptyPuckConfig, puckCategory as emptyCategory } from "@/components/Empty/puck";
+import { fieldPuckConfig, puckCategory as fieldCategory } from "@/components/Field/puck";
 import { flexPuckConfig, puckCategory as flexCategory } from "@/components/Flex/puck";
 import { gridPuckConfig, puckCategory as gridCategory } from "@/components/Grid/puck";
 import { heroCardPuckConfig, puckCategory as heroCardCategory } from "@/components/HeroCard/puck";
+import { hoverCardPuckConfig, puckCategory as hoverCardCategory } from "@/components/HoverCard/puck";
 import { imagePuckConfig, puckCategory as imageCategory } from "@/components/Image/puck";
+import { inputPuckConfig, puckCategory as inputCategory } from "@/components/Input/puck";
+import { inputGroupPuckConfig, puckCategory as inputGroupCategory } from "@/components/InputGroup/puck";
 import { sectionPuckConfig, puckCategory as sectionCategory } from "@/components/Section/puck";
 import { spacePuckConfig, puckCategory as spaceCategory } from "@/components/Space/puck";
 import { textPuckConfig, puckCategory as textCategory } from "@/components/Text/puck";
@@ -60,6 +66,12 @@ const componentCategories: Array<{ name: keyof Components; category: PuckCategor
   { name: "Direction", category: directionCategory },
   { name: "Drawer", category: drawerCategory },
   { name: "Dialog", category: dialogCategory },
+  { name: "DropdownMenu", category: dropdownMenuCategory },
+  { name: "Empty", category: emptyCategory },
+  { name: "Field", category: fieldCategory },
+  { name: "HoverCard", category: hoverCardCategory },
+  { name: "Input", category: inputCategory },
+  { name: "InputGroup", category: inputGroupCategory },
   { name: "AspectRatio", category: aspectRatioCategory },
   { name: "Avatar", category: avatarCategory },
   { name: "Card", category: cardCategory },
@@ -106,6 +118,12 @@ export const config: Config<Components> = {
     ...directionPuckConfig,
     ...drawerPuckConfig,
     ...dialogPuckConfig,
+    ...dropdownMenuPuckConfig,
+    ...emptyPuckConfig,
+    ...fieldPuckConfig,
+    ...hoverCardPuckConfig,
+    ...inputPuckConfig,
+    ...inputGroupPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,

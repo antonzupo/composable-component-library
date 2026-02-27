@@ -317,4 +317,68 @@ export type Components = {
     className: string;
     id: string;
   };
+  DropdownMenu: {
+    trigger: unknown[];
+    triggerLabel: string;
+    contentClassName: string;
+    items: Array<{
+      type: "item" | "separator" | "label" | "sub" | "checkbox" | "radioGroup";
+      label: string;
+      disabled: boolean;
+      shortcut: string;
+      subItemsText: string;
+      inset: boolean;
+      groupHeading: string;
+      checked: boolean;
+      value: string;
+      optionsText: string;
+    }>;
+    className: string;
+    id: string;
+  };
+  Empty: {
+    title: string;
+    description: string;
+    mediaVariant: "default" | "icon";
+    content: unknown[];
+    className: string;
+    id: string;
+  };
+  Field: {
+    label: string;
+    description: string;
+    error: string;
+    orientation: "vertical" | "horizontal" | "responsive";
+    content: unknown[];
+    className: string;
+    id: string;
+  };
+  HoverCard: {
+    trigger: unknown[];
+    triggerLabel: string;
+    content: unknown[];
+    contentClassName: string;
+    openDelay: number;
+    closeDelay: number;
+    className: string;
+    id: string;
+  };
+  Input: {
+    type: string;
+    placeholder: string;
+    defaultValue: string;
+    disabled: boolean;
+    className: string;
+    id: string;
+  };
+  InputGroup: {
+    addonStart: string;
+    addonEnd: string;
+    placeholder: string;
+    type: string;
+    useTextarea: boolean;
+    disabled: boolean;
+    className: string;
+    id: string;
+  };
 };

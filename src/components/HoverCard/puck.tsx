@@ -1,6 +1,5 @@
 import type { ComponentType } from "react";
-import { Dialog } from "@/components/Dialog/Dialog";
-import { Button } from "@/components/ui/button";
+import { HoverCard } from "@/components/HoverCard/HoverCard";
 import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
 
 export const puckCategory: PuckCategory = "molecules";
@@ -29,43 +28,47 @@ const slotAllow = [
   "DropdownMenu",
   "Empty",
   "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
   "Flex",
   "Grid",
   "HeroCard",
+  "HoverCard",
+  "Input",
+  "InputGroup",
   "Section",
   "Space",
 ] as const;
 
-export const dialogPuckConfig = {
-  Dialog: {
-    label: "Dialog",
+export const hoverCardPuckConfig = {
+  HoverCard: {
+    label: "Hover Card",
     fields: {
       triggerLabel: {
         type: "text",
-        label: "Trigger button label",
+        label: "Trigger button label (when no trigger slot)",
       },
       trigger: {
         type: "slot",
-        label: "Trigger (e.g. button that opens the dialog)",
+        label: "Trigger",
         allow: [...slotAllow],
       },
       content: {
         type: "slot",
-        label: "Dialog content",
+        label: "Card content",
         allow: [...slotAllow],
       },
       contentClassName: { type: "text", label: "Content class name" },
+      openDelay: { type: "number", label: "Open delay (ms)" },
+      closeDelay: { type: "number", label: "Close delay (ms)" },
       className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      triggerLabel: "Open dialog",
+      triggerLabel: "Hover me",
       trigger: [],
       content: [],
       contentClassName: "",
+      openDelay: 200,
+      closeDelay: 100,
       className: "",
       id: "",
     },
@@ -74,9 +77,11 @@ export const dialogPuckConfig = {
       triggerLabel,
       content,
       contentClassName,
+      openDelay,
+      closeDelay,
       className,
       id,
-    }: Components["Dialog"]) => {
+    }: Components["HoverCard"]) => {
       const TriggerContent = trigger as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
@@ -86,26 +91,17 @@ export const dialogPuckConfig = {
       const hasTrigger =
         TriggerContent && !Array.isArray(trigger);
       const hasContent = Content && !Array.isArray(content);
-      const triggerNode = hasTrigger ? (
-        <TriggerContent />
-      ) : (
-        <Button type="button">{triggerLabel || "Open dialog"}</Button>
-      );
       return (
-        <Dialog
-          trigger={triggerNode}
+        <HoverCard
+          trigger={hasTrigger ? <TriggerContent /> : undefined}
+          triggerLabel={triggerLabel || "Hover me"}
+          content={hasContent ? <Content /> : undefined}
           contentClassName={contentClassName || undefined}
+          openDelay={openDelay}
+          closeDelay={closeDelay}
           className={className || undefined}
           id={id || undefined}
-        >
-          {hasContent ? (
-            <Content />
-          ) : (
-            <span className="text-muted-foreground text-sm">
-              Add content to the dialog
-            </span>
-          )}
-        </Dialog>
+        />
       );
     },
   },
