@@ -1,8 +1,6 @@
 import { Text } from "@/components/Text/Text";
 import { cn } from "@/lib/utils";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 export const textPuckConfig = {
   Text: {

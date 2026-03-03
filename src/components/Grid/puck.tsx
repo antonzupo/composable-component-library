@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { cn } from "@/lib/utils";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "layout";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 export const gridPuckConfig = {
   Grid: {

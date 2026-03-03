@@ -9,9 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 const slideAllow = [
   "Text",

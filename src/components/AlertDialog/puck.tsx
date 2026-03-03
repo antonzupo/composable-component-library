@@ -1,9 +1,7 @@
 import { AlertDialog } from "@/components/AlertDialog/AlertDialog";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type AlertDialogProps = Components["AlertDialog"];
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const alertDialogPuckConfig = {
   AlertDialog: {

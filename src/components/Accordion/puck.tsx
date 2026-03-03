@@ -1,9 +1,7 @@
 import { Accordion } from "@/components/Accordion/Accordion";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type AccordionProps = Components["Accordion"];
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const accordionPuckConfig = {
   Accordion: {

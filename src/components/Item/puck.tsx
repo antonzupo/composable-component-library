@@ -10,9 +10,7 @@ import {
   ItemFooter,
 } from "@/components/ui/item";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { Components } from "@/puck/types";
 
 type ItemMediaProps = {
   mediaVariant: Components["Item"]["mediaVariant"];

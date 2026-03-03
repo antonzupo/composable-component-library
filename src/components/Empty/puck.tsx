@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { Empty } from "@/components/Empty/Empty";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 const slotAllow = [
   "Text",

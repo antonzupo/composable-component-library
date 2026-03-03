@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { Field } from "@/components/Field/Field";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 const contentAllow = [
   "Text",

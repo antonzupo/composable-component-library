@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { Section } from "@/components/Section/Section";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "organisms";
+import type { Components } from "@/puck/types";
 
 export const sectionPuckConfig = {
   Section: {

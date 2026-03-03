@@ -1,8 +1,6 @@
 import type React from "react";
 import { InputGroup } from "@/components/InputGroup/InputGroup";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 export const inputGroupPuckConfig = {
   InputGroup: {

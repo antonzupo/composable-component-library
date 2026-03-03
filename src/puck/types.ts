@@ -1,12 +1,25 @@
-/** Props passed by Puck to slot/area content components */
-export type AreaContentProps = { className?: string; minEmptyHeight?: number; style?: React.CSSProperties };
+export type { PuckCategory } from "@/puck/categories";
 
-export type PuckCategory = "atoms" | "molecules" | "organisms" | "layout";
+/** Props passed by Puck to slot/area content components */
+export type AreaContentProps = {
+  className?: string;
+  minEmptyHeight?: number;
+  style?: React.CSSProperties;
+  /** Restrict which components can be dropped in the slot (overrides field allow) */
+  allow?: string[];
+  disallow?: string[];
+};
 
 export type Components = {
   Button: {
+    contentMode: "text" | "icon" | "both";
     label: string;
     content: unknown[];
+    icon: string;
+    iconPosition: "start" | "end";
+    roundedFull: boolean;
+    showSpinner: boolean;
+    spinnerPosition: "start" | "end";
     variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     size: "default" | "sm" | "lg" | "icon";
     type: "button" | "submit" | "reset";
@@ -14,6 +27,18 @@ export type Components = {
     className: string;
     id: string;
     ariaLabel: string;
+  };
+  ButtonGroup: {
+    content: unknown[];
+    orientation: "horizontal" | "vertical";
+    ariaLabel: string;
+    ariaLabelledby: string;
+    className: string;
+    id: string;
+  };
+  ButtonGroupSeparator: {
+    orientation: "horizontal" | "vertical";
+    className: string;
   };
   Badge: {
     text: string;
@@ -109,6 +134,8 @@ export type Components = {
     description: string;
     showTitle: boolean;
     variant: "default" | "destructive";
+    showIcon: boolean;
+    icon: string;
     showAction: boolean;
     alertAction: unknown[];
     className: string;
@@ -152,6 +179,21 @@ export type Components = {
     fallback: string;
     size: "sm" | "md" | "lg";
     rounded: "full" | "none" | "sm" | "md" | "lg";
+    showBadge: boolean;
+    badgeContent: string;
+    badgeIcon: string;
+    badgePosition: "top-right" | "top-left" | "bottom-right" | "bottom-left";
+    badgeVariant: "default" | "secondary" | "destructive" | "outline" | "ghost";
+    badgeColorClass: string;
+    className: string;
+    id: string;
+  };
+  AvatarGroup: {
+    content: unknown[];
+    showCount: boolean;
+    count: string;
+    countIcon: string;
+    countSize: "sm" | "md" | "lg";
     className: string;
     id: string;
   };
@@ -475,6 +517,25 @@ export type Components = {
     defaultValue: string;
     disabled: boolean;
     size: "sm" | "default";
+    className: string;
+    id: string;
+  };
+  Popover: {
+    trigger: unknown[];
+    triggerLabel: string;
+    content: unknown[];
+    contentClassName: string;
+    align: "start" | "center" | "end";
+    side: "top" | "right" | "bottom" | "left";
+    sideOffset: number;
+    className: string;
+    id: string;
+  };
+  Progress: {
+    value: number;
+    max: number;
+    indeterminate: boolean;
+    valueLabel: string;
     className: string;
     id: string;
   };

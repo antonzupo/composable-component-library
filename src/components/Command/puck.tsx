@@ -1,7 +1,5 @@
 import { Command } from "@/components/Command/Command";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { Components } from "@/puck/types";
 
 export const commandPuckConfig = {
   Command: {

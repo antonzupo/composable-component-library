@@ -1,7 +1,5 @@
 import { Image } from "@/components/Image/Image";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 export const imagePuckConfig = {
   Image: {

@@ -3,9 +3,7 @@ import {
   NativeSelectOption,
   NativeSelectOptGroup,
 } from "@/components/ui/native-select";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 const optionArrayFields = {
   value: { type: "text" as const, label: "Value" },

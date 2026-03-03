@@ -1,9 +1,7 @@
 import type { ComponentType } from "react";
 import { Dialog } from "@/components/Dialog/Dialog";
 import { Button } from "@/components/ui/button";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 const slotAllow = [
   "Text",

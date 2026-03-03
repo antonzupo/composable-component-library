@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { HeroCard } from "@/components/HeroCard/HeroCard";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "organisms";
+import type { Components } from "@/puck/types";
 
 const HERO_CONTENT_API = "/api/hero-content";
 

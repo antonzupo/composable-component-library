@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { DropdownMenu } from "@/components/DropdownMenu/DropdownMenu";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 const slotAllow = [
   "Text",

@@ -1,9 +1,7 @@
 import { Checkbox } from "@/components/Checkbox/Checkbox";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type CheckboxProps = Components["Checkbox"];
-
-export const puckCategory: PuckCategory = "atoms";
 
 export const checkboxPuckConfig = {
   Checkbox: {

@@ -15,9 +15,7 @@ import {
   MenubarSubContent,
   MenubarShortcut,
 } from "@/components/ui/menubar";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { Components } from "@/puck/types";
 
 type MenubarMenuItem = Components["Menubar"]["menus"][number]["items"][number];
 

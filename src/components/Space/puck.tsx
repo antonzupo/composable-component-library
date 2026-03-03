@@ -1,7 +1,5 @@
 import { Space } from "@/components/Space/Space";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "layout";
+import type { Components } from "@/puck/types";
 
 export const spacePuckConfig = {
   Space: {

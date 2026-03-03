@@ -1,9 +1,7 @@
 import { Breadcrumb } from "@/components/Breadcrumb/Breadcrumb";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type BreadcrumbProps = Components["Breadcrumb"];
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const breadcrumbPuckConfig = {
   Breadcrumb: {

@@ -1,7 +1,5 @@
 import { Label } from "@/components/ui/label";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 export const labelPuckConfig = {
   Label: {

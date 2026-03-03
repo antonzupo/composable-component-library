@@ -1,6 +1,6 @@
 import { Badge } from "@/components/Badge/Badge";
 import { iconNames } from "lucide-react/dynamic";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type BadgeProps = Components["Badge"];
 
@@ -8,8 +8,6 @@ const lucideIconOptions = [
   { label: "None", value: "" },
   ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
 ];
-
-export const puckCategory: PuckCategory = "atoms";
 
 export const badgePuckConfig = {
   Badge: {

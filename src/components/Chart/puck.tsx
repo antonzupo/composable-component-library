@@ -1,9 +1,7 @@
 import { Chart } from "@/components/Chart/Chart";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type ChartProps = Components["Chart"];
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const chartPuckConfig = {
   Chart: {

@@ -1,9 +1,7 @@
 import { Calendar } from "@/components/Calendar/Calendar";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type CalendarProps = Components["Calendar"];
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const calendarPuckConfig = {
   Calendar: {

@@ -1,11 +1,9 @@
 import { AspectRatio } from "@/components/AspectRatio/AspectRatio";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type AspectRatioProps = Components["AspectRatio"];
 
 const slotAllow = ["Image", "Text", "Badge", "Button", "Card", "Section", "Flex", "Grid"] as const;
-
-export const puckCategory: PuckCategory = "atoms";
 
 export const aspectRatioPuckConfig = {
   AspectRatio: {

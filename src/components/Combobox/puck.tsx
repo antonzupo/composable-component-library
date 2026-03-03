@@ -1,9 +1,7 @@
 import { Combobox } from "@/components/Combobox/Combobox";
-import type { Components, PuckCategory } from "@/puck/types";
+import type { Components } from "@/puck/types";
 
 type ComboboxProps = Components["Combobox"];
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const comboboxPuckConfig = {
   Combobox: {

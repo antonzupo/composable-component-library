@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/Card/Card";
 import { cn } from "@/lib/utils";
-import type { AreaContentProps, Components, PuckCategory } from "@/puck/types";
+import type { AreaContentProps, Components } from "@/puck/types";
 
 type CardProps = Components["Card"];
 
@@ -58,8 +58,6 @@ const footerAllow = ["Button", "Text", "Badge"] as const;
 const cardActionAllow = ["Button", "Text", "Badge", "Flex", "Space"] as const;
 
 const headerAllow = ["Image", "AspectRatio", "Avatar", "Badge", "Text"] as const;
-
-export const puckCategory: PuckCategory = "molecules";
 
 export const cardPuckConfig = {
   Card: {

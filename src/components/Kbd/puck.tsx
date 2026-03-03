@@ -1,7 +1,5 @@
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 export const kbdPuckConfig = {
   Kbd: {

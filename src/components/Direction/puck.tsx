@@ -1,8 +1,6 @@
 import type { ComponentType } from "react";
 import { Direction } from "@/components/Direction/Direction";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "layout";
+import type { Components } from "@/puck/types";
 
 export const directionPuckConfig = {
   Direction: {

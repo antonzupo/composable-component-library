@@ -5,9 +5,7 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "@/components/ui/input-otp";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "atoms";
+import type { Components } from "@/puck/types";
 
 const PATTERN_PRESETS: Record<
   Exclude<Components["InputOTP"]["patternPreset"], "custom" | "none">,

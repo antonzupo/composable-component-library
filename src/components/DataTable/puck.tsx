@@ -1,7 +1,5 @@
 import { DataTable } from "@/components/DataTable/DataTable";
-import type { Components, PuckCategory } from "@/puck/types";
-
-export const puckCategory: PuckCategory = "molecules";
+import type { Components } from "@/puck/types";
 
 export const dataTablePuckConfig = {
   DataTable: {
