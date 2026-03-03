@@ -49,6 +49,7 @@ const COMPONENT_CATEGORIES: Array<{
       "Collapsible",
       "Combobox",
       "Command",
+      "Select",
       "ContextMenu",
       "DataTable",
       "DatePicker",

@@ -538,6 +538,34 @@ export type Components = {
     className: string;
     id: string;
   };
+  Select: {
+    defaultValue: string;
+    value: string;
+    disabled: boolean;
+    required: boolean;
+    name: string;
+    dir: "ltr" | "rtl";
+    triggerClassName: string;
+    placeholder: string;
+    position: "popper" | "item-aligned";
+    side: "top" | "right" | "bottom" | "left";
+    sideOffset: number;
+    align: "start" | "center" | "end";
+    alignOffset: number;
+    avoidCollisions: boolean;
+    collisionPadding: number;
+    hideWhenDetached: boolean;
+    contentClassName: string;
+    optionMode: "flat" | "grouped";
+    options: Array<{ value: string; label: string; disabled?: boolean }>;
+    optionGroups: Array<{
+      groupLabel: string;
+      options: Array<{ value: string; label: string; disabled?: boolean }>;
+    }>;
+    separatorBetweenGroups: boolean;
+    className: string;
+    id: string;
+  };
   Popover: {
     trigger: unknown[];
     triggerLabel: string;
@@ -634,3 +662,4 @@ export type Components = {
     horizontalScrollbarClassName: string;
   };
 };
+  
