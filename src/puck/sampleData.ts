@@ -148,6 +148,71 @@ export const sampleData: Data = {
     },
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-items" } },
 
+    // Radio Group — data flow demo (manual + API/mock)
+    {
+      type: "Section",
+      props: {
+        content: [
+          {
+            type: "Text",
+            props: {
+              content: "Radio Group (data flow demo)",
+              as: "h2",
+              align: "center",
+              className: "text-foreground font-semibold tracking-tight",
+              id: "radio-group-heading",
+            },
+          },
+          { type: "Space", props: { size: "md", direction: "vertical", className: "", id: "Space-before-radio" } },
+          {
+            type: "RadioGroup",
+            props: {
+              dataSourceMode: "manual",
+              dataSource: null,
+              options: [
+                { value: "yes", label: "Yes", disabled: false },
+                { value: "no", label: "No", disabled: false },
+              ],
+              defaultValue: "",
+              name: "demo-manual",
+              disabled: false,
+              orientation: "vertical",
+              required: false,
+              className: "",
+              id: "radio-demo-manual",
+            },
+          },
+          { type: "Space", props: { size: "md", direction: "vertical", className: "", id: "Space-between-radio" } },
+          {
+            type: "RadioGroup",
+            props: {
+              dataSourceMode: "api",
+              dataSource: {
+                id: "delivery",
+                label: "Delivery method",
+                options: [
+                  { value: "standard", label: "Standard delivery" },
+                  { value: "express", label: "Express delivery" },
+                  { value: "pickup", label: "Pick up in store" },
+                ],
+              },
+              options: [],
+              defaultValue: "standard",
+              name: "demo-api",
+              disabled: false,
+              orientation: "horizontal",
+              required: false,
+              className: "",
+              id: "radio-demo-api",
+            },
+          },
+        ],
+        className: "bg-muted/10 rounded-xl py-6",
+        id: "Section-radio-demo",
+      },
+    },
+    { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-radio" } },
+
     // Feature cards grid
     {
       type: "Section",

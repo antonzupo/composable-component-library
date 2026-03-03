@@ -39,9 +39,14 @@ import { itemPuckConfig } from "@/components/Item/puck";
 import { kbdPuckConfig } from "@/components/Kbd/puck";
 import { labelPuckConfig } from "@/components/Label/puck";
 import { menubarPuckConfig } from "@/components/Menubar/puck";
+import { navigationMenuPuckConfig } from "@/components/NavigationMenu/puck";
 import { nativeSelectPuckConfig } from "@/components/NativeSelect/puck";
 import { popoverPuckConfig } from "@/components/Popover/puck";
 import { progressPuckConfig } from "@/components/Progress/puck";
+import { radioGroupPuckConfig } from "@/components/RadioGroup/puck";
+import { resizablePuckConfig } from "@/components/Resizable/puck";
+import { separatorPuckConfig } from "@/components/Separator/puck";
+import { skeletonPuckConfig } from "@/components/Skeleton/puck";
 import { sectionPuckConfig } from "@/components/Section/puck";
 import { spacePuckConfig } from "@/components/Space/puck";
 import { textPuckConfig } from "@/components/Text/puck";
@@ -102,9 +107,14 @@ export const config: Config<Components> = {
     ...kbdPuckConfig,
     ...labelPuckConfig,
     ...menubarPuckConfig,
+    ...navigationMenuPuckConfig,
     ...nativeSelectPuckConfig,
     ...popoverPuckConfig,
     ...progressPuckConfig,
+    ...radioGroupPuckConfig,
+    ...resizablePuckConfig,
+    ...separatorPuckConfig,
+    ...skeletonPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,

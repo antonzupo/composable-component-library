@@ -506,6 +506,24 @@ export type Components = {
     className: string;
     id: string;
   };
+  NavigationMenu: {
+    orientation: "horizontal" | "vertical";
+    dir: "ltr" | "rtl";
+    delayDuration: number;
+    skipDelayDuration: number;
+    value: string;
+    defaultValue: string;
+    items: Array<{
+      type: "trigger" | "link";
+      label: string;
+      href: string;
+      disabled: boolean;
+      contentLinks: Array<{ label: string; href: string }>;
+    }>;
+    className: string;
+    listClassName: string;
+    id: string;
+  };
   NativeSelect: {
     optionMode: "flat" | "grouped";
     options: Array<{ value: string; label: string }>;
@@ -538,5 +556,65 @@ export type Components = {
     valueLabel: string;
     className: string;
     id: string;
+  };
+  RadioGroup: {
+    dataSourceMode: "manual" | "api";
+    dataSource: {
+      id: string;
+      label: string;
+      options: Array<{ value: string; label: string; disabled?: boolean }>;
+    } | null;
+    options: Array<{ value: string; label: string; disabled?: boolean }>;
+    defaultValue: string;
+    name: string;
+    disabled: boolean;
+    orientation: "horizontal" | "vertical";
+    required: boolean;
+    className: string;
+    id: string;
+  };
+  Resizable: {
+    direction: "horizontal" | "vertical";
+    autoSaveId: string;
+    tagName: string;
+    className: string;
+    id: string;
+    panel1Content: unknown[];
+    panel1DefaultSize: number;
+    panel1MinSize: number;
+    panel1MaxSize: number;
+    panel1Collapsible: boolean;
+    panel1CollapsedSize: number;
+    panel1Order: number;
+    panel1ClassName: string;
+    panel1Id: string;
+    handleWithHandle: boolean;
+    handleClassName: string;
+    panel2Content: unknown[];
+    panel2DefaultSize: number;
+    panel2MinSize: number;
+    panel2MaxSize: number;
+    panel2Collapsible: boolean;
+    panel2CollapsedSize: number;
+    panel2Order: number;
+    panel2ClassName: string;
+    panel2Id: string;
+  };
+  Separator: {
+    orientation: "horizontal" | "vertical";
+    decorative: boolean;
+    className: string;
+    id: string;
+  };
+  Skeleton: {
+    variant: "single" | "avatar" | "card" | "text" | "form" | "table";
+    className: string;
+    id: string;
+    width: string;
+    height: string;
+    style: string;
+    role: string;
+    tabIndex: number | "";
+    ariaLabel: string;
   };
 };

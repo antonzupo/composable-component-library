@@ -26,6 +26,9 @@ const COMPONENT_CATEGORIES: Array<{
       "Label",
       "NativeSelect",
       "Progress",
+      "RadioGroup",
+      "Separator",
+      "Skeleton",
       "Text",
     ],
   },
@@ -56,6 +59,7 @@ const COMPONENT_CATEGORIES: Array<{
       "HoverCard",
       "Item",
       "Menubar",
+      "NavigationMenu",
       "Popover",
     ],
   },
@@ -65,7 +69,7 @@ const COMPONENT_CATEGORIES: Array<{
   },
   {
     category: "layout",
-    components: ["Direction", "Flex", "Grid", "Space"],
+    components: ["Direction", "Flex", "Grid", "Resizable", "Space"],
   },
 ];
 
