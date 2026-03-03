@@ -617,4 +617,20 @@ export type Components = {
     tabIndex: number | "";
     ariaLabel: string;
   };
+  ScrollArea: {
+    type: "auto" | "always" | "scroll" | "hover";
+    scrollHideDelay: number;
+    dir: "ltr" | "rtl";
+    viewportNonce: string;
+    viewportClassName: string;
+    className: string;
+    id: string;
+    content: unknown[];
+    showVerticalScrollbar: boolean;
+    showHorizontalScrollbar: boolean;
+    verticalScrollbarForceMount: boolean;
+    horizontalScrollbarForceMount: boolean;
+    verticalScrollbarClassName: string;
+    horizontalScrollbarClassName: string;
+  };
 };

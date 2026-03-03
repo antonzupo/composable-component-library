@@ -69,7 +69,7 @@ const COMPONENT_CATEGORIES: Array<{
   },
   {
     category: "layout",
-    components: ["Direction", "Flex", "Grid", "Resizable", "Space"],
+    components: ["Direction", "Flex", "Grid", "Resizable", "ScrollArea", "Space"],
   },
 ];
 

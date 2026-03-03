@@ -45,6 +45,7 @@ import { popoverPuckConfig } from "@/components/Popover/puck";
 import { progressPuckConfig } from "@/components/Progress/puck";
 import { radioGroupPuckConfig } from "@/components/RadioGroup/puck";
 import { resizablePuckConfig } from "@/components/Resizable/puck";
+import { scrollAreaPuckConfig } from "@/components/ScrollArea/puck";
 import { separatorPuckConfig } from "@/components/Separator/puck";
 import { skeletonPuckConfig } from "@/components/Skeleton/puck";
 import { sectionPuckConfig } from "@/components/Section/puck";
@@ -113,6 +114,7 @@ export const config: Config<Components> = {
     ...progressPuckConfig,
     ...radioGroupPuckConfig,
     ...resizablePuckConfig,
+    ...scrollAreaPuckConfig,
     ...separatorPuckConfig,
     ...skeletonPuckConfig,
     ...checkboxPuckConfig,
