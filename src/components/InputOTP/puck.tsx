@@ -1,26 +1,7 @@
-import * as React from "react";
-import {
-  InputOTP as InputOTPRoot,
-  InputOTPGroup,
-  InputOTPSlot,
-  InputOTPSeparator,
-} from "@/components/ui/input-otp";
+import { InputOTP } from "@/components/InputOTP/InputOTP";
 import type { Components } from "@/puck/types";
 
-const PATTERN_PRESETS: Record<
-  Exclude<Components["InputOTP"]["patternPreset"], "custom" | "none">,
-  string
-> = {
-  digits: "^\\d+$",
-  letters: "^[a-zA-Z]+$",
-  alphanumeric: "^[a-zA-Z0-9]+$",
-};
-
-function getPattern(props: Components["InputOTP"]): string | undefined {
-  if (props.patternPreset === "none") return undefined;
-  if (props.patternPreset === "custom") return props.patternCustom || undefined;
-  return PATTERN_PRESETS[props.patternPreset] ?? undefined;
-}
+type InputOTPProps = Components["InputOTP"];
 
 export const inputOtpPuckConfig = {
   InputOTP: {
@@ -78,41 +59,7 @@ export const inputOtpPuckConfig = {
       disabled: false,
       className: "",
       id: "",
-    },
-    render: (props: Components["InputOTP"]) => {
-      const pattern = getPattern(props);
-      const { maxLength, separatorEvery } = props;
-      const groupSize = separatorEvery > 0 ? separatorEvery : maxLength;
-      const chunks: number[][] = [];
-      for (let i = 0; i < maxLength; i += groupSize) {
-        chunks.push(
-          Array.from(
-            { length: Math.min(groupSize, maxLength - i) },
-            (_, j) => i + j
-          )
-        );
-      }
-      return (
-        <InputOTPRoot
-          maxLength={props.maxLength}
-          defaultValue={props.value}
-          pattern={pattern}
-          disabled={props.disabled}
-          className={props.className || undefined}
-          id={props.id || undefined}
-        >
-          {chunks.map((indices, chunkIndex) => (
-            <React.Fragment key={chunkIndex}>
-              <InputOTPGroup>
-                {indices.map((i) => (
-                  <InputOTPSlot key={i} index={i} />
-                ))}
-              </InputOTPGroup>
-              {chunkIndex < chunks.length - 1 ? <InputOTPSeparator /> : null}
-            </React.Fragment>
-          ))}
-        </InputOTPRoot>
-      );
-    },
+    } satisfies InputOTPProps,
+    render: (props: InputOTPProps) => <InputOTP {...props} />,
   },
 };

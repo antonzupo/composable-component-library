@@ -7,11 +7,10 @@ function localDateString(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-/** Sample template: hero, breadcrumb, Item group (draggable list), feature grid, calendar, accordion FAQ, alert, CTA. */
+/** Template data for the Puck editor. */
 export const sampleData: Data = {
   root: { props: {} },
   content: [
-    // Hero
     {
       type: "HeroCard",
       props: {
@@ -32,9 +31,9 @@ export const sampleData: Data = {
       },
       readOnly: { title: false, description: false, ctaLabel: false },
     },
+
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-hero-after" } },
 
-    // Breadcrumb
     {
       type: "Section",
       props: {
@@ -60,9 +59,9 @@ export const sampleData: Data = {
         id: "Section-breadcrumb",
       },
     },
+
     { type: "Space", props: { size: "lg", direction: "vertical", className: "", id: "Space-after-breadcrumb" } },
 
-    // Item group (draggable list) — showcase existing Item component
     {
       type: "Section",
       props: {
@@ -146,9 +145,9 @@ export const sampleData: Data = {
         className: "bg-muted/10 rounded-xl py-6",
       },
     },
+ 
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-items" } },
 
-    // Radio Group — data flow demo (manual + API/mock)
     {
       type: "Section",
       props: {
@@ -211,9 +210,9 @@ export const sampleData: Data = {
         id: "Section-radio-demo",
       },
     },
+
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-radio" } },
 
-    // Feature cards grid
     {
       type: "Section",
       props: {
@@ -397,9 +396,9 @@ export const sampleData: Data = {
         id: "Section-features",
       },
     },
+
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-features" } },
 
-    // FAQ
     {
       type: "Section",
       props: {
@@ -456,9 +455,9 @@ export const sampleData: Data = {
         className: "",
       },
     },
+
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-after-faq" } },
 
-    // Calendar
     {
       type: "Section",
       props: {
@@ -552,9 +551,9 @@ export const sampleData: Data = {
         className: "bg-muted/10 rounded-xl py-8",
       },
     },
+
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-calendar-after" } },
 
-    // Alert CTA
     {
       type: "Section",
       props: {
@@ -580,9 +579,9 @@ export const sampleData: Data = {
         id: "Section-alert",
       },
     },
+
     { type: "Space", props: { size: "xl", direction: "vertical", className: "", id: "Space-before-cta" } },
 
-    // CTA card
     {
       type: "Section",
       props: {

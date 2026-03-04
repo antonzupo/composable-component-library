@@ -1,7 +1,3 @@
-/**
- * Single source of truth: which category each Puck component belongs to.
- * Add or move a component by editing the arrays below only.
- */
 import type { PuckCategory } from "@/puck/categories";
 import type { Components } from "@/puck/types";
 

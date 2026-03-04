@@ -1,60 +1,13 @@
-import { DynamicIcon, iconNames } from "lucide-react/dynamic";
-import {
-  Item as ItemRoot,
-  ItemGroup,
-  ItemMedia,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
-  ItemHeader,
-  ItemFooter,
-} from "@/components/ui/item";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { iconNames } from "lucide-react/dynamic";
+import { Item } from "@/components/Item/Item";
 import type { Components } from "@/puck/types";
 
-type ItemMediaProps = {
-  mediaVariant: Components["Item"]["mediaVariant"];
-  mediaIcon: string;
-  mediaImageSrc: string;
-  mediaImageAlt: string;
-  mediaAvatarSrc: string;
-  mediaAvatarAlt: string;
-  mediaAvatarFallback: string;
-};
+type ItemProps = Components["Item"];
 
 const lucideIconOptions = [
   { label: "None", value: "" },
   ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
 ];
-
-function ItemMediaContent(props: ItemMediaProps) {
-  const { mediaVariant, mediaIcon, mediaImageSrc, mediaImageAlt, mediaAvatarSrc, mediaAvatarAlt, mediaAvatarFallback } = props;
-  if (mediaVariant === "icon" && mediaIcon) {
-    return (
-      <ItemMedia variant="icon">
-        <DynamicIcon name={mediaIcon as never} />
-      </ItemMedia>
-    );
-  }
-  if (mediaVariant === "image" && (mediaImageSrc || mediaImageAlt)) {
-    return (
-      <ItemMedia variant="image">
-        <img src={mediaImageSrc || ""} alt={mediaImageAlt || ""} />
-      </ItemMedia>
-    );
-  }
-  if (mediaVariant === "avatar") {
-    return (
-      <ItemMedia variant="default">
-        <Avatar>
-          <AvatarImage src={mediaAvatarSrc || undefined} alt={mediaAvatarAlt || ""} />
-          <AvatarFallback>{mediaAvatarFallback || "?"}</AvatarFallback>
-        </Avatar>
-      </ItemMedia>
-    );
-  }
-  return null;
-}
 
 const mediaVariantOptions = [
   { label: "None", value: "none" },
@@ -207,65 +160,7 @@ export const itemPuckConfig = {
       items: [],
       className: "",
       id: "",
-    },
-    render: (props: Components["Item"]) => {
-      if (props.displayMode === "group") {
-        const items = props.items.length > 0 ? props.items : [{ title: "Add items in the list below", description: "", mediaVariant: "none" as const, mediaIcon: "", mediaImageSrc: "", mediaImageAlt: "", mediaAvatarSrc: "", mediaAvatarAlt: "", mediaAvatarFallback: "?" }];
-        return (
-          <ItemGroup className={props.className || undefined} id={props.id || undefined}>
-            {items.map((item, i) => (
-              <ItemRoot key={i} variant={props.variant} size={props.size}>
-                <ItemMediaContent {...item} />
-                <ItemContent>
-                  <ItemTitle>{item.title}</ItemTitle>
-                  {item.description ? <ItemDescription>{item.description}</ItemDescription> : null}
-                </ItemContent>
-              </ItemRoot>
-            ))}
-          </ItemGroup>
-        );
-      }
-      const inner = (
-        <>
-          <ItemMediaContent {...props} />
-          {props.showHeader && (props.headerLeft || props.headerRight) ? (
-            <ItemHeader>
-              <span>{props.headerLeft}</span>
-              <span>{props.headerRight}</span>
-            </ItemHeader>
-          ) : null}
-          <ItemContent>
-            <ItemTitle>{props.title}</ItemTitle>
-            {props.description ? <ItemDescription>{props.description}</ItemDescription> : null}
-          </ItemContent>
-          {props.showFooter && (props.footerLeft || props.footerRight) ? (
-            <ItemFooter>
-              <span>{props.footerLeft}</span>
-              <span>{props.footerRight}</span>
-            </ItemFooter>
-          ) : null}
-        </>
-      );
-      const itemProps = {
-        variant: props.variant,
-        size: props.size,
-        className: props.className || undefined,
-        id: props.id || undefined,
-      };
-      if (props.useAsLink && props.href) {
-        return (
-          <ItemRoot asChild {...itemProps}>
-            <a
-              href={props.href}
-              target={props.openInNewTab ? "_blank" : undefined}
-              rel={props.openInNewTab ? "noopener noreferrer" : undefined}
-            >
-              {inner}
-            </a>
-          </ItemRoot>
-        );
-      }
-      return <ItemRoot {...itemProps}>{inner}</ItemRoot>;
-    },
+    } satisfies ItemProps,
+    render: (props: ItemProps) => <Item {...props} />,
   },
 };

@@ -1,5 +1,7 @@
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/Label/Label";
 import type { Components } from "@/puck/types";
+
+type LabelProps = Components["Label"];
 
 export const labelPuckConfig = {
   Label: {
@@ -15,20 +17,7 @@ export const labelPuckConfig = {
       htmlFor: "",
       className: "",
       id: "",
-    },
-    render: ({
-      text,
-      htmlFor,
-      className,
-      id,
-    }: Components["Label"]) => (
-      <Label
-        htmlFor={htmlFor || undefined}
-        className={className || undefined}
-        id={id || undefined}
-      >
-        {text}
-      </Label>
-    ),
+    } satisfies LabelProps,
+    render: (props: LabelProps) => <Label {...props} />,
   },
 };

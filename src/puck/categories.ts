@@ -1,6 +1,3 @@
-/**
- * Single source of truth for Puck categories. Add, remove, or rename categories here only.
- */
 export const PUCK_CATEGORIES = [
   { id: "atoms", title: "Atoms" },
   { id: "molecules", title: "Molecules" },

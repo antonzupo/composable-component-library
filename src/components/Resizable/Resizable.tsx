@@ -72,39 +72,41 @@ export function Resizable({
   };
   const [first, second] = panel1.order <= panel2.order ? [panel1, panel2] : [panel2, panel1];
 
-  return (
-    <Tag className={cn("w-full h-full min-h-[120px]", className)} id={id || undefined}>
-      <ResizablePanelGroup
-        direction={direction}
-        autoSaveId={autoSaveId || undefined}
-        className="h-full w-full"
+  const tagProps = {
+    className: cn("w-full h-full min-h-[120px]", className),
+    id: id || undefined,
+  };
+  return React.createElement(
+    Tag as keyof JSX.IntrinsicElements,
+    tagProps,
+    <ResizablePanelGroup
+      orientation={direction}
+      id={autoSaveId || undefined}
+      className="h-full w-full"
+    >
+      <ResizablePanel
+        id={first.id || undefined}
+        defaultSize={first.defaultSize}
+        minSize={first.minSize}
+        maxSize={first.maxSize}
+        collapsible={first.collapsible}
+        collapsedSize={first.collapsedSize}
+        className={first.className || undefined}
       >
-        <ResizablePanel
-          id={first.id || undefined}
-          order={first.order}
-          defaultSize={first.defaultSize}
-          minSize={first.minSize}
-          maxSize={first.maxSize}
-          collapsible={first.collapsible}
-          collapsedSize={first.collapsedSize}
-          className={first.className || undefined}
-        >
-          {renderPanelContent(first.content)}
-        </ResizablePanel>
-        <ResizableHandle withHandle={handleWithHandle} className={handleClassName || undefined} />
-        <ResizablePanel
-          id={second.id || undefined}
-          order={second.order}
-          defaultSize={second.defaultSize}
-          minSize={second.minSize}
-          maxSize={second.maxSize}
-          collapsible={second.collapsible}
-          collapsedSize={second.collapsedSize}
-          className={second.className || undefined}
-        >
-          {renderPanelContent(second.content)}
-        </ResizablePanel>
-      </ResizablePanelGroup>
-    </Tag>
+        {renderPanelContent(first.content)}
+      </ResizablePanel>
+      <ResizableHandle withHandle={handleWithHandle} className={handleClassName || undefined} />
+      <ResizablePanel
+        id={second.id || undefined}
+        defaultSize={second.defaultSize}
+        minSize={second.minSize}
+        maxSize={second.maxSize}
+        collapsible={second.collapsible}
+        collapsedSize={second.collapsedSize}
+        className={second.className || undefined}
+      >
+        {renderPanelContent(second.content)}
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }

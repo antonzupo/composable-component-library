@@ -1,9 +1,7 @@
-import {
-  NativeSelect as NativeSelectRoot,
-  NativeSelectOption,
-  NativeSelectOptGroup,
-} from "@/components/ui/native-select";
+import { NativeSelect } from "@/components/NativeSelect/NativeSelect";
 import type { Components } from "@/puck/types";
+
+type NativeSelectProps = Components["NativeSelect"];
 
 const optionArrayFields = {
   value: { type: "text" as const, label: "Value" },
@@ -89,45 +87,7 @@ export const nativeSelectPuckConfig = {
       size: "default" as const,
       className: "",
       id: "",
-    },
-    render: (props: Components["NativeSelect"]) => {
-      const selectProps = {
-        defaultValue: props.defaultValue || undefined,
-        disabled: props.disabled,
-        size: props.size,
-        className: props.className || undefined,
-        id: props.id || undefined,
-      };
-      if (props.optionMode === "grouped" && props.optionGroups.length > 0) {
-        return (
-          <NativeSelectRoot {...selectProps}>
-            {props.placeholder ? (
-              <NativeSelectOption value="">{props.placeholder}</NativeSelectOption>
-            ) : null}
-            {props.optionGroups.map((group, gi) => (
-              <NativeSelectOptGroup key={gi} label={group.groupLabel || "Group"}>
-                {group.options.map((opt, oi) => (
-                  <NativeSelectOption key={oi} value={opt.value}>
-                    {opt.label}
-                  </NativeSelectOption>
-                ))}
-              </NativeSelectOptGroup>
-            ))}
-          </NativeSelectRoot>
-        );
-      }
-      return (
-        <NativeSelectRoot {...selectProps}>
-          {props.placeholder ? (
-            <NativeSelectOption value="">{props.placeholder}</NativeSelectOption>
-          ) : null}
-          {props.options.map((opt, i) => (
-            <NativeSelectOption key={i} value={opt.value}>
-              {opt.label}
-            </NativeSelectOption>
-          ))}
-        </NativeSelectRoot>
-      );
-    },
+    } satisfies NativeSelectProps,
+    render: (props: NativeSelectProps) => <NativeSelect {...props} />,
   },
 };

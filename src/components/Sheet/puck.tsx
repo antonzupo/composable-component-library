@@ -103,6 +103,8 @@ export const sheetPuckConfig = {
       return (
         <Sheet
           trigger={triggerNode}
+          triggerLabel={triggerLabel}
+          content={hasContent ? <Content /> : undefined}
           contentClassName={contentClassName || undefined}
           side={side}
           className={className || undefined}

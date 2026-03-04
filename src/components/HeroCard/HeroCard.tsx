@@ -1,19 +1,9 @@
 import { Button } from "@/components/Button/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/Card/Card";
 import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
 
-export type HeroCardProps = {
-  title: string;
-  description: string;
-  ctaLabel: string;
-  ctaVariant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-  ctaSize: "default" | "sm" | "lg" | "icon";
-  ctaAlign: "left" | "center" | "right";
-  className?: string;
-  id?: string;
-  showDescription: boolean;
-  children?: React.ReactNode;
-};
+export type HeroCardProps = Components["HeroCard"];
 
 export function HeroCard({
   title,
@@ -28,7 +18,7 @@ export function HeroCard({
   children,
 }: HeroCardProps) {
   return (
-    <Card className={className} id={id}>
+    <Card className={cn(className)} id={id || undefined}>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         {showDescription && <CardDescription>{description}</CardDescription>}

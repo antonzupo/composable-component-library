@@ -1,7 +1,6 @@
 # Dependencies
 node_modules/
 package-lock.json
-.cursor/
 
 # Build output
 dist/
@@ -28,6 +27,7 @@ pnpm-debug.log*
 # Editor / IDE
 .idea/
 .vscode/
+.cursor/
 *.swp
 *.swo
 *~

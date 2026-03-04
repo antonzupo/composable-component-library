@@ -1,11 +1,9 @@
 export type { PuckCategory } from "@/puck/categories";
 
-/** Props passed by Puck to slot/area content components */
 export type AreaContentProps = {
   className?: string;
   minEmptyHeight?: number;
   style?: React.CSSProperties;
-  /** Restrict which components can be dropped in the slot (overrides field allow) */
   allow?: string[];
   disallow?: string[];
 };
@@ -105,6 +103,7 @@ export type Components = {
     className: string;
     id: string;
     showDescription: boolean;
+    children?: React.ReactNode;
   };
   Grid: {
     content: unknown[];
@@ -162,8 +161,14 @@ export type Components = {
     content: unknown[];
     contentLabel: string;
     contentClassName: string;
+    overlayClassName: string;
     className: string;
     id: string;
+    defaultOpen: boolean;
+    modal: boolean;
+    title: string;
+    description: string;
+    showCloseButton: boolean;
   };
   AspectRatio: {
     ratio: "1/1" | "4/3" | "3/4" | "16/9" | "9/16" | "21/9" | "9/21";
@@ -366,23 +371,23 @@ export type Components = {
     id: string;
   };
   Sheet: {
-    trigger: unknown[];
+    trigger: unknown[] | React.ReactNode;
     triggerLabel: string;
-    content: unknown[];
-    contentClassName: string;
+    content: unknown[] | React.ReactNode;
+    contentClassName?: string;
     side: "right" | "left" | "top" | "bottom";
-    className: string;
-    id: string;
+    className?: string;
+    id?: string;
   };
   Sidebar: {
     defaultOpen: boolean;
     side: "left" | "right";
     variant: "sidebar" | "floating" | "inset";
     collapsible: "offcanvas" | "icon" | "none";
-    sidebarContent: unknown[];
-    mainContent: unknown[];
-    className: string;
-    id: string;
+    sidebarContent: unknown[] | React.ReactNode;
+    mainContent: unknown[] | React.ReactNode;
+    className?: string;
+    id?: string;
   };
   DropdownMenu: {
     trigger: unknown[];

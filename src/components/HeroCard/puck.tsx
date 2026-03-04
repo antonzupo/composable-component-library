@@ -92,7 +92,7 @@ export const heroCardPuckConfig = {
       className: "",
       id: "",
       showDescription: true,
-    },
+    } satisfies Components["HeroCard"],
     resolveData: async ({ props }: { props: Components["HeroCard"] }) => {
       if (props.dataSourceMode !== "api" || !props.dataSource) {
         return { props, readOnly: { title: false, description: false, ctaLabel: false } };
@@ -127,14 +127,17 @@ export const heroCardPuckConfig = {
       const displayCtaLabel = dataSourceMode === "api" && dataSource?.ctaLabel != null ? dataSource.ctaLabel : ctaLabel;
       return (
         <HeroCard
+          dataSourceMode={dataSourceMode}
+          dataSource={dataSource}
           title={displayTitle}
           description={displayDescription}
           ctaLabel={displayCtaLabel}
           ctaVariant={ctaVariant}
           ctaSize={ctaSize}
           ctaAlign={ctaAlign}
-          className={className || undefined}
-          id={id || undefined}
+          content={content}
+          className={className}
+          id={id}
           showDescription={showDescription}
         >
           {Content ? <Content /> : null}

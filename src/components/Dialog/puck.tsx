@@ -3,6 +3,8 @@ import { Dialog } from "@/components/Dialog/Dialog";
 import { Button } from "@/components/ui/button";
 import type { AreaContentProps, Components } from "@/puck/types";
 
+type DialogProps = Components["Dialog"];
+
 const slotAllow = [
   "Text",
   "Badge",
@@ -23,7 +25,11 @@ const slotAllow = [
   "Combobox",
   "Command",
   "ContextMenu",
+  "DataTable",
+  "DatePicker",
+  "Direction",
   "Dialog",
+  "Drawer",
   "DropdownMenu",
   "Empty",
   "Field",
@@ -57,8 +63,35 @@ export const dialogPuckConfig = {
       },
       contentLabel: { type: "text", label: "Content accessibility label" },
       contentClassName: { type: "text", label: "Content class name" },
+      overlayClassName: { type: "text", label: "Overlay class name" },
       className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
+      defaultOpen: {
+        type: "select",
+        label: "Default open (uncontrolled)",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      modal: {
+        type: "select",
+        label: "Modal",
+        options: [
+          { label: "Yes", value: true },
+          { label: "No (non-modal)", value: false },
+        ],
+      },
+      title: { type: "text", label: "Title" },
+      description: { type: "text", label: "Description" },
+      showCloseButton: {
+        type: "select",
+        label: "Show close button",
+        options: [
+          { label: "Yes", value: true },
+          { label: "No", value: false },
+        ],
+      },
     },
     defaultProps: {
       triggerLabel: "Open dialog",
@@ -66,46 +99,70 @@ export const dialogPuckConfig = {
       content: [],
       contentLabel: "",
       contentClassName: "",
+      overlayClassName: "",
       className: "",
       id: "",
-    },
+      defaultOpen: false,
+      modal: true,
+      title: "",
+      description: "",
+      showCloseButton: true,
+    } satisfies DialogProps,
     render: ({
       trigger,
       triggerLabel,
       content,
-      contentLabel: _contentLabel,
+      contentLabel,
       contentClassName,
+      overlayClassName,
       className,
       id,
-    }: Components["Dialog"]) => {
+      defaultOpen,
+      modal,
+      title,
+      description,
+      showCloseButton,
+    }: DialogProps) => {
       const TriggerContent = trigger as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
       const Content = content as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
-      const hasTrigger =
-        TriggerContent && !Array.isArray(trigger);
-      const hasContent = Content && !Array.isArray(content);
-      const triggerNode = hasTrigger ? (
-        <TriggerContent />
+      const triggerIsSlotComponent =
+        typeof TriggerContent === "function" && !Array.isArray(trigger);
+      const contentIsSlotComponent =
+        typeof Content === "function" && !Array.isArray(content);
+      const triggerNode = triggerIsSlotComponent ? (
+        <TriggerContent allow={[...slotAllow]} minEmptyHeight={40} />
       ) : (
         <Button type="button">{triggerLabel || "Open dialog"}</Button>
       );
+      const contentNode = contentIsSlotComponent ? (
+        <Content allow={[...slotAllow]} minEmptyHeight={80} />
+      ) : (
+        <span className="text-muted-foreground text-sm">
+          Add content to the dialog
+        </span>
+      );
+      const isEditMode =
+        triggerIsSlotComponent || contentIsSlotComponent;
       return (
         <Dialog
-          trigger={triggerNode}
+          puck={isEditMode ? { isEditing: true } : undefined}
           contentClassName={contentClassName || undefined}
+          overlayClassName={overlayClassName || undefined}
           className={className || undefined}
           id={id || undefined}
+          defaultOpen={defaultOpen}
+          modal={modal}
+          title={title || undefined}
+          description={description || undefined}
+          contentLabel={contentLabel || undefined}
+          showCloseButton={showCloseButton}
         >
-          {hasContent ? (
-            <Content />
-          ) : (
-            <span className="text-muted-foreground text-sm">
-              Add content to the dialog
-            </span>
-          )}
+          {triggerNode}
+          {contentNode}
         </Dialog>
       );
     },

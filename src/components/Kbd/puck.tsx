@@ -1,5 +1,7 @@
-import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { Kbd } from "@/components/Kbd/Kbd";
 import type { Components } from "@/puck/types";
+
+type KbdProps = Components["Kbd"];
 
 export const kbdPuckConfig = {
   Kbd: {
@@ -32,23 +34,7 @@ export const kbdPuckConfig = {
       keys: [],
       className: "",
       id: "",
-    },
-    render: (props: Components["Kbd"]) => {
-      if (props.displayMode === "group") {
-        const keyItems = props.keys.length > 0 ? props.keys : [{ key: "Add keys below" }];
-        return (
-          <KbdGroup className={props.className || undefined} id={props.id || undefined}>
-            {keyItems.map((item, i) => (
-              <Kbd key={i}>{item.key}</Kbd>
-            ))}
-          </KbdGroup>
-        );
-      }
-      return (
-        <Kbd className={props.className || undefined} id={props.id || undefined}>
-          {props.text}
-        </Kbd>
-      );
-    },
+    } satisfies KbdProps,
+    render: (props: KbdProps) => <Kbd {...props} />,
   },
 };
