@@ -1,134 +1,110 @@
-"use client";
-
-import * as React from "react";
+import React from "react";
 import {
   ResizablePanelGroup,
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
+import type { AreaContentProps, Components } from "@/puck/types";
 
-export interface ResizablePanelProps {
-  defaultSize?: number;
-  minSize?: number;
-  maxSize?: number;
-  collapsible?: boolean;
-  collapsedSize?: number;
-  order?: number;
-  className?: string;
-  id?: string;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-}
+export type ResizableProps = Components["Resizable"];
 
-export interface ResizableHandleProps {
-  withHandle?: boolean;
-  className?: string;
-}
-
-export interface ResizableProps {
-  direction?: "horizontal" | "vertical";
-  autoSaveId?: string;
-  tagName?: keyof JSX.IntrinsicElements;
-  className?: string;
-  id?: string;
-  panel1: ResizablePanelProps & { children?: React.ReactNode };
-  handle?: ResizableHandleProps;
-  panel2: ResizablePanelProps & { children?: React.ReactNode };
-}
-
-const DEFAULT_PANEL: ResizablePanelProps = {
-  defaultSize: 50,
-  minSize: 10,
-  maxSize: 90,
-  collapsible: false,
-  collapsedSize: 0,
-  order: 0,
-  className: undefined,
-  id: undefined,
-};
-
-function applyPanelProps(
-  props: ResizablePanelProps & { children?: React.ReactNode }
-): ResizablePanelProps & { children?: React.ReactNode } {
-  const { order, className, id, style, ...rest } = props;
-  const orderStyle =
-    order !== undefined && order !== 0 ? { ...style, order } : style;
-  return {
-    ...rest,
-    className,
-    id,
-    style: orderStyle,
-    children: props.children,
-  };
+function renderPanelContent(
+  content: unknown,
+  minEmptyHeight = 80
+): React.ReactNode {
+  if (content == null) return null;
+  const Content = content as React.ComponentType<AreaContentProps> | undefined;
+  if (typeof Content === "function") {
+    return <Content minEmptyHeight={minEmptyHeight} />;
+  }
+  return content as React.ReactNode;
 }
 
 export function Resizable({
-  direction = "horizontal",
+  direction,
   autoSaveId,
-  tagName: WrapperTag = "div",
+  tagName: Tag = "div",
   className,
   id,
-  panel1,
-  handle = {},
-  panel2,
+  panel1Content,
+  panel1DefaultSize,
+  panel1MinSize,
+  panel1MaxSize,
+  panel1Collapsible,
+  panel1CollapsedSize,
+  panel1Order,
+  panel1ClassName,
+  panel1Id,
+  handleWithHandle,
+  handleClassName,
+  panel2Content,
+  panel2DefaultSize,
+  panel2MinSize,
+  panel2MaxSize,
+  panel2Collapsible,
+  panel2CollapsedSize,
+  panel2Order,
+  panel2ClassName,
+  panel2Id,
 }: ResizableProps) {
-  const groupId = autoSaveId || id;
-  const p1 = { ...DEFAULT_PANEL, ...panel1 };
-  const p2 = { ...DEFAULT_PANEL, ...panel2 };
-  const { withHandle, className: handleClassName } = handle;
-
-  const panel1Props = applyPanelProps(p1);
-  const panel2Props = applyPanelProps(p2);
+  const panel1 = {
+    id: panel1Id,
+    order: panel1Order,
+    content: panel1Content,
+    defaultSize: panel1DefaultSize,
+    minSize: panel1MinSize,
+    maxSize: panel1MaxSize,
+    collapsible: panel1Collapsible,
+    collapsedSize: panel1CollapsedSize,
+    className: panel1ClassName,
+  };
+  const panel2 = {
+    id: panel2Id,
+    order: panel2Order,
+    content: panel2Content,
+    defaultSize: panel2DefaultSize,
+    minSize: panel2MinSize,
+    maxSize: panel2MaxSize,
+    collapsible: panel2Collapsible,
+    collapsedSize: panel2CollapsedSize,
+    className: panel2ClassName,
+  };
+  const [first, second] = panel1.order <= panel2.order ? [panel1, panel2] : [panel2, panel1];
 
   return (
-    <WrapperTag className={cn("w-full min-h-[200px]", className)} id={id}>
+    <Tag className={cn("w-full h-full min-h-[120px]", className)} id={id || undefined}>
       <ResizablePanelGroup
         direction={direction}
-        id={groupId}
+        autoSaveId={autoSaveId || undefined}
         className="h-full w-full"
       >
         <ResizablePanel
-          defaultSize={panel1Props.defaultSize}
-          minSize={panel1Props.minSize}
-          maxSize={panel1Props.maxSize}
-          collapsible={panel1Props.collapsible}
-          collapsedSize={panel1Props.collapsedSize}
-          id={panel1Props.id}
-          className={panel1Props.className}
-          style={panel1Props.style}
+          id={first.id || undefined}
+          order={first.order}
+          defaultSize={first.defaultSize}
+          minSize={first.minSize}
+          maxSize={first.maxSize}
+          collapsible={first.collapsible}
+          collapsedSize={first.collapsedSize}
+          className={first.className || undefined}
         >
-          <div className="flex h-full items-center justify-center p-4">
-            {panel1Props.children ?? (
-              <span className="text-muted-foreground text-sm">
-                Panel 1 content
-              </span>
-            )}
-          </div>
+          {renderPanelContent(first.content)}
         </ResizablePanel>
-        <ResizableHandle
-          withHandle={withHandle}
-          className={handleClassName}
-        />
+        <ResizableHandle withHandle={handleWithHandle} className={handleClassName || undefined} />
         <ResizablePanel
-          defaultSize={panel2Props.defaultSize}
-          minSize={panel2Props.minSize}
-          maxSize={panel2Props.maxSize}
-          collapsible={panel2Props.collapsible}
-          collapsedSize={panel2Props.collapsedSize}
-          id={panel2Props.id}
-          className={panel2Props.className}
-          style={panel2Props.style}
+          id={second.id || undefined}
+          order={second.order}
+          defaultSize={second.defaultSize}
+          minSize={second.minSize}
+          maxSize={second.maxSize}
+          collapsible={second.collapsible}
+          collapsedSize={second.collapsedSize}
+          className={second.className || undefined}
         >
-          <div className="flex h-full items-center justify-center p-4">
-            {panel2Props.children ?? (
-              <span className="text-muted-foreground text-sm">
-                Panel 2 content
-              </span>
-            )}
-          </div>
+          {renderPanelContent(second.content)}
         </ResizablePanel>
       </ResizablePanelGroup>
-    </WrapperTag>
+    </Tag>
   );
 }

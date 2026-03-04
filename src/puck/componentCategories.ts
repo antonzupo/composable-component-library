@@ -28,6 +28,7 @@ const COMPONENT_CATEGORIES: Array<{
       "Progress",
       "RadioGroup",
       "Separator",
+      "Slider",
       "Skeleton",
       "Text",
     ],

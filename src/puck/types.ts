@@ -629,6 +629,15 @@ export type Components = {
     className: string;
     id: string;
   };
+  Slider: {
+    value: number;
+    min: number;
+    max: number;
+    step: number;
+    disabled: boolean;
+    className: string;
+    id: string;
+  };
   Resizable: {
     direction: "horizontal" | "vertical";
     autoSaveId: string;
