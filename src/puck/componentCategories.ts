@@ -61,7 +61,10 @@ const COMPONENT_CATEGORIES: Array<{
       "Item",
       "Menubar",
       "NavigationMenu",
+      "Pagination",
       "Popover",
+      "Sheet",
+      "Sidebar",
     ],
   },
   {

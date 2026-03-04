@@ -41,6 +41,7 @@ import { labelPuckConfig } from "@/components/Label/puck";
 import { menubarPuckConfig } from "@/components/Menubar/puck";
 import { navigationMenuPuckConfig } from "@/components/NavigationMenu/puck";
 import { nativeSelectPuckConfig } from "@/components/NativeSelect/puck";
+import { paginationPuckConfig } from "@/components/Pagination/puck";
 import { popoverPuckConfig } from "@/components/Popover/puck";
 import { progressPuckConfig } from "@/components/Progress/puck";
 import { radioGroupPuckConfig } from "@/components/RadioGroup/puck";
@@ -50,6 +51,8 @@ import { selectPuckConfig } from "@/components/Select/puck";
 import { separatorPuckConfig } from "@/components/Separator/puck";
 import { skeletonPuckConfig } from "@/components/Skeleton/puck";
 import { sectionPuckConfig } from "@/components/Section/puck";
+import { sheetPuckConfig } from "@/components/Sheet/puck";
+import { sidebarPuckConfig } from "@/components/Sidebar/puck";
 import { spacePuckConfig } from "@/components/Space/puck";
 import { textPuckConfig } from "@/components/Text/puck";
 import { PUCK_CATEGORIES, PUCK_CATEGORY_TITLES } from "@/puck/categories";
@@ -111,12 +114,15 @@ export const config: Config<Components> = {
     ...menubarPuckConfig,
     ...navigationMenuPuckConfig,
     ...nativeSelectPuckConfig,
+    ...paginationPuckConfig,
     ...selectPuckConfig,
     ...popoverPuckConfig,
     ...progressPuckConfig,
     ...radioGroupPuckConfig,
     ...resizablePuckConfig,
     ...scrollAreaPuckConfig,
+    ...sheetPuckConfig,
+    ...sidebarPuckConfig,
     ...separatorPuckConfig,
     ...skeletonPuckConfig,
     ...checkboxPuckConfig,

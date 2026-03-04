@@ -365,6 +365,25 @@ export type Components = {
     className: string;
     id: string;
   };
+  Sheet: {
+    trigger: unknown[];
+    triggerLabel: string;
+    content: unknown[];
+    contentClassName: string;
+    side: "right" | "left" | "top" | "bottom";
+    className: string;
+    id: string;
+  };
+  Sidebar: {
+    defaultOpen: boolean;
+    side: "left" | "right";
+    variant: "sidebar" | "floating" | "inset";
+    collapsible: "offcanvas" | "icon" | "none";
+    sidebarContent: unknown[];
+    mainContent: unknown[];
+    className: string;
+    id: string;
+  };
   DropdownMenu: {
     trigger: unknown[];
     triggerLabel: string;
@@ -582,6 +601,15 @@ export type Components = {
     max: number;
     indeterminate: boolean;
     valueLabel: string;
+    className: string;
+    id: string;
+  };
+  Pagination: {
+    pageCount: number;
+    currentPage: number;
+    showPreviousNext: boolean;
+    showFirstLast: boolean;
+    siblingCount: number;
     className: string;
     id: string;
   };
