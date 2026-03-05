@@ -485,6 +485,12 @@ export type Components = {
   InputGroup: {
     addonStart: string;
     addonEnd: string;
+    addonStartAlign: "inline-start" | "inline-end" | "block-start" | "block-end";
+    addonEndAlign: "inline-start" | "inline-end" | "block-start" | "block-end";
+    addonStartType: "text" | "icon";
+    addonEndType: "text" | "icon";
+    addonStartIcon: string;
+    addonEndIcon: string;
     placeholder: string;
     type: string;
     useTextarea: boolean;

@@ -1,13 +1,64 @@
 import type React from "react";
+import { iconNames } from "lucide-react/dynamic";
 import { InputGroup } from "@/components/InputGroup/InputGroup";
 import type { Components } from "@/puck/types";
+
+const lucideIconOptions = [
+  { label: "(none)", value: "" },
+  ...[...iconNames]
+    .sort((a, b) => a.localeCompare(b))
+    .map((name) => ({ label: name, value: name })),
+];
+
+const addonAlignOptions = [
+  { label: "Inline start", value: "inline-start" },
+  { label: "Inline end", value: "inline-end" },
+  { label: "Block start (above)", value: "block-start" },
+  { label: "Block end (below)", value: "block-end" },
+];
 
 export const inputGroupPuckConfig = {
   InputGroup: {
     label: "Input Group",
     fields: {
-      addonStart: { type: "text", label: "Addon (start)" },
-      addonEnd: { type: "text", label: "Addon (end)" },
+      addonStart: { type: "text", label: "Addon (start) text" },
+      addonEnd: { type: "text", label: "Addon (end) text" },
+      addonStartAlign: {
+        type: "select",
+        label: "Addon (start) align",
+        options: addonAlignOptions,
+      },
+      addonEndAlign: {
+        type: "select",
+        label: "Addon (end) align",
+        options: addonAlignOptions,
+      },
+      addonStartType: {
+        type: "select",
+        label: "Addon (start) type",
+        options: [
+          { label: "Text", value: "text" },
+          { label: "Icon", value: "icon" },
+        ],
+      },
+      addonEndType: {
+        type: "select",
+        label: "Addon (end) type",
+        options: [
+          { label: "Text", value: "text" },
+          { label: "Icon", value: "icon" },
+        ],
+      },
+      addonStartIcon: {
+        type: "select",
+        label: "Addon (start) icon",
+        options: lucideIconOptions,
+      },
+      addonEndIcon: {
+        type: "select",
+        label: "Addon (end) icon",
+        options: lucideIconOptions,
+      },
       placeholder: { type: "text", label: "Placeholder" },
       type: {
         type: "select",
@@ -44,6 +95,12 @@ export const inputGroupPuckConfig = {
     defaultProps: {
       addonStart: "",
       addonEnd: "",
+      addonStartAlign: "inline-start",
+      addonEndAlign: "inline-end",
+      addonStartType: "text",
+      addonEndType: "text",
+      addonStartIcon: "",
+      addonEndIcon: "",
       placeholder: "Enter value...",
       type: "text",
       useTextarea: false,
@@ -53,8 +110,14 @@ export const inputGroupPuckConfig = {
     },
     render: (props: Components["InputGroup"]) => (
       <InputGroup
-        addonStart={props.addonStart || undefined}
-        addonEnd={props.addonEnd || undefined}
+        addonStart={props.addonStart}
+        addonEnd={props.addonEnd}
+        addonStartAlign={props.addonStartAlign}
+        addonEndAlign={props.addonEndAlign}
+        addonStartType={props.addonStartType}
+        addonEndType={props.addonEndType}
+        addonStartIcon={props.addonStartIcon}
+        addonEndIcon={props.addonEndIcon}
         placeholder={props.placeholder || undefined}
         type={props.type as React.HTMLInputTypeAttribute}
         useTextarea={props.useTextarea}

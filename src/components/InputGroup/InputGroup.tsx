@@ -9,6 +9,8 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group";
 import { cn } from "@/lib/utils";
+import { DynamicIcon } from "lucide-react/dynamic";
+import type { Components } from "@/puck/types";
 
 export type InputGroupAddonAlign =
   | "inline-start"
@@ -16,20 +18,17 @@ export type InputGroupAddonAlign =
   | "block-start"
   | "block-end";
 
-export interface InputGroupProps {
-  addonStart?: string;
-  addonEnd?: string;
-  placeholder?: string;
-  type?: React.HTMLInputTypeAttribute;
-  useTextarea?: boolean;
-  disabled?: boolean;
-  className?: string;
-  id?: string;
-}
+export type InputGroupProps = Components["InputGroup"];
 
 export function InputGroup({
-  addonStart,
-  addonEnd,
+  addonStart = "",
+  addonEnd = "",
+  addonStartAlign = "inline-start",
+  addonEndAlign = "inline-end",
+  addonStartType = "text",
+  addonEndType = "text",
+  addonStartIcon = "",
+  addonEndIcon = "",
   placeholder = "Enter value...",
   type = "text",
   useTextarea = false,
@@ -37,14 +36,38 @@ export function InputGroup({
   className,
   id,
 }: InputGroupProps) {
-  const hasStart = addonStart != null && addonStart.trim() !== "";
-  const hasEnd = addonEnd != null && addonEnd.trim() !== "";
+  const hasStart =
+    addonStartType === "icon"
+      ? addonStartIcon != null && addonStartIcon.trim() !== ""
+      : addonStart != null && addonStart.trim() !== "";
+  const hasEnd =
+    addonEndType === "icon"
+      ? addonEndIcon != null && addonEndIcon.trim() !== ""
+      : addonEnd != null && addonEnd.trim() !== "";
+
+  const startAddonContent =
+    addonStartType === "icon" && addonStartIcon ? (
+      <DynamicIcon
+        name={addonStartIcon as React.ComponentProps<typeof DynamicIcon>["name"]}
+      />
+    ) : (
+      <InputGroupText>{addonStart}</InputGroupText>
+    );
+
+  const endAddonContent =
+    addonEndType === "icon" && addonEndIcon ? (
+      <DynamicIcon
+        name={addonEndIcon as React.ComponentProps<typeof DynamicIcon>["name"]}
+      />
+    ) : (
+      <InputGroupText>{addonEnd}</InputGroupText>
+    );
 
   return (
     <UIInputGroup id={id} className={cn(className)}>
       {hasStart && (
-        <InputGroupAddon align="inline-start">
-          <InputGroupText>{addonStart}</InputGroupText>
+        <InputGroupAddon align={addonStartAlign}>
+          {startAddonContent}
         </InputGroupAddon>
       )}
       {useTextarea ? (
@@ -61,9 +84,7 @@ export function InputGroup({
         />
       )}
       {hasEnd && (
-        <InputGroupAddon align="inline-end">
-          <InputGroupText>{addonEnd}</InputGroupText>
-        </InputGroupAddon>
+        <InputGroupAddon align={addonEndAlign}>{endAddonContent}</InputGroupAddon>
       )}
     </UIInputGroup>
   );
