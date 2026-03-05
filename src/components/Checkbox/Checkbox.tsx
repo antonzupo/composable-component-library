@@ -1,5 +1,4 @@
 import { Checkbox as CheckboxRoot } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import type { Components } from "@/puck/types";
 
@@ -18,12 +17,26 @@ export function Checkbox({
   size = "default",
   className,
   id,
+  onCheckedChange,
 }: CheckboxProps) {
   const inputId = id || `checkbox-${Math.random().toString(36).slice(2, 9)}`;
-  return (
-    <div className={cn("flex items-center gap-2", className)} id={id || undefined}>
-      <CheckboxRoot id={inputId} checked={checked} disabled={disabled} className={cn(sizeClass[size])} />
-      {label ? <Label htmlFor={inputId} className="cursor-pointer font-normal">{label}</Label> : null}
-    </div>
+  const isControlled = onCheckedChange !== undefined;
+  const content = (
+    <>
+      <CheckboxRoot
+        id={inputId}
+        {...(isControlled ? { checked, onCheckedChange } : { defaultChecked: checked })}
+        disabled={disabled}
+        className={cn(sizeClass[size])}
+      />
+      {label ? <span className="cursor-pointer font-normal">{label}</span> : null}
+    </>
+  );
+  return label ? (
+    <label className={cn("flex items-center gap-2 cursor-pointer", className)}>
+      {content}
+    </label>
+  ) : (
+    <div className={cn("flex items-center gap-2", className)}>{content}</div>
   );
 }

@@ -56,6 +56,11 @@ import { spinnerPuckConfig } from "@/components/Spinner/puck";
 import { switchPuckConfig } from "@/components/Switch/puck";
 import { tablePuckConfig } from "@/components/Table/puck";
 import { tabsPuckConfig } from "@/components/Tabs/puck";
+import { textAreaPuckConfig } from "@/components/TextArea/puck";
+import { tooltipPuckConfig } from "@/components/Tooltip/puck";
+import { togglePuckConfig } from "@/components/Toggle/puck";
+import { toggleGroupPuckConfig } from "@/components/ToggleGroup/puck";
+import { typographyPuckConfig } from "@/components/Typography/puck";
 import { sectionPuckConfig } from "@/components/Section/puck";
 import { sheetPuckConfig } from "@/components/Sheet/puck";
 import { sidebarPuckConfig } from "@/components/Sidebar/puck";
@@ -116,6 +121,7 @@ export const config: Config<Components> = {
     ...inputPuckConfig,
     ...inputOtpPuckConfig,
     ...inputGroupPuckConfig,
+    ...textAreaPuckConfig,
     ...itemPuckConfig,
     ...kbdPuckConfig,
     ...labelPuckConfig,
@@ -137,6 +143,10 @@ export const config: Config<Components> = {
     ...sonnerPuckConfig,
     ...spinnerPuckConfig,
     ...switchPuckConfig,
+    ...tooltipPuckConfig,
+    ...togglePuckConfig,
+    ...toggleGroupPuckConfig,
+    ...typographyPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,

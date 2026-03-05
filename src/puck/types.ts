@@ -285,6 +285,7 @@ export type Components = {
     size: "default" | "sm" | "lg";
     className: string;
     id: string;
+    onCheckedChange?: (checked: boolean) => void;
   };
   Collapsible: {
     trigger: string;
@@ -454,11 +455,30 @@ export type Components = {
     className: string;
     id: string;
   };
+  Tooltip: {
+    trigger: unknown[] | React.ReactNode;
+    triggerLabel: string;
+    content: string;
+    side: "top" | "right" | "bottom" | "left";
+    sideOffset: number;
+    delayDuration: number;
+    className: string;
+    id: string;
+    puck?: { isEditing?: boolean };
+  };
   Input: {
     type: string;
     placeholder: string;
     defaultValue: string;
     disabled: boolean;
+    className: string;
+    id: string;
+  };
+  TextArea: {
+    placeholder: string;
+    defaultValue: string;
+    disabled: boolean;
+    rows: number;
     className: string;
     id: string;
   };
@@ -744,6 +764,47 @@ export type Components = {
     className: string;
     id: string;
     onCheckedChange?: (checked: boolean) => void;
+  };
+  Toggle: {
+    label: string;
+    icon: string;
+    iconPosition: "start" | "end";
+    variant: "default" | "outline";
+    size: "default" | "sm" | "lg";
+    defaultPressed: boolean;
+    disabled: boolean;
+    className: string;
+    id: string;
+  };
+  ToggleGroup: {
+    type: "single" | "multiple";
+    defaultValue: string;
+    items: Array<{ value: string; label: string }>;
+    variant: "default" | "outline";
+    size: "default" | "sm" | "lg";
+    spacing: "none" | "sm" | "md" | "lg";
+    orientation: "horizontal" | "vertical";
+    disabled: boolean;
+    className: string;
+    id: string;
+  };
+  Typography: {
+    content: string;
+    variant:
+      | "h1"
+      | "h2"
+      | "h3"
+      | "h4"
+      | "p"
+      | "blockquote"
+      | "list"
+      | "inline-code"
+      | "lead"
+      | "large"
+      | "small"
+      | "muted";
+    className: string;
+    id: string;
   };
   Sonner: {
     position:
