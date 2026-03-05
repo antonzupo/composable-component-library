@@ -65,6 +65,32 @@ export const resizablePuckConfig = {
         ],
       },
       autoSaveId: { type: "text", label: "Auto-save ID (persist sizes)" },
+      groupDisableCursor: {
+        type: "select",
+        label: "Group: disable cursor",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      groupDisabled: {
+        type: "select",
+        label: "Group: disabled",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      groupResizeTargetMinimumSizeCoarse: {
+        type: "number",
+        label: "Group: resize target min (coarse px)",
+        min: 0,
+      },
+      groupResizeTargetMinimumSizeFine: {
+        type: "number",
+        label: "Group: resize target min (fine px)",
+        min: 0,
+      },
       tagName: {
         type: "select",
         label: "Wrapper tag",
@@ -91,6 +117,22 @@ export const resizablePuckConfig = {
       panel1Order: { type: "number", label: "Panel 1 order", min: 0 },
       panel1ClassName: { type: "text", label: "Panel 1 class name" },
       panel1Id: { type: "text", label: "Panel 1 ID" },
+      panel1Disabled: {
+        type: "select",
+        label: "Panel 1 disabled",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      panel1GroupResizeBehavior: {
+        type: "select",
+        label: "Panel 1 resize behavior",
+        options: [
+          { label: "Preserve relative size", value: "preserve-relative-size" },
+          { label: "Preserve pixel size", value: "preserve-pixel-size" },
+        ],
+      },
       handleWithHandle: {
         type: "select",
         label: "Handle with grip icon",
@@ -100,6 +142,15 @@ export const resizablePuckConfig = {
         ],
       },
       handleClassName: { type: "text", label: "Handle class name" },
+      handleDisabled: {
+        type: "select",
+        label: "Handle disabled",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      handleId: { type: "text", label: "Handle ID" },
       panel2Content: { type: "slot", label: "Panel 2", allow: [...slotAllow] },
       panel2DefaultSize: { type: "number", label: "Panel 2 default size (%)", min: 0, max: 100 },
       panel2MinSize: { type: "number", label: "Panel 2 min size (%)", min: 0, max: 100 },
@@ -116,6 +167,22 @@ export const resizablePuckConfig = {
       panel2Order: { type: "number", label: "Panel 2 order", min: 0 },
       panel2ClassName: { type: "text", label: "Panel 2 class name" },
       panel2Id: { type: "text", label: "Panel 2 ID" },
+      panel2Disabled: {
+        type: "select",
+        label: "Panel 2 disabled",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
+      panel2GroupResizeBehavior: {
+        type: "select",
+        label: "Panel 2 resize behavior",
+        options: [
+          { label: "Preserve relative size", value: "preserve-relative-size" },
+          { label: "Preserve pixel size", value: "preserve-pixel-size" },
+        ],
+      },
     },
     defaultProps: {
       direction: "horizontal" as const,
@@ -143,6 +210,12 @@ export const resizablePuckConfig = {
       panel2Order: 1,
       panel2ClassName: "",
       panel2Id: "",
+      groupDisableCursor: false,
+      groupDisabled: false,
+      handleDisabled: false,
+      handleId: "",
+      panel1Disabled: false,
+      panel2Disabled: false,
     } satisfies ResizableProps,
     render: (props: ResizableProps) => <Resizable {...props} />,
   },

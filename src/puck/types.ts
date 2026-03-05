@@ -1,4 +1,5 @@
 export type { PuckCategory } from "@/puck/categories";
+import type { TableData } from "@/data/table";
 
 export type AreaContentProps = {
   className?: string;
@@ -346,6 +347,24 @@ export type Components = {
     className: string;
     id: string;
   };
+  Table: {
+    dataSourceMode: "manual" | "api";
+    dataSource: (TableData & { id?: string }) | null;
+    columns: TableData["columns"];
+    rows: TableData["rows"];
+    caption: string;
+    variant: "default" | "bordered";
+    className: string;
+    id: string;
+  };
+  Tabs: {
+    items: Array<{ value: string; label: string; content: unknown[] }>;
+    defaultValue: string;
+    orientation: "horizontal" | "vertical";
+    variant: "default" | "line";
+    className: string;
+    id: string;
+  };
   DatePicker: {
     appearance: "basic" | "dateOfBirth" | "input" | "timePicker" | "naturalLanguage";
     placeholder: string;
@@ -649,6 +668,17 @@ export type Components = {
     tagName: string;
     className: string;
     id: string;
+    // Group (v4): all optional props (Layout = map of panel id to percentage)
+    groupDefaultLayout?: Record<string, number>;
+    groupDisableCursor?: boolean;
+    groupDisabled?: boolean;
+    groupResizeTargetMinimumSize?: { coarse: number; fine: number };
+    groupResizeTargetMinimumSizeCoarse?: number;
+    groupResizeTargetMinimumSizeFine?: number;
+    groupStyle?: React.CSSProperties;
+    onLayoutChange?: (layout: Record<string, number>) => void;
+    onLayoutChanged?: (layout: Record<string, number>) => void;
+    // Panel 1
     panel1Content: unknown[];
     panel1DefaultSize: number;
     panel1MinSize: number;
@@ -658,8 +688,17 @@ export type Components = {
     panel1Order: number;
     panel1ClassName: string;
     panel1Id: string;
+    panel1Disabled?: boolean;
+    panel1GroupResizeBehavior?: "preserve-relative-size" | "preserve-pixel-size";
+    panel1Style?: React.CSSProperties;
+    panel1Ref?: React.Ref<import("react-resizable-panels").PanelImperativeHandle | null>;
+    // Handle / Separator (v4)
     handleWithHandle: boolean;
     handleClassName: string;
+    handleDisabled?: boolean;
+    handleId?: string;
+    handleStyle?: React.CSSProperties;
+    // Panel 2
     panel2Content: unknown[];
     panel2DefaultSize: number;
     panel2MinSize: number;
@@ -669,6 +708,10 @@ export type Components = {
     panel2Order: number;
     panel2ClassName: string;
     panel2Id: string;
+    panel2Disabled?: boolean;
+    panel2GroupResizeBehavior?: "preserve-relative-size" | "preserve-pixel-size";
+    panel2Style?: React.CSSProperties;
+    panel2Ref?: React.Ref<import("react-resizable-panels").PanelImperativeHandle | null>;
   };
   Separator: {
     orientation: "horizontal" | "vertical";
@@ -686,6 +729,35 @@ export type Components = {
     role: string;
     tabIndex: number | "";
     ariaLabel: string;
+  };
+  Spinner: {
+    size: "sm" | "default" | "lg";
+    className: string;
+    id: string;
+    ariaLabel: string;
+  };
+  Switch: {
+    label: string;
+    checked: boolean;
+    disabled: boolean;
+    size: "default" | "sm" | "lg";
+    className: string;
+    id: string;
+    onCheckedChange?: (checked: boolean) => void;
+  };
+  Sonner: {
+    position:
+      | "top-left"
+      | "top-right"
+      | "bottom-left"
+      | "bottom-right"
+      | "top-center"
+      | "bottom-center";
+    expand: boolean;
+    richColors: boolean;
+    closeButton: boolean;
+    className: string;
+    id: string;
   };
   ScrollArea: {
     type: "auto" | "always" | "scroll" | "hover";

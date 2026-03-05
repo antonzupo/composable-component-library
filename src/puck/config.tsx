@@ -51,6 +51,11 @@ import { selectPuckConfig } from "@/components/Select/puck";
 import { sliderPuckConfig } from "@/components/Slider/puck";
 import { separatorPuckConfig } from "@/components/Separator/puck";
 import { skeletonPuckConfig } from "@/components/Skeleton/puck";
+import { sonnerPuckConfig } from "@/components/Sonner/puck";
+import { spinnerPuckConfig } from "@/components/Spinner/puck";
+import { switchPuckConfig } from "@/components/Switch/puck";
+import { tablePuckConfig } from "@/components/Table/puck";
+import { tabsPuckConfig } from "@/components/Tabs/puck";
 import { sectionPuckConfig } from "@/components/Section/puck";
 import { sheetPuckConfig } from "@/components/Sheet/puck";
 import { sidebarPuckConfig } from "@/components/Sidebar/puck";
@@ -98,6 +103,8 @@ export const config: Config<Components> = {
     ...commandPuckConfig,
     ...contextMenuPuckConfig,
     ...dataTablePuckConfig,
+    ...tablePuckConfig,
+    ...tabsPuckConfig,
     ...datePickerPuckConfig,
     ...directionPuckConfig,
     ...drawerPuckConfig,
@@ -127,6 +134,9 @@ export const config: Config<Components> = {
     ...sidebarPuckConfig,
     ...separatorPuckConfig,
     ...skeletonPuckConfig,
+    ...sonnerPuckConfig,
+    ...spinnerPuckConfig,
+    ...switchPuckConfig,
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,
