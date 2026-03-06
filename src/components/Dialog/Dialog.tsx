@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { useIsPuckEditor } from "@/puck/editorContext";
 import type { Components } from "@/puck/types";
 
 export type DialogProps = Components["Dialog"] & {
@@ -47,12 +48,13 @@ export function Dialog({
   const hasTrigger = trigger != null;
   const hasContent = content != null;
 
-  const isPuckEditing = puck?.isEditing === true;
+  const isPuckEditor = useIsPuckEditor();
+  const isPuckEditing = puck?.isEditing === true && isPuckEditor;
 
   const hasTitle = title != null && title !== "";
   const hasDescription = description != null && description !== "";
 
-  // In Puck edit mode: render trigger and content in a flat layout so drop zones work (no DialogTrigger, no modal)
+  // Only in Puck editor canvas: render trigger and content in a flat layout so drop zones work. In preview, show real Dialog (only trigger visible until opened).
   if (isPuckEditing) {
     return (
       <div
@@ -106,7 +108,11 @@ export function Dialog({
           {isControlledNow ? (
             trigger
           ) : (
-            <DialogTrigger asChild>{trigger}</DialogTrigger>
+            <DialogTrigger asChild>
+              <span className="inline-block cursor-pointer [&_button]:cursor-pointer">
+                {trigger}
+              </span>
+            </DialogTrigger>
           )}
         </span>
       )}

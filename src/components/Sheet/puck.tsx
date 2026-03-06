@@ -30,11 +30,18 @@ const slotAllow = [
   "Direction",
   "Dialog",
   "Drawer",
+  "DropdownMenu",
+  "Empty",
+  "Field",
+  "HoverCard",
+  "Input",
+  "InputGroup",
   "Flex",
   "Grid",
   "HeroCard",
   "Section",
   "Space",
+  "Sheet",
 ] as const;
 
 export const sheetPuckConfig = {
@@ -55,7 +62,19 @@ export const sheetPuckConfig = {
         label: "Sheet content",
         allow: [...slotAllow],
       },
+      contentLabel: { type: "text", label: "Content accessibility label" },
       contentClassName: { type: "text", label: "Content class name" },
+      overlayClassName: { type: "text", label: "Overlay class name" },
+      className: { type: "text", label: "Trigger wrapper class name" },
+      id: { type: "text", label: "ID" },
+      defaultOpen: {
+        type: "select",
+        label: "Default open (uncontrolled)",
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
+      },
       side: {
         type: "select",
         label: "Side",
@@ -66,26 +85,46 @@ export const sheetPuckConfig = {
           { label: "Bottom", value: "bottom" },
         ],
       },
-      className: { type: "text", label: "Trigger wrapper class name" },
-      id: { type: "text", label: "ID" },
+      title: { type: "text", label: "Title" },
+      description: { type: "text", label: "Description" },
+      showCloseButton: {
+        type: "select",
+        label: "Show close button",
+        options: [
+          { label: "Yes", value: true },
+          { label: "No", value: false },
+        ],
+      },
     },
     defaultProps: {
       triggerLabel: "Open sheet",
       trigger: [],
       content: [],
+      contentLabel: "",
       contentClassName: "",
-      side: "right",
+      overlayClassName: "",
       className: "",
       id: "",
+      defaultOpen: false,
+      side: "right",
+      title: "",
+      description: "",
+      showCloseButton: true,
     } satisfies SheetProps,
     render: ({
       trigger,
       triggerLabel,
       content,
+      contentLabel,
       contentClassName,
-      side,
+      overlayClassName,
       className,
       id,
+      defaultOpen,
+      side,
+      title,
+      description,
+      showCloseButton,
     }: SheetProps) => {
       const TriggerContent = trigger as unknown as
         | ComponentType<AreaContentProps>
@@ -93,30 +132,40 @@ export const sheetPuckConfig = {
       const Content = content as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
-      const hasTrigger = TriggerContent && !Array.isArray(trigger);
-      const hasContent = Content && !Array.isArray(content);
-      const triggerNode = hasTrigger ? (
-        <TriggerContent />
+      const triggerIsSlotComponent =
+        typeof TriggerContent === "function" && !Array.isArray(trigger);
+      const contentIsSlotComponent =
+        typeof Content === "function" && !Array.isArray(content);
+      const triggerNode = triggerIsSlotComponent ? (
+        <TriggerContent allow={[...slotAllow]} minEmptyHeight={40} />
       ) : (
         <Button type="button">{triggerLabel || "Open sheet"}</Button>
       );
+      const contentNode = contentIsSlotComponent ? (
+        <Content allow={[...slotAllow]} minEmptyHeight={80} />
+      ) : (
+        <span className="text-muted-foreground text-sm">
+          Add content to the sheet
+        </span>
+      );
+      const isEditMode =
+        triggerIsSlotComponent || contentIsSlotComponent;
       return (
         <Sheet
-          trigger={triggerNode}
-          triggerLabel={triggerLabel}
-          content={hasContent ? <Content /> : undefined}
+          puck={isEditMode ? { isEditing: true } : undefined}
           contentClassName={contentClassName || undefined}
-          side={side}
+          overlayClassName={overlayClassName || undefined}
           className={className || undefined}
           id={id || undefined}
+          defaultOpen={defaultOpen}
+          side={side}
+          title={title || undefined}
+          description={description || undefined}
+          contentLabel={contentLabel || undefined}
+          showCloseButton={showCloseButton}
         >
-          {hasContent ? (
-            <Content />
-          ) : (
-            <span className="text-muted-foreground text-sm p-4 block">
-              Add content to the sheet
-            </span>
-          )}
+          {triggerNode}
+          {contentNode}
         </Sheet>
       );
     },

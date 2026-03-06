@@ -1,34 +1,5 @@
-import type { ComponentType } from "react";
 import { DropdownMenu } from "@/components/DropdownMenu/DropdownMenu";
-import type { AreaContentProps, Components } from "@/puck/types";
-
-const slotAllow = [
-  "Text",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-] as const;
+import type { Components } from "@/puck/types";
 
 const itemTypeOptions = [
   { label: "Item", value: "item" },
@@ -45,12 +16,7 @@ export const dropdownMenuPuckConfig = {
     fields: {
       triggerLabel: {
         type: "text",
-        label: "Trigger button label (when no trigger slot)",
-      },
-      trigger: {
-        type: "slot",
-        label: "Trigger (e.g. button that opens the menu)",
-        allow: [...slotAllow],
+        label: "Trigger button label",
       },
       contentClassName: { type: "text", label: "Content class name" },
       items: {
@@ -133,7 +99,6 @@ export const dropdownMenuPuckConfig = {
     },
     defaultProps: {
       triggerLabel: "Open menu",
-      trigger: [],
       contentClassName: "",
       items: [
         {
@@ -200,32 +165,14 @@ export const dropdownMenuPuckConfig = {
       className: "",
       id: "",
     },
-    render: ({
-      trigger,
-      triggerLabel,
-      contentClassName,
-      items,
-      className,
-      id,
-    }: Components["DropdownMenu"]) => {
-      const TriggerContent = trigger as unknown as
-        | ComponentType<AreaContentProps>
-        | undefined;
-      const hasTrigger =
-        TriggerContent && !Array.isArray(trigger);
-      const triggerNode = hasTrigger ? (
-        <TriggerContent />
-      ) : undefined;
-      return (
-        <DropdownMenu
-          trigger={triggerNode}
-          triggerLabel={triggerLabel || "Open menu"}
-          contentClassName={contentClassName || undefined}
-          items={items}
-          className={className || undefined}
-          id={id || undefined}
-        />
-      );
-    },
+    render: (props: Components["DropdownMenu"]) => (
+      <DropdownMenu
+        triggerLabel={props.triggerLabel || "Open menu"}
+        contentClassName={props.contentClassName || undefined}
+        items={props.items ?? []}
+        className={props.className || undefined}
+        id={props.id || undefined}
+      />
+    ),
   },
 };

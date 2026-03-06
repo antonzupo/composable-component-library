@@ -100,28 +100,6 @@ export const calendarPuckConfig = {
           { label: "Outline", value: "outline" },
         ],
       },
-      showPresets: {
-        type: "select",
-        label: "Show presets",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      presetKeys: {
-        type: "array",
-        label: "Preset keys",
-        getItemSummary: (item: { key: string }) => item?.key || "Preset",
-        arrayFields: { key: { type: "text", label: "Key" } },
-      },
-      showTime: {
-        type: "select",
-        label: "Show time",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
       bookedDates: {
         type: "array",
         label: "Booked dates",
@@ -142,9 +120,6 @@ export const calendarPuckConfig = {
       captionLayout: "label" as const,
       weekStartsOn: 0 as const,
       mode: "single" as const,
-      showPresets: false,
-      presetKeys: [],
-      showTime: false,
       bookedDates: [],
       cellSize: "default" as const,
       variant: "default" as const,

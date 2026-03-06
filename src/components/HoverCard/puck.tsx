@@ -1,6 +1,9 @@
 import type { ComponentType } from "react";
 import { HoverCard } from "@/components/HoverCard/HoverCard";
+import { Button } from "@/components/ui/button";
 import type { AreaContentProps, Components } from "@/puck/types";
+
+type HoverCardProps = Components["HoverCard"];
 
 const slotAllow = [
   "Text",
@@ -22,16 +25,20 @@ const slotAllow = [
   "Combobox",
   "Command",
   "ContextMenu",
+  "DataTable",
+  "DatePicker",
+  "Direction",
   "Dialog",
+  "Drawer",
   "DropdownMenu",
   "Empty",
   "Field",
-  "Flex",
-  "Grid",
-  "HeroCard",
   "HoverCard",
   "Input",
   "InputGroup",
+  "Flex",
+  "Grid",
+  "HeroCard",
   "Section",
   "Space",
 ] as const;
@@ -46,12 +53,12 @@ export const hoverCardPuckConfig = {
       },
       trigger: {
         type: "slot",
-        label: "Trigger",
+        label: "Trigger (e.g. button or link that shows the card on hover)",
         allow: [...slotAllow],
       },
       content: {
         type: "slot",
-        label: "Card content",
+        label: "Hover card content",
         allow: [...slotAllow],
       },
       contentClassName: { type: "text", label: "Content class name" },
@@ -69,7 +76,7 @@ export const hoverCardPuckConfig = {
       closeDelay: 100,
       className: "",
       id: "",
-    },
+    } satisfies HoverCardProps,
     render: ({
       trigger,
       triggerLabel,
@@ -79,27 +86,45 @@ export const hoverCardPuckConfig = {
       closeDelay,
       className,
       id,
-    }: Components["HoverCard"]) => {
+    }: HoverCardProps) => {
       const TriggerContent = trigger as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
       const Content = content as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
-      const hasTrigger =
-        TriggerContent && !Array.isArray(trigger);
-      const hasContent = Content && !Array.isArray(content);
+      const triggerIsSlotComponent =
+        typeof TriggerContent === "function" && !Array.isArray(trigger);
+      const contentIsSlotComponent =
+        typeof Content === "function" && !Array.isArray(content);
+      const triggerNode = triggerIsSlotComponent ? (
+        <TriggerContent allow={[...slotAllow]} minEmptyHeight={40} />
+      ) : (
+        <Button type="button" variant="outline" size="sm">
+          {triggerLabel || "Hover me"}
+        </Button>
+      );
+      const contentNode = contentIsSlotComponent ? (
+        <Content allow={[...slotAllow]} minEmptyHeight={80} />
+      ) : (
+        <span className="text-muted-foreground text-sm">
+          Add content to the hover card
+        </span>
+      );
+      const isEditMode =
+        triggerIsSlotComponent || contentIsSlotComponent;
       return (
         <HoverCard
-          trigger={hasTrigger ? <TriggerContent /> : undefined}
-          triggerLabel={triggerLabel || "Hover me"}
-          content={hasContent ? <Content /> : undefined}
+          puck={isEditMode ? { isEditing: true } : undefined}
           contentClassName={contentClassName || undefined}
-          openDelay={openDelay}
-          closeDelay={closeDelay}
           className={className || undefined}
           id={id || undefined}
-        />
+          openDelay={openDelay}
+          closeDelay={closeDelay}
+        >
+          {triggerNode}
+          {contentNode}
+        </HoverCard>
       );
     },
   },

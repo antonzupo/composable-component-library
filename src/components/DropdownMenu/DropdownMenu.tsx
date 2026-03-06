@@ -164,8 +164,11 @@ export function DropdownMenu({
     return result;
   }, [items]);
 
-  const hasTrigger = trigger != null && React.Children.count(trigger) > 0;
-  const triggerNode = hasTrigger ? (
+  const hasCustomTrigger =
+    trigger != null &&
+    !Array.isArray(trigger) &&
+    React.Children.count(trigger) > 0;
+  const triggerNode = hasCustomTrigger ? (
     <>{trigger}</>
   ) : (
     <Button type="button" variant="outline" size="sm">
@@ -173,12 +176,19 @@ export function DropdownMenu({
     </Button>
   );
 
+  const needsWrapper = (id != null && id !== "") || (className != null && className !== "");
+  const triggerElement = needsWrapper ? (
+    <span id={id || undefined} className={cn("inline-block", className)}>
+      {triggerNode}
+    </span>
+  ) : (
+    triggerNode
+  );
+
   return (
     <UIDropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div id={id} className={cn("inline-block", className)}>
-          {triggerNode}
-        </div>
+        {triggerElement}
       </DropdownMenuTrigger>
       <DropdownMenuContent className={contentClassName}>
         {contentWithGroups}

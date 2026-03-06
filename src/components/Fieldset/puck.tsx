@@ -1,8 +1,13 @@
 import type { ComponentType, ReactNode } from "react";
-import { Field } from "@/components/Field/Field";
+import { Fieldset } from "@/components/Fieldset/Fieldset";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const contentAllow = [
+  "Field",
+  "Fieldset",
+  "FieldGroup",
+  "FieldContent",
+  "FieldSeparator",
   "Text",
   "Input",
   "InputGroup",
@@ -10,56 +15,45 @@ const contentAllow = [
   "Combobox",
   "Badge",
   "Button",
-  "Image",
-  "Card",
   "Flex",
   "Grid",
   "Space",
-  "FieldContent",
 ] as const;
 
-export const fieldPuckConfig = {
-  Field: {
-    label: "Field",
+export const fieldsetPuckConfig = {
+  Fieldset: {
+    label: "Fieldset",
     fields: {
-      label: { type: "text", label: "Label" },
-      description: { type: "textarea", label: "Description" },
-      error: { type: "text", label: "Error message" },
-      orientation: {
+      legend: { type: "text", label: "Legend" },
+      legendVariant: {
         type: "select",
-        label: "Orientation",
+        label: "Legend variant",
         options: [
-          { label: "Vertical", value: "vertical" },
-          { label: "Horizontal", value: "horizontal" },
-          { label: "Responsive", value: "responsive" },
+          { label: "Legend", value: "legend" },
+          { label: "Label", value: "label" },
         ],
       },
-      content: {
-        type: "slot",
-        label: "Control (e.g. Input)",
-        allow: [...contentAllow],
-      },
+      description: { type: "textarea", label: "Description" },
+      content: { type: "slot", label: "Content", allow: [...contentAllow] },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },
     defaultProps: {
-      label: "Label",
+      legend: "",
+      legendVariant: "legend" as const,
       description: "",
-      error: "",
-      orientation: "vertical" as const,
       content: [],
       className: "",
       id: "",
     },
     render: ({
-      label,
+      legend,
+      legendVariant,
       description,
-      error,
-      orientation,
       content,
       className,
       id,
-    }: Components["Field"]) => {
+    }: Components["Fieldset"]) => {
       const Content = content as unknown as
         | ComponentType<AreaContentProps>
         | undefined;
@@ -67,11 +61,10 @@ export const fieldPuckConfig = {
         typeof Content === "function" ||
         (Content != null && !Array.isArray(content));
       return (
-        <Field
-          label={label || undefined}
+        <Fieldset
+          legend={legend || undefined}
+          legendVariant={legendVariant}
           description={description || undefined}
-          error={error || undefined}
-          orientation={orientation}
           className={className || undefined}
           id={id || undefined}
         >
@@ -79,8 +72,8 @@ export const fieldPuckConfig = {
             <Content />
           ) : hasContent && Content != null && !Array.isArray(Content) ? (
             (Content as ReactNode)
-          ) : undefined}
-        </Field>
+          ) : null}
+        </Fieldset>
       );
     },
   },

@@ -30,6 +30,8 @@ export type Components = {
   ButtonGroup: {
     content: unknown[];
     orientation: "horizontal" | "vertical";
+    appearance: "separate" | "merged";
+    buttonVariant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     ariaLabel: string;
     ariaLabelledby: string;
     className: string;
@@ -230,7 +232,7 @@ export type Components = {
   Calendar: {
     month: number;
     year: number;
-    defaultMonth?: string;
+    defaultMonth: string;
     showHeader: boolean;
     showWeekdays: boolean;
     showOutsideDays: boolean;
@@ -238,9 +240,6 @@ export type Components = {
     captionLayout: "label" | "dropdown";
     weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
     mode: "single" | "range";
-    showPresets: boolean;
-    presetKeys: Array<{ key: string }>;
-    showTime: boolean;
     bookedDates: Array<{ date: string }>;
     cellSize: "sm" | "default" | "lg";
     variant: "default" | "outline";
@@ -386,18 +385,42 @@ export type Components = {
     trigger: unknown[];
     triggerLabel: string;
     content: unknown[];
+    contentLabel: string;
     contentClassName: string;
+    overlayClassName: string;
+    headerClassName: string;
+    footerClassName: string;
     className: string;
     id: string;
+    defaultOpen: boolean;
+    /** Which side the drawer opens from. @default "bottom" */
+    direction: "top" | "bottom" | "left" | "right";
+    /** Scale background when drawer is open. @default true */
+    shouldScaleBackground: boolean;
+    /** When false, allows interacting with elements outside without closing. @default true */
+    modal: boolean;
+    /** When false, dragging/click outside/esc will not close. @default true */
+    dismissible: boolean;
+    /** Show the drag handle bar at the top of the drawer. @default true */
+    showHandle: boolean;
+    title: string;
+    description: string;
+    showCloseButton: boolean;
   };
   Sheet: {
     trigger: unknown[] | React.ReactNode;
     triggerLabel: string;
     content: unknown[] | React.ReactNode;
     contentClassName?: string;
+    overlayClassName?: string;
     side: "right" | "left" | "top" | "bottom";
     className?: string;
     id?: string;
+    defaultOpen?: boolean;
+    title?: string;
+    description?: string;
+    contentLabel?: string;
+    showCloseButton?: boolean;
   };
   Sidebar: {
     defaultOpen: boolean;
@@ -410,7 +433,6 @@ export type Components = {
     id?: string;
   };
   DropdownMenu: {
-    trigger: unknown[];
     triggerLabel: string;
     contentClassName: string;
     items: Array<{
@@ -431,7 +453,9 @@ export type Components = {
   Empty: {
     title: string;
     description: string;
-    mediaVariant: "default" | "icon";
+    mediaVariant: "default" | "icon" | "avatar";
+    icon: string;
+    avatarImageUrl: string;
     content: unknown[];
     className: string;
     id: string;
@@ -442,6 +466,30 @@ export type Components = {
     error: string;
     orientation: "vertical" | "horizontal" | "responsive";
     content: unknown[];
+    className: string;
+    id: string;
+  };
+  Fieldset: {
+    legend: string;
+    legendVariant: "legend" | "label";
+    description: string;
+    content: unknown[];
+    className: string;
+    id: string;
+  };
+  FieldGroup: {
+    content: unknown[];
+    className: string;
+    id: string;
+  };
+  FieldContent: {
+    content: unknown[];
+    className: string;
+    id: string;
+  };
+  FieldSeparator: {
+    label: string;
+    verticalSpace: "none" | "sm" | "md" | "lg";
     className: string;
     id: string;
   };

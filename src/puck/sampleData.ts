@@ -776,6 +776,7 @@ export const sampleData: Data = {
             props: {
               month: new Date().getMonth() + 1,
               year: new Date().getFullYear(),
+              defaultMonth: "",
               showHeader: true,
               showWeekdays: true,
               showOutsideDays: false,
@@ -783,13 +784,6 @@ export const sampleData: Data = {
               captionLayout: "label",
               weekStartsOn: 0,
               mode: "single",
-              showPresets: true,
-              presetKeys: [
-                { key: "today" },
-                { key: "tomorrow" },
-                { key: "next7days" },
-              ],
-              showTime: false,
               bookedDates: (() => {
                 const today = new Date();
                 const d2 = new Date(today);
@@ -906,9 +900,11 @@ export const sampleData: Data = {
                       },
                     ],
                     orientation: "horizontal",
+                    appearance: "merged",
+                    buttonVariant: "outline",
                     ariaLabel: "Contact actions",
                     ariaLabelledby: "",
-                    className: "flex-wrap justify-center gap-2",
+                    className: "justify-center",
                     id: "btn-group-cta",
                   },
                 },

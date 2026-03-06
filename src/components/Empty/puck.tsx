@@ -1,6 +1,12 @@
 import type { ComponentType } from "react";
+import { iconNames } from "lucide-react/dynamic";
 import { Empty } from "@/components/Empty/Empty";
 import type { AreaContentProps, Components } from "@/puck/types";
+
+const lucideIconOptions = [
+  { label: "— None —", value: "" },
+  ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
+];
 
 const slotAllow = [
   "Text",
@@ -44,11 +50,21 @@ export const emptyPuckConfig = {
       description: { type: "textarea", label: "Description" },
       mediaVariant: {
         type: "select",
-        label: "Media style",
+        label: "Empty media",
         options: [
           { label: "Default", value: "default" },
           { label: "Icon", value: "icon" },
+          { label: "Avatar", value: "avatar" },
         ],
+      },
+      icon: {
+        type: "select",
+        label: "Icon (when media is Icon)",
+        options: lucideIconOptions,
+      },
+      avatarImageUrl: {
+        type: "text",
+        label: "Avatar image URL (when media is Avatar)",
       },
       content: {
         type: "slot",
@@ -62,6 +78,8 @@ export const emptyPuckConfig = {
       title: "No results",
       description: "Get started by adding content.",
       mediaVariant: "icon" as const,
+      icon: "",
+      avatarImageUrl: "",
       content: [],
       className: "",
       id: "",
@@ -70,6 +88,8 @@ export const emptyPuckConfig = {
       title,
       description,
       mediaVariant,
+      icon,
+      avatarImageUrl,
       content,
       className,
       id,
@@ -84,6 +104,8 @@ export const emptyPuckConfig = {
           title={title || "No results"}
           description={description || undefined}
           mediaVariant={mediaVariant}
+          icon={icon || undefined}
+          avatarImageUrl={avatarImageUrl || undefined}
           className={className || undefined}
           id={id || undefined}
         >

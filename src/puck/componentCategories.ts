@@ -13,7 +13,6 @@ const COMPONENT_CATEGORIES: Array<{
       "Badge",
       "Button",
       "Checkbox",
-      "Field",
       "Image",
       "Input",
       "InputGroup",
@@ -80,7 +79,19 @@ const COMPONENT_CATEGORIES: Array<{
   },
   {
     category: "layout",
-    components: ["Direction", "Flex", "Grid", "Resizable", "ScrollArea", "Space"],
+    components: [
+      "Direction",
+      "Field",
+      "Fieldset",
+      "FieldGroup",
+      "FieldContent",
+      "FieldSeparator",
+      "Flex",
+      "Grid",
+      "Resizable",
+      "ScrollArea",
+      "Space",
+    ],
   },
 ];
 

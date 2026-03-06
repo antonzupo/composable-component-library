@@ -39,7 +39,7 @@ export function Field({
       data-invalid={error ? true : undefined}
     >
       {label != null && label !== "" && (
-        <FieldLabel>{label}</FieldLabel>
+        <FieldLabel htmlFor={id}>{label}</FieldLabel>
       )}
       <FieldContent>
         {hasContent ? children : (

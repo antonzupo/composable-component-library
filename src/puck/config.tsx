@@ -27,6 +27,10 @@ import { dialogPuckConfig } from "@/components/Dialog/puck";
 import { dropdownMenuPuckConfig } from "@/components/DropdownMenu/puck";
 import { emptyPuckConfig } from "@/components/Empty/puck";
 import { fieldPuckConfig } from "@/components/Field/puck";
+import { fieldContentPuckConfig } from "@/components/FieldContent/puck";
+import { fieldGroupPuckConfig } from "@/components/FieldGroup/puck";
+import { fieldSeparatorPuckConfig } from "@/components/FieldSeparator/puck";
+import { fieldsetPuckConfig } from "@/components/Fieldset/puck";
 import { flexPuckConfig } from "@/components/Flex/puck";
 import { gridPuckConfig } from "@/components/Grid/puck";
 import { heroCardPuckConfig } from "@/components/HeroCard/puck";
@@ -117,6 +121,10 @@ export const config: Config<Components> = {
     ...dropdownMenuPuckConfig,
     ...emptyPuckConfig,
     ...fieldPuckConfig,
+    ...fieldContentPuckConfig,
+    ...fieldGroupPuckConfig,
+    ...fieldSeparatorPuckConfig,
+    ...fieldsetPuckConfig,
     ...hoverCardPuckConfig,
     ...inputPuckConfig,
     ...inputOtpPuckConfig,

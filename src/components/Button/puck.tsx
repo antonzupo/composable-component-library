@@ -16,6 +16,7 @@ const lucideIconOptions = [
 export const buttonPuckConfig = {
   Button: {
     label: "Button",
+    inline: true,
     fields: {
       contentMode: {
         type: "select",
@@ -142,6 +143,7 @@ export const buttonPuckConfig = {
       className,
       id,
       ariaLabel,
+      puck,
     }: ButtonProps) => {
       const isIconOnly = contentMode === "icon";
       const isBoth = contentMode === "both";
@@ -195,6 +197,7 @@ export const buttonPuckConfig = {
       );
       return (
         <Button
+          ref={puck?.dragRef}
           variant={variant}
           size={buttonSize}
           type={type}
