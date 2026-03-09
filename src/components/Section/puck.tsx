@@ -14,7 +14,7 @@ export const sectionPuckConfig = {
     render: ({ content, className, id }: Components["Section"]) => {
       const Content = content as unknown as ComponentType | undefined;
       return (
-        <Section className={className || undefined} id={id || undefined}>
+        <Section content={content} className={className ?? ""} id={id ?? ""}>
           {Content ? <Content /> : null}
         </Section>
       );

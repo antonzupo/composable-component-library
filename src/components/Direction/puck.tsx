@@ -27,7 +27,7 @@ export const directionPuckConfig = {
     render: ({ dir, content, className, id }: Components["Direction"]) => {
       const Content = content as unknown as ComponentType | undefined;
       return (
-        <Direction dir={dir} className={className || undefined} id={id || undefined}>
+        <Direction dir={dir} content={content} className={className ?? ""} id={id ?? ""}>
           {Content ? <Content /> : null}
         </Direction>
       );

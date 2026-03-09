@@ -1,12 +1,7 @@
 import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
 
-export type GridProps = {
-  columns: 2 | 3 | 4 | 6 | 12;
-  gap: "none" | "sm" | "md" | "lg";
-  className?: string;
-  id?: string;
-  children?: React.ReactNode;
-};
+export type GridProps = Components["Grid"] & { children?: React.ReactNode };
 
 const gapClass = (gap: GridProps["gap"]) =>
   gap === "none" ? "gap-0" : gap === "sm" ? "gap-2" : gap === "md" ? "gap-4" : "gap-6";

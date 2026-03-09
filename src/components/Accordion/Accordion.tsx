@@ -6,25 +6,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
 
-export type AccordionProps = {
-  items: Array<{ trigger: string; content: string; disabled?: boolean }>;
-  type?: "single" | "multiple";
-  defaultOpen?: "first" | "none" | "all";
-  collapsible?: boolean;
-  triggerAlign?: "left" | "center" | "right";
-  contentAlign?: "left" | "center" | "right";
-  triggerPadding?: "none" | "sm" | "md" | "lg";
-  contentPadding?: "none" | "sm" | "md" | "lg";
-  showIcon?: boolean;
-  iconPosition?: "start" | "end";
-  rounded?: "none" | "sm" | "md" | "lg" | "full";
-  variant?: "default" | "bordered" | "ghost";
-  fullWidth?: boolean;
-  showBorder?: boolean;
-  className?: string;
-  id?: string;
-};
+export type AccordionProps = Components["Accordion"];
 
 const roundedMap = {
   none: "rounded-none",

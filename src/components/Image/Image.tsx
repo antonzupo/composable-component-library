@@ -1,14 +1,7 @@
 import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
 
-export type ImageProps = {
-  src: string;
-  alt: string;
-  objectFit: "cover" | "contain" | "fill" | "none";
-  align: "left" | "center" | "right";
-  rounded: "none" | "sm" | "md" | "lg" | "full";
-  className?: string;
-  id?: string;
-};
+export type ImageProps = Components["Image"];
 
 export function Image({ src, alt, objectFit, align, rounded, className, id }: ImageProps) {
   if (!src) {

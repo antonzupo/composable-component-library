@@ -191,6 +191,7 @@ export const collapsiblePuckConfig = {
       return (
         <Collapsible
           trigger={trigger}
+          content={content}
           defaultOpen={defaultOpen}
           appearance={appearance}
           triggerAlign={triggerAlign}
@@ -202,8 +203,8 @@ export const collapsiblePuckConfig = {
           variant={variant}
           rounded={rounded}
           fullWidth={fullWidth}
-          className={className || undefined}
-          id={id || undefined}
+          className={className ?? ""}
+          id={id ?? ""}
         >
           {isSlotFunction ? (
             <Content className="min-w-0" minEmptyHeight={44} />

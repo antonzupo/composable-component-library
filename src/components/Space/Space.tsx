@@ -1,11 +1,7 @@
 import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
 
-export type SpaceProps = {
-  size: "xs" | "sm" | "md" | "lg" | "xl";
-  direction: "horizontal" | "vertical";
-  className?: string;
-  id?: string;
-};
+export type SpaceProps = Components["Space"];
 
 const sizeMap = {
   xs: "0.5rem",

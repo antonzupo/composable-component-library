@@ -5,25 +5,9 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import type { ReactNode } from "react";
+import type { Components } from "@/puck/types";
 
-export type CollapsibleProps = {
-  trigger: string;
-  children?: ReactNode;
-  defaultOpen?: boolean;
-  appearance?: "default" | "fileTree";
-  triggerAlign?: "left" | "center" | "right";
-  contentAlign?: "left" | "center" | "right";
-  triggerPadding?: "none" | "sm" | "md" | "lg";
-  contentPadding?: "none" | "sm" | "md" | "lg";
-  showIcon?: boolean;
-  iconPosition?: "start" | "end";
-  variant?: "default" | "bordered" | "ghost";
-  rounded?: "none" | "sm" | "md" | "lg" | "full";
-  fullWidth?: boolean;
-  className?: string;
-  id?: string;
-};
+export type CollapsibleProps = Components["Collapsible"] & { children?: React.ReactNode };
 
 const roundedMap = {
   none: "rounded-none",
@@ -55,6 +39,7 @@ const contentPaddingMap = {
 
 export function Collapsible({
   trigger,
+  content: _content,
   children,
   defaultOpen = false,
   appearance = "default",

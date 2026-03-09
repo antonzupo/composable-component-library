@@ -1,15 +1,7 @@
 import { cn } from "@/lib/utils";
+import type { Components } from "@/puck/types";
 
-export type FlexProps = {
-  direction: "row" | "column" | "row-reverse" | "column-reverse";
-  justify: "start" | "center" | "end" | "between" | "around";
-  align: "start" | "center" | "end" | "stretch";
-  gap: "none" | "sm" | "md" | "lg";
-  wrap: boolean;
-  className?: string;
-  id?: string;
-  children?: React.ReactNode;
-};
+export type FlexProps = Components["Flex"] & { children?: React.ReactNode };
 
 const justifyClass = (j: FlexProps["justify"]) =>
   j === "start" ? "justify-start" : j === "center" ? "justify-center" : j === "end" ? "justify-end" : j === "between" ? "justify-between" : "justify-around";

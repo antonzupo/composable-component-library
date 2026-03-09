@@ -197,8 +197,8 @@ export const accordionPuckConfig = {
         variant={variant}
         fullWidth={fullWidth}
         showBorder={showBorder}
-        className={className || undefined}
-        id={id || undefined}
+        className={className ?? ""}
+        id={id ?? ""}
       />
     ),
   },
