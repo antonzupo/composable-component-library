@@ -1,7 +1,4 @@
-/**
- * Data access layer for Table.
- * Define the table data shape and provide mocks; swap with real API (e.g. fetch) without changing component props.
- */
+/** Data access layer for Table. */
 
 export interface TableColumn {
   id: string;
@@ -53,19 +50,13 @@ const MOCK_TABLE_LIST: TableDataItem[] = [
   },
 ];
 
-/**
- * Fetches table data by id (e.g. from CMS).
- * Replace with: return fetch(`/api/tables/${id}`).then(r => r.json())
- */
+/** Fetches table data by id. */
 export async function getTableData(id?: string): Promise<TableData> {
   await Promise.resolve();
   return id ? { ...mockTableData, caption: `Table: ${id}` } : { ...mockTableData };
 }
 
-/**
- * Fetches list of tables for external data source picker.
- * Replace with: return fetch('/api/tables').then(r => r.json())
- */
+/** Fetches list of tables for external data source picker. */
 export async function getTableList(query?: string): Promise<TableDataItem[]> {
   await Promise.resolve();
   const list = [...MOCK_TABLE_LIST];

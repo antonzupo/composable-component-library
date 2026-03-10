@@ -28,7 +28,7 @@ const baseFields = {
   content: {
     type: "slot" as const,
     label: "Content",
-    allow: ["Badge", "Text"],
+    allow: ["Badge", "Typography"],
   },
   icon: {
     type: "select" as const,

@@ -9,7 +9,12 @@ function localDateString(d: Date): string {
 
 /** Template data for the Puck editor. */
 export const sampleData: Data = {
-  root: { props: {} },
+  root: {
+    props: {
+      maxWidth: "6xl",
+      paddingX: "md",
+    },
+  } as Data["root"],
   content: [
     {
       type: "HeroCard",
@@ -65,22 +70,20 @@ export const sampleData: Data = {
       props: {
         content: [
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Everything you need to ship",
-              as: "h2",
-              align: "center",
-              className: "text-2xl font-bold tracking-tight text-foreground",
+              variant: "h2",
+              className: "text-2xl font-bold tracking-tight text-foreground text-center",
               id: "features-heading",
             },
           },
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Composable blocks that work together. Edit any section in the canvas.",
-              as: "p",
-              align: "center",
-              className: "text-muted-foreground max-w-xl mx-auto",
+              variant: "p",
+              className: "text-muted-foreground max-w-xl mx-auto text-center",
               id: "features-sub",
             },
           },
@@ -325,11 +328,10 @@ export const sampleData: Data = {
                   label: "Features",
                   content: [
                     {
-                      type: "Text",
+                      type: "Typography",
                       props: {
                         content: "Components, layout primitives, forms, and data tables—all composable and editable in the canvas.",
-                        as: "p",
-                        align: "left",
+                        variant: "p",
                         className: "text-muted-foreground",
                         id: "tab-features-text",
                       },
@@ -341,11 +343,10 @@ export const sampleData: Data = {
                   label: "Resources",
                   content: [
                     {
-                      type: "Text",
+                      type: "Typography",
                       props: {
                         content: "Docs, examples, and design tokens. Everything you need to customize and extend the system.",
-                        as: "p",
-                        align: "left",
+                        variant: "p",
                         className: "text-muted-foreground",
                         id: "tab-resources-text",
                       },
@@ -357,11 +358,10 @@ export const sampleData: Data = {
                   label: "Pricing",
                   content: [
                     {
-                      type: "Text",
+                      type: "Typography",
                       props: {
                         content: "Simple, transparent pricing. Start free and scale as you grow.",
-                        as: "p",
-                        align: "left",
+                        variant: "p",
                         className: "text-muted-foreground",
                         id: "tab-pricing-text",
                       },
@@ -384,22 +384,20 @@ export const sampleData: Data = {
       props: {
         content: [
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Request early access",
-              as: "h2",
-              align: "center",
-              className: "text-2xl font-bold tracking-tight text-foreground",
+              variant: "h2",
+              className: "text-2xl font-bold tracking-tight text-foreground text-center",
               id: "form-heading",
             },
           },
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Join the waitlist. We'll be in touch soon.",
-              as: "p",
-              align: "center",
-              className: "text-muted-foreground mb-6",
+              variant: "p",
+              className: "text-muted-foreground mb-6 text-center",
               id: "form-sub",
             },
           },
@@ -644,12 +642,11 @@ export const sampleData: Data = {
       props: {
         content: [
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Early access spots",
-              as: "h3",
-              align: "center",
-              className: "text-lg font-semibold text-foreground",
+              variant: "h3",
+              className: "text-lg font-semibold text-foreground text-center",
               id: "progress-heading",
             },
           },
@@ -666,12 +663,11 @@ export const sampleData: Data = {
             },
           },
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "72% of early access spots claimed this week",
-              as: "p",
-              align: "center",
-              className: "text-sm text-muted-foreground mt-2",
+              variant: "p",
+              className: "text-sm text-muted-foreground mt-2 text-center",
               id: "progress-caption",
             },
           },
@@ -688,12 +684,11 @@ export const sampleData: Data = {
       props: {
         content: [
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Frequently asked",
-              as: "h2",
-              align: "center",
-              className: "text-2xl font-bold tracking-tight text-foreground",
+              variant: "h2",
+              className: "text-2xl font-bold tracking-tight text-foreground text-center",
               id: "faq-heading",
             },
           },
@@ -711,7 +706,7 @@ export const sampleData: Data = {
                 {
                   trigger: "Can I nest components?",
                   content:
-                    "Yes. Cards, Sections, HeroCard, Grid, and Flex all have content slots. Drop Buttons, Text, Images, and other blocks inside them.",
+                    "Yes. Cards, Sections, HeroCard, Grid, and Flex all have content slots. Drop Buttons, Typography, Images, and other blocks inside them.",
                 },
                 {
                   trigger: "Where is my content stored?",
@@ -752,22 +747,20 @@ export const sampleData: Data = {
       props: {
         content: [
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Book a demo",
-              as: "h2",
-              align: "center",
-              className: "text-2xl font-bold tracking-tight text-foreground",
+              variant: "h2",
+              className: "text-2xl font-bold tracking-tight text-foreground text-center",
               id: "calendar-heading",
             },
           },
           {
-            type: "Text",
+            type: "Typography",
             props: {
               content: "Pick a time that works for you.",
-              as: "p",
-              align: "center",
-              className: "text-muted-foreground mb-6",
+              variant: "p",
+              className: "text-muted-foreground mb-6 text-center",
               id: "calendar-sub",
             },
           },
@@ -844,12 +837,11 @@ export const sampleData: Data = {
             props: {
               content: [
                 {
-                  type: "Text",
+                  type: "Typography",
                   props: {
                     content: "Have questions or want to see a live walkthrough? We're here to help.",
-                    as: "p",
-                    align: "center",
-                    className: "text-muted-foreground",
+                    variant: "p",
+                    className: "text-muted-foreground text-center",
                     id: "cta-text",
                   },
                 },

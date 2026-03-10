@@ -6,7 +6,7 @@ import type { AreaContentProps, Components } from "@/puck/types";
 type DrawerProps = Components["Drawer"];
 
 const slotAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

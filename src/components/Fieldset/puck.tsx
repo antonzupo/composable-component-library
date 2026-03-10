@@ -8,7 +8,7 @@ const contentAllow = [
   "FieldGroup",
   "FieldContent",
   "FieldSeparator",
-  "Text",
+  "Typography",
   "Input",
   "InputGroup",
   "Checkbox",

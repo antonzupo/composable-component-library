@@ -9,7 +9,7 @@ const lucideIconOptions = [
 ];
 
 const slotAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

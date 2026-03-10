@@ -55,13 +55,6 @@ export type Components = {
     className: string;
     id: string;
   };
-  Text: {
-    content: string;
-    as: "p" | "span" | "h1" | "h2" | "h3" | "label";
-    align: "left" | "center" | "right";
-    className: string;
-    id: string;
-  };
   Image: {
     src: string;
     alt: string;

@@ -69,7 +69,6 @@ import { sectionPuckConfig } from "@/components/Section/puck";
 import { sheetPuckConfig } from "@/components/Sheet/puck";
 import { sidebarPuckConfig } from "@/components/Sidebar/puck";
 import { spacePuckConfig } from "@/components/Space/puck";
-import { textPuckConfig } from "@/components/Text/puck";
 import { PUCK_CATEGORIES, PUCK_CATEGORY_TITLES } from "@/puck/categories";
 import { COMPONENT_CATEGORY_MAP } from "@/puck/componentCategories";
 import type { Components, PuckCategory } from "@/puck/types";
@@ -90,6 +89,39 @@ const categories = Object.fromEntries(
 ) as Config<Components>["categories"];
 
 export type { Components } from "@/puck/types";
+
+/** Root layout props (preview container). Used by App.tsx for the preview wrapper. */
+export type RootLayoutProps = {
+  maxWidth?: "full" | "4xl" | "5xl" | "6xl" | "7xl";
+  paddingX?: "none" | "sm" | "md" | "lg";
+};
+
+const MAX_WIDTH_CLASS: Record<NonNullable<RootLayoutProps["maxWidth"]>, string> = {
+  full: "max-w-full",
+  "4xl": "max-w-4xl",
+  "5xl": "max-w-5xl",
+  "6xl": "max-w-6xl",
+  "7xl": "max-w-7xl",
+};
+
+const PADDING_X_CLASS: Record<NonNullable<RootLayoutProps["paddingX"]>, string> = {
+  none: "px-0",
+  sm: "px-4",
+  md: "px-6",
+  lg: "px-8",
+};
+
+/** Build preview wrapper className from root layout props (for use in App.tsx). */
+export function getPreviewLayoutClassName(props: RootLayoutProps = {}): string {
+  const maxWidth = props.maxWidth ?? "6xl";
+  const paddingX = props.paddingX ?? "md";
+  return [
+    "mx-auto",
+    MAX_WIDTH_CLASS[maxWidth],
+    PADDING_X_CLASS[paddingX],
+    "py-6 space-y-8",
+  ].join(" ");
+}
 
 export const config: Config<Components> = {
   categories,
@@ -158,7 +190,6 @@ export const config: Config<Components> = {
     ...checkboxPuckConfig,
     ...imagePuckConfig,
     ...badgePuckConfig,
-    ...textPuckConfig,
     ...sectionPuckConfig,
     ...heroCardPuckConfig,
     ...gridPuckConfig,
@@ -166,6 +197,33 @@ export const config: Config<Components> = {
     ...spacePuckConfig,
   } as Config<Components>["components"],
   root: {
+    fields: {
+      maxWidth: {
+        type: "select" as const,
+        label: "Preview max width",
+        options: [
+          { label: "Full width", value: "full" },
+          { label: "4xl (56rem)", value: "4xl" },
+          { label: "5xl (64rem)", value: "5xl" },
+          { label: "6xl (72rem)", value: "6xl" },
+          { label: "7xl (80rem)", value: "7xl" },
+        ],
+      },
+      paddingX: {
+        type: "select" as const,
+        label: "Preview horizontal padding",
+        options: [
+          { label: "None", value: "none" },
+          { label: "Small", value: "sm" },
+          { label: "Medium", value: "md" },
+          { label: "Large", value: "lg" },
+        ],
+      },
+    },
+    defaultProps: {
+      maxWidth: "6xl",
+      paddingX: "md",
+    },
     render: ({ children }) => (
       <div className="min-h-full bg-background">
         {children}

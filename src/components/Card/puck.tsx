@@ -20,7 +20,7 @@ const imageSectionSizeClasses: Record<"sm" | "md" | "lg", string> = {
 };
 
 const slotAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",
@@ -53,11 +53,11 @@ const slotAllow = [
   "Space",
 ] as const;
 
-const footerAllow = ["Button", "Text", "Badge"] as const;
+const footerAllow = ["Button", "Typography", "Badge"] as const;
 
-const cardActionAllow = ["Button", "Text", "Badge", "Flex", "Space"] as const;
+const cardActionAllow = ["Button", "Typography", "Badge", "Flex", "Space"] as const;
 
-const headerAllow = ["Image", "AspectRatio", "Avatar", "Badge", "Text"] as const;
+const headerAllow = ["Image", "AspectRatio", "Avatar", "Badge", "Typography"] as const;
 
 export const cardPuckConfig = {
   Card: {

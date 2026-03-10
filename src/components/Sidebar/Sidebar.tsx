@@ -29,7 +29,10 @@ export function Sidebar({
 }: SidebarProps) {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <div className={cn("flex flex-1 flex-col", className)} id={id}>
+      <div
+        className={cn("flex min-h-svh flex-1 flex-row", className)}
+        id={id}
+      >
         <UISidebar side={side} variant={variant} collapsible={collapsible}>
           <SidebarContent>
             <SidebarGroup>

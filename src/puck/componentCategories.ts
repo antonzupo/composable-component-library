@@ -29,7 +29,6 @@ const COMPONENT_CATEGORIES: Array<{
       "Spinner",
       "Switch",
       "Toggle",
-      "Text",
       "Typography",
     ],
   },

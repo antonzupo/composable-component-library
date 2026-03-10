@@ -4,7 +4,7 @@ import type { Components } from "@/puck/types";
 type ResizableProps = Components["Resizable"];
 
 const slotAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

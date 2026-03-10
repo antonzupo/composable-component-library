@@ -3,7 +3,7 @@ import { Field } from "@/components/Field/Field";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const contentAllow = [
-  "Text",
+  "Typography",
   "Input",
   "InputGroup",
   "Checkbox",

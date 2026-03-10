@@ -3,7 +3,7 @@ import type { Components } from "@/puck/types";
 
 type AspectRatioProps = Components["AspectRatio"];
 
-const slotAllow = ["Image", "Text", "Badge", "Button", "Card", "Section", "Flex", "Grid"] as const;
+const slotAllow = ["Image", "Typography", "Badge", "Button", "Card", "Section", "Flex", "Grid"] as const;
 
 export const aspectRatioPuckConfig = {
   AspectRatio: {

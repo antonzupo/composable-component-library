@@ -1,7 +1,4 @@
-/**
- * Data access layer for Radio Group options.
- * Replace the implementation here with a real API (e.g. fetch) without changing callers.
- */
+/** Data access layer for Radio Group options. */
 
 export interface RadioGroupOption {
   value: string;
@@ -44,10 +41,7 @@ const MOCK_RADIO_GROUP_SETS: RadioGroupContentSet[] = [
   },
 ];
 
-/**
- * Fetches available radio group content sets (e.g. from CMS).
- * Replace with: return fetch('/api/radio-group-sets').then(r => r.json())
- */
+/** Fetches available radio group content sets. */
 export async function getRadioGroupContentSets(
   _query?: string
 ): Promise<RadioGroupContentSet[]> {
@@ -55,10 +49,7 @@ export async function getRadioGroupContentSets(
   return [...MOCK_RADIO_GROUP_SETS];
 }
 
-/**
- * Fetches options for a single radio group by id.
- * Replace with: return fetch(`/api/radio-group-sets/${id}`).then(r => r.json()).then(d => d.options)
- */
+/** Fetches options for a single radio group by id. */
 export async function getRadioGroupOptionsById(
   id: string
 ): Promise<RadioGroupOption[]> {

@@ -3,7 +3,7 @@ import { ScrollArea } from "@/components/ScrollArea/ScrollArea";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const contentAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

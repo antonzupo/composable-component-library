@@ -3,7 +3,7 @@ import { Collapsible } from "@/components/Collapsible/Collapsible";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const contentAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

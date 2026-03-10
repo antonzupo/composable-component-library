@@ -3,7 +3,7 @@ import { Alert } from "@/components/Alert/Alert";
 import { cn } from "@/lib/utils";
 import type { AreaContentProps, Components } from "@/puck/types";
 
-const alertActionAllow = ["Button", "Text", "Badge", "Flex", "Space"] as const;
+const alertActionAllow = ["Button", "Typography", "Badge", "Flex", "Space"] as const;
 
 const alertIconOptions = [
   { label: "None", value: "" },

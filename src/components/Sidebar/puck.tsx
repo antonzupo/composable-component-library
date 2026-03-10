@@ -5,7 +5,7 @@ import type { AreaContentProps, Components } from "@/puck/types";
 type SidebarProps = Components["Sidebar"];
 
 const slotAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

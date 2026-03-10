@@ -19,7 +19,7 @@ export const contextMenuPuckConfig = {
         type: "slot" as const,
         label: "Trigger (right-click area)",
         allow: [
-          "Text",
+          "Typography",
           "Badge",
           "Button",
           "Image",

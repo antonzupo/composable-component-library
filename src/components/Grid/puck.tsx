@@ -2,11 +2,57 @@ import type { ComponentType } from "react";
 import { cn } from "@/lib/utils";
 import type { AreaContentProps, Components } from "@/puck/types";
 
+const gridContentAllow = [
+  "Typography",
+  "Badge",
+  "Button",
+  "Image",
+  "Card",
+  "Accordion",
+  "Alert",
+  "AspectRatio",
+  "Avatar",
+  "Breadcrumb",
+  "Calendar",
+  "Carousel",
+  "Chart",
+  "Collapsible",
+  "Combobox",
+  "Command",
+  "ContextMenu",
+  "DataTable",
+  "DatePicker",
+  "Dialog",
+  "Drawer",
+  "DropdownMenu",
+  "Empty",
+  "Field",
+  "Flex",
+  "Grid",
+  "HeroCard",
+  "HoverCard",
+  "Input",
+  "InputGroup",
+  "Item",
+  "Menubar",
+  "NavigationMenu",
+  "Pagination",
+  "Popover",
+  "Progress",
+  "Resizable",
+  "ScrollArea",
+  "Section",
+  "Select",
+  "Sheet",
+  "Sidebar",
+  "Space",
+] as const;
+
 export const gridPuckConfig = {
   Grid: {
     label: "Grid",
     fields: {
-      content: { type: "slot", label: "Content" },
+      content: { type: "slot", label: "Content", allow: [...gridContentAllow] },
       columns: {
         type: "select" as const,
         label: "Columns",

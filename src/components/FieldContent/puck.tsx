@@ -4,7 +4,7 @@ import type { AreaContentProps, Components } from "@/puck/types";
 
 const contentAllow = [
   "Field",
-  "Text",
+  "Typography",
   "Input",
   "InputGroup",
   "Checkbox",

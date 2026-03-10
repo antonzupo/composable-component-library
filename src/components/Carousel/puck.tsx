@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const slideAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

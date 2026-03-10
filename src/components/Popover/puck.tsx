@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const slotAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",

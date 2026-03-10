@@ -5,12 +5,7 @@ import {
   type RadioGroupContentSet,
 } from "@/data/radioGroup";
 
-/**
- * Demo: data layer → props → UI.
- * Fetches options from the mock data layer and passes them to RadioGroup.
- * Replace the implementation in src/data/radioGroup.ts with a real API
- * and this component unchanged will show live API data.
- */
+/** Demo: data layer → props → UI; fetches options and passes them to RadioGroup. */
 export function RadioGroupDataFlowDemo() {
   const [sets, setSets] = useState<RadioGroupContentSet[] | null>(null);
 

@@ -1,7 +1,8 @@
 import { Puck, Render, type Config } from "@puckeditor/core";
 import "@puckeditor/core/puck.css";
 import { RadioGroupDataFlowDemo } from "@/components/RadioGroup/RadioGroupDataFlowDemo";
-import { config } from "@/puck/config";
+import { config, getPreviewLayoutClassName, type RootLayoutProps } from "@/puck/config";
+import { ComponentListWithSearch } from "@/puck/ComponentListWithSearch";
 import { IsPuckEditorContext } from "@/puck/editorContext";
 import { sampleData } from "@/puck/sampleData";
 import { useState } from "react";
@@ -44,6 +45,7 @@ function App() {
                   {editToggleButton}
                 </>
               ),
+              drawer: () => <ComponentListWithSearch />,
             }}
           />
         </IsPuckEditorContext.Provider>
@@ -52,7 +54,7 @@ function App() {
           <div className="border-b border-border bg-muted/30 px-4 py-2 flex items-center justify-end gap-2">
             {editToggleButton}
           </div>
-          <div className="mx-auto max-w-6xl p-6 space-y-8">
+          <div className={getPreviewLayoutClassName((data.root?.props ?? {}) as RootLayoutProps)}>
             <Render config={config as Config} data={data} />
             <RadioGroupDataFlowDemo />
           </div>

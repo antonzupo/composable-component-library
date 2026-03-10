@@ -7,7 +7,7 @@ import type { AreaContentProps, Components } from "@/puck/types";
 type TabsProps = Components["Tabs"];
 
 const tabContentAllow = [
-  "Text",
+  "Typography",
   "Badge",
   "Button",
   "Image",
