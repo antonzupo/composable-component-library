@@ -8,7 +8,7 @@ export const comboboxPuckConfig = {
     label: "Combobox",
     fields: {
       options: {
-        type: "array",
+        type: "array" as const,
         label: "Options",
         getItemSummary: (item: { value: string; label: string }) => item?.label || item?.value || "Option",
         arrayFields: {
@@ -21,7 +21,7 @@ export const comboboxPuckConfig = {
       searchPlaceholder: { type: "text", label: "Search placeholder" },
       emptyText: { type: "text", label: "Empty text" },
       disabled: {
-        type: "select",
+        type: "select" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },

@@ -15,12 +15,12 @@ export const dropdownMenuPuckConfig = {
     label: "Dropdown Menu",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label",
       },
       contentClassName: { type: "text", label: "Content class name" },
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Menu items",
         getItemSummary: (item: {
           type: string;
@@ -37,13 +37,13 @@ export const dropdownMenuPuckConfig = {
         },
         arrayFields: {
           type: {
-            type: "select",
+            type: "select" as const,
             label: "Type",
             options: itemTypeOptions,
           },
           label: { type: "text", label: "Label" },
           disabled: {
-            type: "select",
+            type: "radio" as const,
             label: "Disabled",
             options: [
               { label: "No", value: false },
@@ -52,11 +52,11 @@ export const dropdownMenuPuckConfig = {
           },
           shortcut: { type: "text", label: "Shortcut (e.g. ⌘S)" },
           subItemsText: {
-            type: "textarea",
+            type: "textarea" as const,
             label: "Sub-items (one per line)",
           },
           inset: {
-            type: "select",
+            type: "radio" as const,
             label: "Inset",
             options: [
               { label: "No", value: false },
@@ -65,7 +65,7 @@ export const dropdownMenuPuckConfig = {
           },
           groupHeading: { type: "text", label: "Group heading (optional)" },
           checked: {
-            type: "select",
+            type: "radio" as const,
             label: "Checked (checkbox)",
             options: [
               { label: "No", value: false },
@@ -73,11 +73,11 @@ export const dropdownMenuPuckConfig = {
             ],
           },
           value: {
-            type: "text",
+            type: "text" as const,
             label: "Value (radio selected / radioGroup)",
           },
           optionsText: {
-            type: "textarea",
+            type: "textarea" as const,
             label: "Radio options (one per line)",
           },
         },

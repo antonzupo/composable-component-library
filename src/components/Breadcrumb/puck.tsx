@@ -8,7 +8,7 @@ export const breadcrumbPuckConfig = {
     label: "Breadcrumb",
     fields: {
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Items",
         getItemSummary: (item: { label: string; href?: string; node?: string }) =>
           item?.label || "Item",
@@ -16,7 +16,7 @@ export const breadcrumbPuckConfig = {
           label: { type: "text", label: "Label" },
           href: { type: "text", label: "Link (optional)" },
           node: {
-            type: "select",
+            type: "select" as const,
             label: "Node type",
             options: [
               { label: "Default", value: "default" },
@@ -27,7 +27,7 @@ export const breadcrumbPuckConfig = {
         },
       },
       separator: {
-        type: "select",
+        type: "select" as const,
         label: "Separator",
         options: [
           { label: "Slash", value: "slash" },

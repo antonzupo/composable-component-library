@@ -8,7 +8,7 @@ export const navigationMenuPuckConfig = {
     label: "Navigation Menu",
     fields: {
       orientation: {
-        type: "select",
+        type: "radio" as const,
         label: "Orientation",
         options: [
           { label: "Horizontal", value: "horizontal" },
@@ -16,7 +16,7 @@ export const navigationMenuPuckConfig = {
         ],
       },
       dir: {
-        type: "select",
+        type: "radio" as const,
         label: "Direction",
         options: [
           { label: "Left to right", value: "ltr" },
@@ -24,35 +24,35 @@ export const navigationMenuPuckConfig = {
         ],
       },
       delayDuration: {
-        type: "number",
+        type: "number" as const,
         label: "Delay duration (ms)",
         min: 0,
         description: "Delay before opening on hover",
       },
       skipDelayDuration: {
-        type: "number",
+        type: "number" as const,
         label: "Skip delay duration (ms)",
         min: 0,
         description: "Time window to skip delay when moving between items",
       },
       value: {
-        type: "text",
+        type: "text" as const,
         label: "Value (controlled)",
         description: "Controlled open value (leave empty for uncontrolled)",
       },
       defaultValue: {
-        type: "text",
+        type: "text" as const,
         label: "Default value (uncontrolled)",
         description: "Initially open item value",
       },
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Items",
         getItemSummary: (item: NavItem) =>
           item ? `${item.type}: ${item.label || "…"}` : "Item",
         arrayFields: {
           type: {
-            type: "select",
+            type: "radio" as const,
             label: "Type",
             options: [
               { label: "Trigger (dropdown)", value: "trigger" },
@@ -61,12 +61,12 @@ export const navigationMenuPuckConfig = {
           },
           label: { type: "text", label: "Label" },
           href: {
-            type: "text",
+            type: "text" as const,
             label: "Href",
             description: "Link URL (for link type, or leave empty for trigger)",
           },
           disabled: {
-            type: "select",
+            type: "radio" as const,
             label: "Disabled",
             options: [
               { label: "No", value: false },
@@ -74,7 +74,7 @@ export const navigationMenuPuckConfig = {
             ],
           },
           contentLinks: {
-            type: "array",
+            type: "array" as const,
             label: "Content links (trigger only)",
             getItemSummary: (sub: { label?: string; href?: string }) =>
               sub?.label ?? "Link",

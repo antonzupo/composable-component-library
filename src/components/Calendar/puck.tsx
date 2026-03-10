@@ -11,39 +11,39 @@ export const calendarPuckConfig = {
       year: { type: "number", label: "Year" },
       defaultMonth: { type: "text", label: "Default month (YYYY-MM-DD)" },
       showHeader: {
-        type: "select",
+        type: "radio" as const,
         label: "Show header",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showWeekdays: {
-        type: "select",
+        type: "radio" as const,
         label: "Show weekdays",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showOutsideDays: {
-        type: "select",
+        type: "radio" as const,
         label: "Show outside days",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showNavigation: {
-        type: "select",
+        type: "radio" as const,
         label: "Show navigation",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       captionLayout: {
-        type: "select",
+        type: "select" as const,
         label: "Caption layout",
         options: [
           { label: "Label", value: "label" },
@@ -51,7 +51,7 @@ export const calendarPuckConfig = {
         ],
       },
       weekStartsOn: {
-        type: "select",
+        type: "select" as const,
         label: "Week starts on",
         options: [
           { label: "Sunday", value: 0 },
@@ -64,7 +64,7 @@ export const calendarPuckConfig = {
         ],
       },
       mode: {
-        type: "select",
+        type: "select" as const,
         label: "Mode",
         options: [
           { label: "Single", value: "single" },
@@ -72,7 +72,7 @@ export const calendarPuckConfig = {
         ],
       },
       cellSize: {
-        type: "select",
+        type: "select" as const,
         label: "Cell size",
         options: [
           { label: "Small", value: "sm" },
@@ -81,7 +81,7 @@ export const calendarPuckConfig = {
         ],
       },
       buttonVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Button variant",
         options: [
           { label: "Default", value: "default" },
@@ -93,7 +93,7 @@ export const calendarPuckConfig = {
         ],
       },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Default", value: "default" },
@@ -101,7 +101,7 @@ export const calendarPuckConfig = {
         ],
       },
       bookedDates: {
-        type: "array",
+        type: "array" as const,
         label: "Booked dates",
         getItemSummary: (item: { date: string }) => item?.date || "Date",
         arrayFields: { date: { type: "text", label: "Date" } },

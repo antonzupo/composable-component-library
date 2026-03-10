@@ -62,7 +62,7 @@ export const scrollAreaPuckConfig = {
     fields: {
       // Root (atom: scroll area container)
       type: {
-        type: "select",
+        type: "select" as const,
         label: "Scrollbar visibility",
         description: "When to show the scrollbar (Root).",
         options: [
@@ -73,13 +73,13 @@ export const scrollAreaPuckConfig = {
         ],
       },
       scrollHideDelay: {
-        type: "number",
+        type: "number" as const,
         label: "Scroll hide delay (ms)",
         description: "Delay before hiding scrollbar after scroll stops (Root).",
         min: 0,
       },
       dir: {
-        type: "select",
+        type: "select" as const,
         label: "Direction",
         description: "Text direction for RTL support (Root).",
         options: [
@@ -88,52 +88,52 @@ export const scrollAreaPuckConfig = {
         ],
       },
       className: {
-        type: "text",
+        type: "text" as const,
         label: "Root class name",
         description: "CSS classes for the scroll area root (e.g. h-[200px] w-full).",
       },
       id: {
-        type: "text",
+        type: "text" as const,
         label: "Root ID",
         description: "HTML id for the scroll area root.",
       },
       // Viewport
       viewportNonce: {
-        type: "text",
+        type: "text" as const,
         label: "Viewport nonce",
         description: "CSP nonce for the viewport element (optional).",
       },
       viewportClassName: {
-        type: "text",
+        type: "text" as const,
         label: "Viewport class name",
         description: "CSS classes for the scroll viewport.",
       },
       // Content (slot)
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Content",
         description: "Content inside the scroll area.",
         allow: [...contentAllow],
       },
       // Scrollbars
       showVerticalScrollbar: {
-        type: "select",
+        type: "radio" as const,
         label: "Show vertical scrollbar",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showHorizontalScrollbar: {
-        type: "select",
+        type: "radio" as const,
         label: "Show horizontal scrollbar",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       verticalScrollbarForceMount: {
-        type: "select",
+        type: "radio" as const,
         label: "Vertical scrollbar force mount",
         description: "Keep scrollbar mounted when not needed (e.g. for animations).",
         options: [
@@ -142,7 +142,7 @@ export const scrollAreaPuckConfig = {
         ],
       },
       horizontalScrollbarForceMount: {
-        type: "select",
+        type: "radio" as const,
         label: "Horizontal scrollbar force mount",
         description: "Keep scrollbar mounted when not needed.",
         options: [
@@ -151,12 +151,12 @@ export const scrollAreaPuckConfig = {
         ],
       },
       verticalScrollbarClassName: {
-        type: "text",
+        type: "text" as const,
         label: "Vertical scrollbar class name",
         description: "CSS classes for the vertical scrollbar.",
       },
       horizontalScrollbarClassName: {
-        type: "text",
+        type: "text" as const,
         label: "Horizontal scrollbar class name",
         description: "CSS classes for the horizontal scrollbar.",
       },

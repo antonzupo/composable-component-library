@@ -57,7 +57,7 @@ export const resizablePuckConfig = {
     label: "Resizable",
     fields: {
       direction: {
-        type: "select",
+        type: "select" as const,
         label: "Direction",
         options: [
           { label: "Horizontal", value: "horizontal" },
@@ -66,7 +66,7 @@ export const resizablePuckConfig = {
       },
       autoSaveId: { type: "text", label: "Auto-save ID (persist sizes)" },
       groupDisableCursor: {
-        type: "select",
+        type: "radio" as const,
         label: "Group: disable cursor",
         options: [
           { label: "No", value: false },
@@ -74,7 +74,7 @@ export const resizablePuckConfig = {
         ],
       },
       groupDisabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Group: disabled",
         options: [
           { label: "No", value: false },
@@ -82,17 +82,17 @@ export const resizablePuckConfig = {
         ],
       },
       groupResizeTargetMinimumSizeCoarse: {
-        type: "number",
+        type: "number" as const,
         label: "Group: resize target min (coarse px)",
         min: 0,
       },
       groupResizeTargetMinimumSizeFine: {
-        type: "number",
+        type: "number" as const,
         label: "Group: resize target min (fine px)",
         min: 0,
       },
       tagName: {
-        type: "select",
+        type: "select" as const,
         label: "Wrapper tag",
         options: [
           { label: "div", value: "div" },
@@ -106,11 +106,11 @@ export const resizablePuckConfig = {
       panel1MinSize: { type: "number", label: "Panel 1 min size (%)", min: 0, max: 100 },
       panel1MaxSize: { type: "number", label: "Panel 1 max size (%)", min: 0, max: 100 },
       panel1Collapsible: {
-        type: "select",
+        type: "radio" as const,
         label: "Panel 1 collapsible",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       panel1CollapsedSize: { type: "number", label: "Panel 1 collapsed size (%)", min: 0, max: 100 },
@@ -118,7 +118,7 @@ export const resizablePuckConfig = {
       panel1ClassName: { type: "text", label: "Panel 1 class name" },
       panel1Id: { type: "text", label: "Panel 1 ID" },
       panel1Disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Panel 1 disabled",
         options: [
           { label: "No", value: false },
@@ -126,7 +126,7 @@ export const resizablePuckConfig = {
         ],
       },
       panel1GroupResizeBehavior: {
-        type: "select",
+        type: "select" as const,
         label: "Panel 1 resize behavior",
         options: [
           { label: "Preserve relative size", value: "preserve-relative-size" },
@@ -134,16 +134,16 @@ export const resizablePuckConfig = {
         ],
       },
       handleWithHandle: {
-        type: "select",
+        type: "radio" as const,
         label: "Handle with grip icon",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       handleClassName: { type: "text", label: "Handle class name" },
       handleDisabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Handle disabled",
         options: [
           { label: "No", value: false },
@@ -156,11 +156,11 @@ export const resizablePuckConfig = {
       panel2MinSize: { type: "number", label: "Panel 2 min size (%)", min: 0, max: 100 },
       panel2MaxSize: { type: "number", label: "Panel 2 max size (%)", min: 0, max: 100 },
       panel2Collapsible: {
-        type: "select",
+        type: "radio" as const,
         label: "Panel 2 collapsible",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       panel2CollapsedSize: { type: "number", label: "Panel 2 collapsed size (%)", min: 0, max: 100 },
@@ -168,7 +168,7 @@ export const resizablePuckConfig = {
       panel2ClassName: { type: "text", label: "Panel 2 class name" },
       panel2Id: { type: "text", label: "Panel 2 ID" },
       panel2Disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Panel 2 disabled",
         options: [
           { label: "No", value: false },
@@ -176,7 +176,7 @@ export const resizablePuckConfig = {
         ],
       },
       panel2GroupResizeBehavior: {
-        type: "select",
+        type: "select" as const,
         label: "Panel 2 resize behavior",
         options: [
           { label: "Preserve relative size", value: "preserve-relative-size" },

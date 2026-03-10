@@ -7,19 +7,19 @@ export const textAreaPuckConfig = {
   TextArea: {
     label: "Text Area",
     fields: {
-      placeholder: { type: "text", label: "Placeholder" },
-      defaultValue: { type: "textarea", label: "Default value" },
+      placeholder: { type: "text" as const, label: "Placeholder" },
+      defaultValue: { type: "textarea" as const, label: "Default value" },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      rows: { type: "number", label: "Rows" },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      rows: { type: "number" as const, label: "Rows" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       placeholder: "Enter text...",
@@ -29,6 +29,6 @@ export const textAreaPuckConfig = {
       className: "",
       id: "",
     } satisfies TextAreaProps,
-    render: (props: Components["TextArea"]) => <TextArea {...props} />,
+    render: (props: TextAreaProps) => <TextArea {...props} />,
   },
 };

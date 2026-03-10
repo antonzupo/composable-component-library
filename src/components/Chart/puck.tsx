@@ -8,7 +8,7 @@ export const chartPuckConfig = {
     label: "Chart",
     fields: {
       dataSourceMode: {
-        type: "select",
+        type: "select" as const,
         label: "Data source",
         options: [
           { label: "Manual", value: "manual" },
@@ -17,7 +17,7 @@ export const chartPuckConfig = {
       },
       dataSourceUrl: { type: "text", label: "Data source URL (API mode)" },
       type: {
-        type: "select",
+        type: "select" as const,
         label: "Chart type",
         options: [
           { label: "Line", value: "line" },
@@ -26,7 +26,7 @@ export const chartPuckConfig = {
         ],
       },
       data: {
-        type: "array",
+        type: "array" as const,
         label: "Data rows",
         getItemSummary: (item: Record<string, string | number>) =>
           String(item?.name ?? item?.value ?? "Row"),
@@ -41,31 +41,31 @@ export const chartPuckConfig = {
       bars: { type: "text", label: "Bar keys (comma-separated)" },
       height: { type: "number", label: "Height" },
       showGrid: {
-        type: "select",
+        type: "select" as const,
         label: "Show grid",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showLegend: {
-        type: "select",
+        type: "select" as const,
         label: "Show legend",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showTooltip: {
-        type: "select",
+        type: "select" as const,
         label: "Show tooltip",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Default", value: "default" },

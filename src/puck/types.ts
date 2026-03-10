@@ -201,6 +201,7 @@ export type Components = {
     showCount: boolean;
     count: string;
     countIcon: string;
+    countDisplay: "icon" | "count";
     countSize: "sm" | "md" | "lg";
     className: string;
     id: string;

@@ -49,26 +49,26 @@ export const sheetPuckConfig = {
     label: "Sheet",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label",
       },
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger (e.g. button that opens the sheet)",
         allow: [...slotAllow],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Sheet content",
         allow: [...slotAllow],
       },
-      contentLabel: { type: "text", label: "Content accessibility label" },
-      contentClassName: { type: "text", label: "Content class name" },
-      overlayClassName: { type: "text", label: "Overlay class name" },
-      className: { type: "text", label: "Trigger wrapper class name" },
-      id: { type: "text", label: "ID" },
+      contentLabel: { type: "text" as const, label: "Content accessibility label" },
+      contentClassName: { type: "text" as const, label: "Content class name" },
+      overlayClassName: { type: "text" as const, label: "Overlay class name" },
+      className: { type: "text" as const, label: "Trigger wrapper class name" },
+      id: { type: "text" as const, label: "ID" },
       defaultOpen: {
-        type: "select",
+        type: "radio" as const,
         label: "Default open (uncontrolled)",
         options: [
           { label: "No", value: false },
@@ -76,7 +76,7 @@ export const sheetPuckConfig = {
         ],
       },
       side: {
-        type: "select",
+        type: "select" as const,
         label: "Side",
         options: [
           { label: "Right", value: "right" },
@@ -85,14 +85,14 @@ export const sheetPuckConfig = {
           { label: "Bottom", value: "bottom" },
         ],
       },
-      title: { type: "text", label: "Title" },
-      description: { type: "text", label: "Description" },
+      title: { type: "text" as const, label: "Title" },
+      description: { type: "text" as const, label: "Description" },
       showCloseButton: {
-        type: "select",
+        type: "radio" as const,
         label: "Show close button",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
     },
@@ -152,6 +152,9 @@ export const sheetPuckConfig = {
         triggerIsSlotComponent || contentIsSlotComponent;
       return (
         <Sheet
+          trigger={undefined}
+          triggerLabel={triggerLabel}
+          content={contentNode}
           puck={isEditMode ? { isEditing: true } : undefined}
           contentClassName={contentClassName || undefined}
           overlayClassName={overlayClassName || undefined}

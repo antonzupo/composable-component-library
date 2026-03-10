@@ -45,20 +45,20 @@ export const tooltipPuckConfig = {
     label: "Tooltip",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label (when no trigger slot)",
       },
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger",
         allow: [...slotAllow],
       },
       content: {
-        type: "text",
+        type: "text" as const,
         label: "Tooltip content",
       },
       side: {
-        type: "select",
+        type: "select" as const,
         label: "Side",
         options: [
           { label: "Top", value: "top" },

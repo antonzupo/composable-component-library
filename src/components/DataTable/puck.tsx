@@ -6,7 +6,7 @@ export const dataTablePuckConfig = {
     label: "Data Table",
     fields: {
       columns: {
-        type: "array",
+        type: "array" as const,
         label: "Columns",
         getItemSummary: (item: { id: string; header: string }) =>
           item?.header || item?.id || "Column",
@@ -17,7 +17,7 @@ export const dataTablePuckConfig = {
         defaultItemProps: () => ({ id: "", header: "" }),
       },
       rows: {
-        type: "array",
+        type: "array" as const,
         label: "Rows",
         getItemSummary: (item: { values: string }) => {
           const first = item?.values?.split("\n")?.[0];
@@ -25,7 +25,7 @@ export const dataTablePuckConfig = {
         },
         arrayFields: {
           values: {
-            type: "textarea",
+            type: "textarea" as const,
             label: "Cells (one per line, matches column order)",
           },
         },

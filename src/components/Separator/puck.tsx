@@ -8,34 +8,23 @@ export const separatorPuckConfig = {
     label: "Separator",
     fields: {
       orientation: {
-        type: "select",
+        type: "radio" as const,
         label: "Orientation",
         options: [
           { label: "Horizontal", value: "horizontal" },
           { label: "Vertical", value: "vertical" },
         ],
-        description: "Layout direction of the separator line.",
       },
       decorative: {
-        type: "select",
+        type: "radio" as const,
         label: "Decorative",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
-        description:
-          "When true, the separator has no semantic meaning (role=\"none\"). Use false if it divides content sections for assistive tech.",
       },
-      className: {
-        type: "text",
-        label: "Class name",
-        description: "Additional CSS classes for the separator.",
-      },
-      id: {
-        type: "text",
-        label: "ID",
-        description: "HTML id attribute.",
-      },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       orientation: "horizontal",

@@ -9,79 +9,98 @@ const lucideIconOptions = [
   ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
 ];
 
+const baseFields = {
+  text: { type: "text" as const, label: "Text" },
+  variant: {
+    type: "select" as const,
+    label: "Variant",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Secondary", value: "secondary" },
+      { label: "Destructive", value: "destructive" },
+      { label: "Outline", value: "outline" },
+      { label: "Ghost", value: "ghost" },
+    ],
+  },
+  showIcon: {
+    type: "radio" as const,
+    label: "Show icon",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  icon: {
+    type: "select" as const,
+    label: "Icon",
+    options: lucideIconOptions,
+  },
+  iconPosition: {
+    type: "radio" as const,
+    label: "Icon position",
+    options: [
+      { label: "Left", value: "left" },
+      { label: "Right", value: "right" },
+    ],
+  },
+  showSpinner: {
+    type: "radio" as const,
+    label: "Show spinner",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  spinnerPosition: {
+    type: "radio" as const,
+    label: "Spinner position",
+    options: [
+      { label: "Left", value: "left" },
+      { label: "Right", value: "right" },
+    ],
+  },
+  useAsLink: {
+    type: "radio" as const,
+    label: "Render as link",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  href: { type: "text" as const, label: "Link URL" },
+  openInNewTab: {
+    type: "radio" as const,
+    label: "Open in new tab",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  className: { type: "text" as const, label: "Class name" },
+  id: { type: "text" as const, label: "ID" },
+};
+
 export const badgePuckConfig = {
   Badge: {
     label: "Badge",
-    fields: {
-      text: { type: "text", label: "Text" },
-      variant: {
-        type: "select",
-        label: "Variant",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Secondary", value: "secondary" },
-          { label: "Destructive", value: "destructive" },
-          { label: "Outline", value: "outline" },
-          { label: "Ghost", value: "ghost" },
-        ],
-      },
-      showIcon: {
-        type: "radio",
-        label: "Show icon",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      icon: {
-        type: "select",
-        label: "Icon",
-        options: lucideIconOptions,
-      },
-      iconPosition: {
-        type: "select",
-        label: "Icon position",
-        options: [
-          { label: "Left", value: "left" },
-          { label: "Right", value: "right" },
-        ],
-      },
-      showSpinner: {
-        type: "radio",
-        label: "Show spinner",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      spinnerPosition: {
-        type: "select",
-        label: "Spinner position",
-        options: [
-          { label: "Left", value: "left" },
-          { label: "Right", value: "right" },
-        ],
-      },
-      useAsLink: {
-        type: "radio",
-        label: "Render as link",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      href: { type: "text", label: "Link URL" },
-      openInNewTab: {
-        type: "radio",
-        label: "Open in new tab",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+    resolveFields: (data: { props: BadgeProps }) => {
+      const showIcon = data.props.showIcon === true;
+      const showSpinner = data.props.showSpinner === true;
+      const useAsLink = data.props.useAsLink === true;
+      return {
+        text: baseFields.text,
+        variant: baseFields.variant,
+        showIcon: baseFields.showIcon,
+        ...(showIcon ? { icon: baseFields.icon, iconPosition: baseFields.iconPosition } : {}),
+        showSpinner: baseFields.showSpinner,
+        ...(showSpinner ? { spinnerPosition: baseFields.spinnerPosition } : {}),
+        useAsLink: baseFields.useAsLink,
+        ...(useAsLink ? { href: baseFields.href, openInNewTab: baseFields.openInNewTab } : {}),
+        className: baseFields.className,
+        id: baseFields.id,
+      };
     },
+    fields: baseFields,
     defaultProps: {
       text: "Badge",
       variant: "default" as const,

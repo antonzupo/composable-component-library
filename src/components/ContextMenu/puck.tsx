@@ -16,7 +16,7 @@ export const contextMenuPuckConfig = {
     label: "Context Menu",
     fields: {
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger (right-click area)",
         allow: [
           "Text",
@@ -46,16 +46,16 @@ export const contextMenuPuckConfig = {
         ],
       },
       modal: {
-        type: "select",
+        type: "radio" as const,
         label: "Modal",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       contentClassName: { type: "text", label: "Content class name" },
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Menu items",
         getItemSummary: (item: {
           type: string;
@@ -72,13 +72,13 @@ export const contextMenuPuckConfig = {
         },
         arrayFields: {
           type: {
-            type: "select",
+            type: "select" as const,
             label: "Type",
             options: itemTypeOptions,
           },
           label: { type: "text", label: "Label" },
           disabled: {
-            type: "select",
+            type: "radio" as const,
             label: "Disabled",
             options: [
               { label: "No", value: false },
@@ -87,11 +87,11 @@ export const contextMenuPuckConfig = {
           },
           shortcut: { type: "text", label: "Shortcut (e.g. ⌘S)" },
           subItemsText: {
-            type: "textarea",
+            type: "textarea" as const,
             label: "Sub-items (one per line)",
           },
           inset: {
-            type: "select",
+            type: "radio" as const,
             label: "Inset",
             options: [
               { label: "No", value: false },
@@ -100,7 +100,7 @@ export const contextMenuPuckConfig = {
           },
           groupHeading: { type: "text", label: "Group heading (optional)" },
           checked: {
-            type: "select",
+            type: "radio" as const,
             label: "Checked (checkbox)",
             options: [
               { label: "No", value: false },
@@ -108,11 +108,11 @@ export const contextMenuPuckConfig = {
             ],
           },
           value: {
-            type: "text",
+            type: "text" as const,
             label: "Value (radio selected / radioGroup)",
           },
           optionsText: {
-            type: "textarea",
+            type: "textarea" as const,
             label: "Radio options (one per line)",
           },
         },

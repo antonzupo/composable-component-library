@@ -15,12 +15,12 @@ export const buttonGroupPuckConfig = {
     inline: true,
     fields: {
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Content (drag Button, Button group separator, or nested Button group here)",
         allow: [...buttonGroupSlotAllow],
       },
       orientation: {
-        type: "select",
+        type: "radio" as const,
         label: "Orientation",
         options: [
           { label: "Horizontal", value: "horizontal" },
@@ -28,7 +28,7 @@ export const buttonGroupPuckConfig = {
         ],
       },
       appearance: {
-        type: "select",
+        type: "radio" as const,
         label: "Appearance",
         options: [
           { label: "Separate (gap between buttons)", value: "separate" },
@@ -36,7 +36,7 @@ export const buttonGroupPuckConfig = {
         ],
       },
       buttonVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Button variant",
         options: [
           { label: "Default", value: "default" },
@@ -48,11 +48,11 @@ export const buttonGroupPuckConfig = {
         ],
       },
       ariaLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Aria label",
       },
       ariaLabelledby: {
-        type: "text",
+        type: "text" as const,
         label: "Aria labelledby (element id)",
       },
       className: { type: "text", label: "Class name" },
@@ -105,7 +105,7 @@ export const buttonGroupPuckConfig = {
     inline: true,
     fields: {
       orientation: {
-        type: "select",
+        type: "select" as const,
         label: "Separator orientation",
         options: [
           {

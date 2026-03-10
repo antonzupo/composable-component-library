@@ -52,9 +52,15 @@ function ItemMediaContent(props: ItemMediaContentProps) {
   if (mediaVariant === "avatar") {
     return (
       <ItemMedia variant="default">
-        <Avatar>
-          <AvatarImage src={mediaAvatarSrc || undefined} alt={mediaAvatarAlt || ""} />
-          <AvatarFallback>{mediaAvatarFallback || "?"}</AvatarFallback>
+        <Avatar className="rounded-full">
+          <AvatarImage
+            src={mediaAvatarSrc || undefined}
+            alt={mediaAvatarAlt || ""}
+            className="rounded-full"
+          />
+          <AvatarFallback className="rounded-full">
+            {mediaAvatarFallback || "?"}
+          </AvatarFallback>
         </Avatar>
       </ItemMedia>
     );

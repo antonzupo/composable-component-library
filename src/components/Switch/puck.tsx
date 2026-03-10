@@ -7,9 +7,9 @@ export const switchPuckConfig = {
   Switch: {
     label: "Switch",
     fields: {
-      label: { type: "text", label: "Label" },
+      label: { type: "text" as const, label: "Label" },
       checked: {
-        type: "select",
+        type: "radio" as const,
         label: "Checked",
         options: [
           { label: "No", value: false },
@@ -17,7 +17,7 @@ export const switchPuckConfig = {
         ],
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
@@ -25,7 +25,7 @@ export const switchPuckConfig = {
         ],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Default", value: "default" },
@@ -33,8 +33,8 @@ export const switchPuckConfig = {
           { label: "Large", value: "lg" },
         ],
       },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       label: "Toggle",

@@ -6,7 +6,7 @@ export const spacePuckConfig = {
     label: "Space",
     fields: {
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "XS", value: "xs" },
@@ -17,7 +17,7 @@ export const spacePuckConfig = {
         ],
       },
       direction: {
-        type: "select",
+        type: "select" as const,
         label: "Direction",
         options: [
           { label: "Vertical", value: "vertical" },

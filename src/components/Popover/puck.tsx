@@ -44,22 +44,22 @@ export const popoverPuckConfig = {
     label: "Popover",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label (when no trigger slot)",
       },
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger (e.g. button that opens the popover)",
         allow: [...slotAllow],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Popover content",
         allow: [...slotAllow],
       },
       contentClassName: { type: "text", label: "Content class name" },
       align: {
-        type: "select",
+        type: "select" as const,
         label: "Content align",
         options: [
           { label: "Start", value: "start" },
@@ -68,7 +68,7 @@ export const popoverPuckConfig = {
         ],
       },
       side: {
-        type: "select",
+        type: "select" as const,
         label: "Content side",
         options: [
           { label: "Top", value: "top" },

@@ -41,7 +41,7 @@ export const sidebarPuckConfig = {
     label: "Sidebar",
     fields: {
       defaultOpen: {
-        type: "radio",
+        type: "radio" as const,
         label: "Default open",
         options: [
           { label: "Open", value: true },
@@ -49,7 +49,7 @@ export const sidebarPuckConfig = {
         ],
       },
       side: {
-        type: "select",
+        type: "select" as const,
         label: "Side",
         options: [
           { label: "Left", value: "left" },
@@ -57,7 +57,7 @@ export const sidebarPuckConfig = {
         ],
       },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Sidebar", value: "sidebar" },
@@ -66,7 +66,7 @@ export const sidebarPuckConfig = {
         ],
       },
       collapsible: {
-        type: "select",
+        type: "select" as const,
         label: "Collapsible",
         options: [
           { label: "Offcanvas", value: "offcanvas" },
@@ -75,12 +75,12 @@ export const sidebarPuckConfig = {
         ],
       },
       sidebarContent: {
-        type: "slot",
+        type: "slot" as const,
         label: "Sidebar content",
         allow: [...slotAllow],
       },
       mainContent: {
-        type: "slot",
+        type: "slot" as const,
         label: "Main content",
         allow: [...slotAllow],
       },

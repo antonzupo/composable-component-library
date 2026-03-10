@@ -12,7 +12,7 @@ export const alertDialogPuckConfig = {
       cancelLabel: { type: "text", label: "Cancel button label" },
       confirmLabel: { type: "text", label: "Confirm button label" },
       confirmVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Confirm variant",
         options: [
           { label: "Default", value: "default" },
@@ -20,15 +20,15 @@ export const alertDialogPuckConfig = {
         ],
       },
       showCancel: {
-        type: "select",
+        type: "select" as const,
         label: "Show cancel",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       titleAlign: {
-        type: "select",
+        type: "select" as const,
         label: "Title alignment",
         options: [
           { label: "Left", value: "left" },
@@ -37,7 +37,7 @@ export const alertDialogPuckConfig = {
         ],
       },
       descriptionAlign: {
-        type: "select",
+        type: "select" as const,
         label: "Description alignment",
         options: [
           { label: "Left", value: "left" },
@@ -46,7 +46,7 @@ export const alertDialogPuckConfig = {
         ],
       },
       actionsAlign: {
-        type: "select",
+        type: "select" as const,
         label: "Actions alignment",
         options: [
           { label: "Start", value: "start" },
@@ -55,7 +55,7 @@ export const alertDialogPuckConfig = {
         ],
       },
       rounded: {
-        type: "select",
+        type: "select" as const,
         label: "Rounded",
         options: [
           { label: "None", value: "none" },
@@ -66,7 +66,7 @@ export const alertDialogPuckConfig = {
         ],
       },
       padding: {
-        type: "select",
+        type: "select" as const,
         label: "Padding",
         options: [
           { label: "None", value: "none" },

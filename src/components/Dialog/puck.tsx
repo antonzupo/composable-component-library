@@ -48,16 +48,16 @@ export const dialogPuckConfig = {
     label: "Dialog",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label",
       },
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger (e.g. button that opens the dialog)",
         allow: [...slotAllow],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Dialog content",
         allow: [...slotAllow],
       },
@@ -67,7 +67,7 @@ export const dialogPuckConfig = {
       className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
       defaultOpen: {
-        type: "select",
+        type: "radio" as const,
         label: "Default open (uncontrolled)",
         options: [
           { label: "No", value: false },
@@ -75,21 +75,21 @@ export const dialogPuckConfig = {
         ],
       },
       modal: {
-        type: "select",
+        type: "radio" as const,
         label: "Modal",
         options: [
-          { label: "Yes", value: true },
           { label: "No (non-modal)", value: false },
+          { label: "Yes", value: true },
         ],
       },
       title: { type: "text", label: "Title" },
       description: { type: "text", label: "Description" },
       showCloseButton: {
-        type: "select",
+        type: "radio" as const,
         label: "Show close button",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
     },

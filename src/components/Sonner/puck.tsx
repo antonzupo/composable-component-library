@@ -8,7 +8,7 @@ export const sonnerPuckConfig = {
     label: "Sonner",
     fields: {
       position: {
-        type: "select",
+        type: "select" as const,
         label: "Position",
         options: [
           { label: "Top left", value: "top-left" },
@@ -20,7 +20,7 @@ export const sonnerPuckConfig = {
         ],
       },
       expand: {
-        type: "select",
+        type: "radio" as const,
         label: "Expand",
         options: [
           { label: "No", value: false },
@@ -28,7 +28,7 @@ export const sonnerPuckConfig = {
         ],
       },
       richColors: {
-        type: "select",
+        type: "radio" as const,
         label: "Rich colors",
         options: [
           { label: "No", value: false },
@@ -36,7 +36,7 @@ export const sonnerPuckConfig = {
         ],
       },
       closeButton: {
-        type: "select",
+        type: "radio" as const,
         label: "Close button",
         options: [
           { label: "No", value: false },

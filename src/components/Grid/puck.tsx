@@ -8,7 +8,7 @@ export const gridPuckConfig = {
     fields: {
       content: { type: "slot", label: "Content" },
       columns: {
-        type: "select",
+        type: "select" as const,
         label: "Columns",
         options: [
           { label: "2", value: 2 },
@@ -19,7 +19,7 @@ export const gridPuckConfig = {
         ],
       },
       gap: {
-        type: "select",
+        type: "select" as const,
         label: "Gap",
         options: [
           { label: "None", value: "none" },

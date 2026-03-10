@@ -13,14 +13,14 @@ export const togglePuckConfig = {
   Toggle: {
     label: "Toggle",
     fields: {
-      label: { type: "text", label: "Label" },
+      label: { type: "text" as const, label: "Label" },
       icon: {
-        type: "select",
+        type: "select" as const,
         label: "Icon",
         options: lucideIconOptions,
       },
       iconPosition: {
-        type: "select",
+        type: "radio" as const,
         label: "Icon position",
         options: [
           { label: "Start", value: "start" },
@@ -28,7 +28,7 @@ export const togglePuckConfig = {
         ],
       },
       variant: {
-        type: "select",
+        type: "radio" as const,
         label: "Variant",
         options: [
           { label: "Default", value: "default" },
@@ -36,7 +36,7 @@ export const togglePuckConfig = {
         ],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Default", value: "default" },
@@ -45,7 +45,7 @@ export const togglePuckConfig = {
         ],
       },
       defaultPressed: {
-        type: "select",
+        type: "radio" as const,
         label: "Default pressed",
         options: [
           { label: "No", value: false },
@@ -53,7 +53,7 @@ export const togglePuckConfig = {
         ],
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },

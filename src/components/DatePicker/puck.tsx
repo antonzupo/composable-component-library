@@ -6,7 +6,7 @@ export const datePickerPuckConfig = {
     label: "Date Picker",
     fields: {
       appearance: {
-        type: "select",
+        type: "select" as const,
         label: "Appearance",
         options: [
           { label: "Basic", value: "basic" },
@@ -17,11 +17,11 @@ export const datePickerPuckConfig = {
         ],
       },
       placeholder: {
-        type: "text",
+        type: "text" as const,
         label: "Placeholder",
       },
       mode: {
-        type: "select",
+        type: "select" as const,
         label: "Mode",
         options: [
           { label: "Single date", value: "single" },
@@ -29,7 +29,7 @@ export const datePickerPuckConfig = {
         ],
       },
       triggerVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Trigger button variant",
         options: [
           { label: "Default", value: "default" },
@@ -41,7 +41,7 @@ export const datePickerPuckConfig = {
         ],
       },
       triggerSize: {
-        type: "select",
+        type: "select" as const,
         label: "Trigger button size",
         options: [
           { label: "Default", value: "default" },

@@ -66,31 +66,31 @@ export const cardPuckConfig = {
       title: { type: "text", label: "Title" },
       description: { type: "textarea", label: "Description" },
       showHeader: {
-        type: "select",
+        type: "select" as const,
         label: "Show header",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showDescription: {
-        type: "select",
+        type: "select" as const,
         label: "Show description",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showImageSection: {
-        type: "select",
+        type: "select" as const,
         label: "Show image section",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       imageSectionSize: {
-        type: "select",
+        type: "select" as const,
         label: "Image section size",
         options: [
           { label: "Small", value: "sm" },
@@ -99,43 +99,43 @@ export const cardPuckConfig = {
         ],
       },
       header: {
-        type: "slot",
+        type: "slot" as const,
         label: "Image section (drag image here)",
         allow: [...headerAllow],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Content",
         allow: [...slotAllow],
       },
       showCardAction: {
-        type: "select",
+        type: "select" as const,
         label: "Show card action",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       cardAction: {
-        type: "slot",
+        type: "slot" as const,
         label: "Card action",
         allow: [...cardActionAllow],
       },
       showFooter: {
-        type: "select",
+        type: "select" as const,
         label: "Show footer",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       footer: {
-        type: "slot",
+        type: "slot" as const,
         label: "Footer",
         allow: [...footerAllow],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Small", value: "sm" },

@@ -10,7 +10,7 @@ export const aspectRatioPuckConfig = {
     label: "Aspect Ratio",
     fields: {
       ratio: {
-        type: "select",
+        type: "select" as const,
         label: "Ratio",
         options: [
           { label: "1:1", value: "1/1" },
@@ -23,7 +23,7 @@ export const aspectRatioPuckConfig = {
         ],
       },
       objectFit: {
-        type: "select",
+        type: "select" as const,
         label: "Object fit",
         options: [
           { label: "Cover", value: "cover" },
@@ -33,7 +33,7 @@ export const aspectRatioPuckConfig = {
         ],
       },
       rounded: {
-        type: "select",
+        type: "select" as const,
         label: "Rounded",
         options: [
           { label: "None", value: "none" },
@@ -44,7 +44,7 @@ export const aspectRatioPuckConfig = {
         ],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Content",
         allow: [...slotAllow],
       },

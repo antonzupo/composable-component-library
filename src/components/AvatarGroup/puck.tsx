@@ -17,6 +17,7 @@ const defaultProps: AvatarGroupProps = {
   showCount: false,
   count: "",
   countIcon: "plus",
+  countDisplay: "count",
   countSize: "md",
   className: "",
   id: "",
@@ -25,7 +26,7 @@ const defaultProps: AvatarGroupProps = {
 export const avatarGroupPuckConfig = {
   AvatarGroup: {
     label: "Avatar group",
-    resolveData: ({ props }: { props: Components["AvatarGroup"] }) => {
+    resolveData: ({ props }: { props: AvatarGroupProps }) => {
       const content = props.content;
       if (!Array.isArray(content)) return { props };
       const avatarCount = content.length;
@@ -36,12 +37,12 @@ export const avatarGroupPuckConfig = {
     },
     fields: {
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Avatars (drag Avatar here)",
         allow: [...avatarGroupContentAllow],
       },
       showCount: {
-        type: "radio",
+        type: "radio" as const,
         label: "Show count",
         options: [
           { label: "No", value: false },
@@ -49,16 +50,24 @@ export const avatarGroupPuckConfig = {
         ],
       },
       count: {
-        type: "text",
+        type: "text" as const,
         label: "Count (manual; auto when avatars in slot)",
       },
       countIcon: {
-        type: "select",
+        type: "select" as const,
         label: "Count icon",
         options: countIconOptions,
       },
+      countDisplay: {
+        type: "radio" as const,
+        label: "Display",
+        options: [
+          { label: "Icon", value: "icon" },
+          { label: "Count", value: "count" },
+        ],
+      },
       countSize: {
-        type: "select",
+        type: "select" as const,
         label: "Count size",
         options: [
           { label: "Small", value: "sm" },
@@ -66,11 +75,11 @@ export const avatarGroupPuckConfig = {
           { label: "Large", value: "lg" },
         ],
       },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps,
-    render: (props: Components["AvatarGroup"]) => {
+    render: (props: AvatarGroupProps) => {
       const { content, ...avatarGroupProps } = props;
       const avatarCount = Array.isArray(content) ? content.length : undefined;
       const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
@@ -84,6 +93,7 @@ export const avatarGroupPuckConfig = {
           showCount={avatarGroupProps.showCount ?? false}
           count={displayCount}
           countIcon={avatarGroupProps.countIcon ?? ""}
+          countDisplay={avatarGroupProps.countDisplay ?? "count"}
           countSize={avatarGroupProps.countSize ?? "md"}
           className={avatarGroupProps.className ?? ""}
           id={avatarGroupProps.id ?? ""}

@@ -13,7 +13,7 @@ export const nativeSelectPuckConfig = {
     label: "Native Select",
     fields: {
       optionMode: {
-        type: "select",
+        type: "select" as const,
         label: "Options",
         options: [
           { label: "Flat list", value: "flat" },
@@ -21,7 +21,7 @@ export const nativeSelectPuckConfig = {
         ],
       },
       options: {
-        type: "array",
+        type: "array" as const,
         label: "Options",
         getItemSummary: (item: { value?: string; label?: string }) =>
           item?.label ?? item?.value ?? "Option",
@@ -29,14 +29,14 @@ export const nativeSelectPuckConfig = {
         defaultItemProps: () => ({ value: "", label: "Option" }),
       },
       optionGroups: {
-        type: "array",
+        type: "array" as const,
         label: "Option groups",
         getItemSummary: (item: { groupLabel?: string }) =>
           item?.groupLabel ?? "Group",
         arrayFields: {
           groupLabel: { type: "text", label: "Group label" },
           options: {
-            type: "array",
+            type: "array" as const,
             label: "Options",
             getItemSummary: (opt: { value?: string; label?: string }) =>
               opt?.label ?? opt?.value ?? "Option",
@@ -52,7 +52,7 @@ export const nativeSelectPuckConfig = {
       placeholder: { type: "text", label: "Placeholder" },
       defaultValue: { type: "text", label: "Default value" },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
@@ -60,7 +60,7 @@ export const nativeSelectPuckConfig = {
         ],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Default", value: "default" },

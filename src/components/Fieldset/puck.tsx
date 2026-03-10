@@ -26,7 +26,7 @@ export const fieldsetPuckConfig = {
     fields: {
       legend: { type: "text", label: "Legend" },
       legendVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Legend variant",
         options: [
           { label: "Legend", value: "legend" },

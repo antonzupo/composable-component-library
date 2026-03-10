@@ -8,7 +8,7 @@ export const kbdPuckConfig = {
     label: "Kbd",
     fields: {
       displayMode: {
-        type: "select",
+        type: "select" as const,
         label: "Display",
         options: [
           { label: "Single key", value: "single" },
@@ -17,7 +17,7 @@ export const kbdPuckConfig = {
       },
       text: { type: "text", label: "Key / text" },
       keys: {
-        type: "array",
+        type: "array" as const,
         label: "Keys in group",
         getItemSummary: (item: { key?: string }) => item?.key ?? "Key",
         arrayFields: {

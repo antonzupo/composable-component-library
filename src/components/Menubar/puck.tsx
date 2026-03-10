@@ -21,7 +21,7 @@ const menuItemArrayFields = {
   },
   label: { type: "text" as const, label: "Label" },
   disabled: {
-    type: "select" as const,
+    type: "radio" as const,
     label: "Disabled",
     options: [
       { label: "No", value: false },
@@ -30,7 +30,7 @@ const menuItemArrayFields = {
   },
   shortcut: { type: "text" as const, label: "Shortcut (e.g. ⌘S)" },
   inset: {
-    type: "select" as const,
+    type: "radio" as const,
     label: "Inset",
     options: [
       { label: "No", value: false },
@@ -38,7 +38,7 @@ const menuItemArrayFields = {
     ],
   },
   checked: {
-    type: "select" as const,
+    type: "radio" as const,
     label: "Checked (checkbox)",
     options: [
       { label: "No", value: false },
@@ -61,13 +61,13 @@ export const menubarPuckConfig = {
     label: "Menubar",
     fields: {
       menus: {
-        type: "array",
+        type: "array" as const,
         label: "Menus",
         getItemSummary: (item: { trigger?: string }) => item?.trigger ?? "Menu",
         arrayFields: {
           trigger: { type: "text", label: "Trigger label" },
           items: {
-            type: "array",
+            type: "array" as const,
             label: "Menu items",
             getItemSummary: (item: MenubarMenuItem) => {
               if (!item) return "Item";

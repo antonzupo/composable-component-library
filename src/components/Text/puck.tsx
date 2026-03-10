@@ -8,7 +8,7 @@ export const textPuckConfig = {
     fields: {
       content: { type: "textarea", label: "Content" },
       as: {
-        type: "select",
+        type: "select" as const,
         label: "Element",
         options: [
           { label: "Paragraph", value: "p" },
@@ -20,7 +20,7 @@ export const textPuckConfig = {
         ],
       },
       align: {
-        type: "select",
+        type: "select" as const,
         label: "Alignment",
         options: [
           { label: "Left", value: "left" },

@@ -9,7 +9,7 @@ export const tablePuckConfig = {
     label: "Table",
     fields: {
       dataSourceMode: {
-        type: "select",
+        type: "select" as const,
         label: "Data source",
         options: [
           { label: "Manual", value: "manual" },
@@ -17,7 +17,7 @@ export const tablePuckConfig = {
         ],
       },
       dataSource: {
-        type: "external",
+        type: "external" as const,
         label: "Table from API",
         placeholder: "Select table",
         getItemSummary: (item: TableDataItem) =>
@@ -27,7 +27,7 @@ export const tablePuckConfig = {
         },
       },
       columns: {
-        type: "array",
+        type: "array" as const,
         label: "Columns",
         getItemSummary: (item: { id: string; header: string }) =>
           item?.header || item?.id || "Column",
@@ -38,7 +38,7 @@ export const tablePuckConfig = {
         defaultItemProps: () => ({ id: "", header: "" }),
       },
       rows: {
-        type: "array",
+        type: "array" as const,
         label: "Rows",
         getItemSummary: (item: { values: string }) => {
           const first = item?.values?.split("\n")?.[0];
@@ -46,7 +46,7 @@ export const tablePuckConfig = {
         },
         arrayFields: {
           values: {
-            type: "textarea",
+            type: "textarea" as const,
             label: "Cells (one per line, matches column order)",
           },
         },
@@ -54,7 +54,7 @@ export const tablePuckConfig = {
       },
       caption: { type: "text", label: "Caption" },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Default", value: "default" },

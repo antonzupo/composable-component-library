@@ -8,32 +8,32 @@ export const sliderPuckConfig = {
     label: "Slider",
     fields: {
       value: {
-        type: "number",
+        type: "number" as const,
         label: "Value",
         min: 0,
         max: 100,
         step: 1,
       },
       min: {
-        type: "number",
+        type: "number" as const,
         label: "Min",
         min: 0,
         step: 1,
       },
       max: {
-        type: "number",
+        type: "number" as const,
         label: "Max",
         min: 1,
         step: 1,
       },
       step: {
-        type: "number",
+        type: "number" as const,
         label: "Step",
         min: 0,
         step: 0.1,
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },

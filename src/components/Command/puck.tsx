@@ -6,17 +6,17 @@ export const commandPuckConfig = {
     label: "Command",
     fields: {
       showInput: {
-        type: "select",
+        type: "select" as const,
         label: "Show search input",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       inputPlaceholder: { type: "text", label: "Search placeholder" },
       emptyText: { type: "text", label: "Empty state text" },
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Items",
         getItemSummary: (item: { value: string; label: string; groupHeading: string }) =>
           item?.label

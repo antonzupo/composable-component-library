@@ -8,14 +8,14 @@ export const inputOtpPuckConfig = {
     label: "Input OTP",
     fields: {
       maxLength: {
-        type: "number",
+        type: "number" as const,
         label: "Length",
         min: 4,
         max: 8,
       },
       value: { type: "text", label: "Default value (preview)" },
       patternPreset: {
-        type: "select",
+        type: "select" as const,
         label: "Pattern",
         options: [
           { label: "None", value: "none" },
@@ -26,11 +26,11 @@ export const inputOtpPuckConfig = {
         ],
       },
       patternCustom: {
-        type: "text",
+        type: "text" as const,
         label: "Custom pattern (regex, e.g. ^\\d+$)",
       },
       separatorEvery: {
-        type: "select",
+        type: "select" as const,
         label: "Separator between groups",
         options: [
           { label: "None", value: 0 },
@@ -40,7 +40,7 @@ export const inputOtpPuckConfig = {
         ],
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },

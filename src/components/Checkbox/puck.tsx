@@ -7,9 +7,9 @@ export const checkboxPuckConfig = {
   Checkbox: {
     label: "Checkbox",
     fields: {
-      label: { type: "text", label: "Label" },
+      label: { type: "text" as const, label: "Label" },
       checked: {
-        type: "select",
+        type: "radio" as const,
         label: "Checked",
         options: [
           { label: "No", value: false },
@@ -17,7 +17,7 @@ export const checkboxPuckConfig = {
         ],
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
@@ -25,7 +25,7 @@ export const checkboxPuckConfig = {
         ],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Default", value: "default" },
@@ -33,8 +33,8 @@ export const checkboxPuckConfig = {
           { label: "Large", value: "lg" },
         ],
       },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       label: "Option",
@@ -43,7 +43,7 @@ export const checkboxPuckConfig = {
       size: "default" as const,
       className: "",
       id: "",
-    },
+    } satisfies CheckboxProps,
     render: (props: CheckboxProps) => <Checkbox {...props} />,
   },
 };

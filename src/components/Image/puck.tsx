@@ -8,7 +8,7 @@ export const imagePuckConfig = {
       src: { type: "text", label: "Image URL" },
       alt: { type: "text", label: "Alt text" },
       objectFit: {
-        type: "select",
+        type: "select" as const,
         label: "Object fit",
         options: [
           { label: "Cover", value: "cover" },
@@ -18,7 +18,7 @@ export const imagePuckConfig = {
         ],
       },
       align: {
-        type: "select",
+        type: "select" as const,
         label: "Alignment",
         options: [
           { label: "Left", value: "left" },
@@ -27,7 +27,7 @@ export const imagePuckConfig = {
         ],
       },
       rounded: {
-        type: "select",
+        type: "select" as const,
         label: "Rounded",
         options: [
           { label: "None", value: "none" },

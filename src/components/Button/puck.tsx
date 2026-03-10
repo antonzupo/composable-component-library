@@ -1,4 +1,4 @@
-import React, { type ComponentType } from "react";
+import React, { type ComponentType, type Ref } from "react";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { iconNames } from "lucide-react/dynamic";
 import { Button } from "@/components/Button/Button";
@@ -7,109 +7,132 @@ import { cn } from "@/lib/utils";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type ButtonProps = Components["Button"];
+type PuckRenderProps = { puck?: { dragRef?: Ref<HTMLButtonElement> | null } };
 
 const lucideIconOptions = [
   { label: "— None —", value: "" },
   ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
 ];
 
+const baseFields = {
+  contentMode: {
+    type: "select" as const,
+    label: "Button content",
+    options: [
+      { label: "Text", value: "text" },
+      { label: "Icon", value: "icon" },
+      { label: "Text and icon", value: "both" },
+    ],
+  },
+  label: { type: "text" as const, label: "Label (when content is empty)" },
+  content: {
+    type: "slot" as const,
+    label: "Content",
+    allow: ["Badge", "Text"],
+  },
+  icon: {
+    type: "select" as const,
+    label: "Icon",
+    options: lucideIconOptions,
+  },
+  iconPosition: {
+    type: "radio" as const,
+    label: "Icon position",
+    options: [
+      { label: "Start", value: "start" },
+      { label: "End", value: "end" },
+    ],
+  },
+  roundedFull: {
+    type: "radio" as const,
+    label: "Rounded",
+    options: [
+      { label: "Default", value: false },
+      { label: "Full", value: true },
+    ],
+  },
+  showSpinner: {
+    type: "radio" as const,
+    label: "Show spinner (loading)",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  spinnerPosition: {
+    type: "radio" as const,
+    label: "Spinner position",
+    options: [
+      { label: "Start", value: "start" },
+      { label: "End", value: "end" },
+    ],
+  },
+  variant: {
+    type: "select" as const,
+    label: "Variant",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Destructive", value: "destructive" },
+      { label: "Outline", value: "outline" },
+      { label: "Secondary", value: "secondary" },
+      { label: "Ghost", value: "ghost" },
+      { label: "Link", value: "link" },
+    ],
+  },
+  size: {
+    type: "select" as const,
+    label: "Size",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Small", value: "sm" },
+      { label: "Large", value: "lg" },
+      { label: "Icon", value: "icon" },
+    ],
+  },
+  type: {
+    type: "select" as const,
+    label: "Type",
+    options: [
+      { label: "Button", value: "button" },
+      { label: "Submit", value: "submit" },
+      { label: "Reset", value: "reset" },
+    ],
+  },
+  disabled: {
+    type: "radio" as const,
+    label: "Disabled",
+    options: [{ label: "No", value: false }, { label: "Yes", value: true }],
+  },
+  className: { type: "text" as const, label: "Class name" },
+  id: { type: "text" as const, label: "ID" },
+  ariaLabel: { type: "text" as const, label: "Aria label" },
+};
+
 export const buttonPuckConfig = {
   Button: {
     label: "Button",
-    inline: true,
-    fields: {
-      contentMode: {
-        type: "select",
-        label: "Button content",
-        options: [
-          { label: "Text", value: "text" },
-          { label: "Icon", value: "icon" },
-          { label: "Text and icon", value: "both" },
-        ],
-      },
-      label: { type: "text", label: "Label (when content is empty)" },
-      content: {
-        type: "slot",
-        label: "Content",
-        allow: ["Badge", "Text"],
-      },
-      icon: {
-        type: "select",
-        label: "Icon",
-        options: lucideIconOptions,
-      },
-      iconPosition: {
-        type: "select",
-        label: "Icon position",
-        options: [
-          { label: "Start", value: "start" },
-          { label: "End", value: "end" },
-        ],
-      },
-      roundedFull: {
-        type: "select",
-        label: "Rounded",
-        options: [
-          { label: "Default", value: false },
-          { label: "Full", value: true },
-        ],
-      },
-      showSpinner: {
-        type: "select",
-        label: "Show spinner (loading)",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      spinnerPosition: {
-        type: "select",
-        label: "Spinner position",
-        options: [
-          { label: "Start", value: "start" },
-          { label: "End", value: "end" },
-        ],
-      },
-      variant: {
-        type: "select",
-        label: "Variant",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Destructive", value: "destructive" },
-          { label: "Outline", value: "outline" },
-          { label: "Secondary", value: "secondary" },
-          { label: "Ghost", value: "ghost" },
-          { label: "Link", value: "link" },
-        ],
-      },
-      size: {
-        type: "select",
-        label: "Size",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Small", value: "sm" },
-          { label: "Large", value: "lg" },
-          { label: "Icon", value: "icon" },
-        ],
-      },
-      type: {
-        type: "select",
-        label: "Type",
-        options: [
-          { label: "Button", value: "button" },
-          { label: "Submit", value: "submit" },
-          { label: "Reset", value: "reset" },
-        ],
-      },
-      disabled: {
-        type: "select",
-        label: "Disabled",
-        options: [{ label: "No", value: false }, { label: "Yes", value: true }],
-      },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
-      ariaLabel: { type: "text", label: "Aria label" },
+    resolveFields: (data: { props: ButtonProps }) => {
+      const contentMode = data.props.contentMode;
+      const showIconFields = contentMode === "icon" || contentMode === "both";
+      const showSpinner = data.props.showSpinner === true;
+      return {
+        contentMode: baseFields.contentMode,
+        label: baseFields.label,
+        content: baseFields.content,
+        ...(showIconFields ? { icon: baseFields.icon, iconPosition: baseFields.iconPosition } : {}),
+        roundedFull: baseFields.roundedFull,
+        showSpinner: baseFields.showSpinner,
+        ...(showSpinner ? { spinnerPosition: baseFields.spinnerPosition } : {}),
+        variant: baseFields.variant,
+        size: baseFields.size,
+        type: baseFields.type,
+        disabled: baseFields.disabled,
+        className: baseFields.className,
+        id: baseFields.id,
+        ariaLabel: baseFields.ariaLabel,
+      };
     },
+    fields: baseFields,
     defaultProps: {
       contentMode: "text" as const,
       label: "Button",
@@ -144,7 +167,7 @@ export const buttonPuckConfig = {
       id,
       ariaLabel,
       puck,
-    }: ButtonProps) => {
+    }: ButtonProps & PuckRenderProps) => {
       const isIconOnly = contentMode === "icon";
       const isBoth = contentMode === "both";
       const showIcon = (isIconOnly || isBoth) && icon;

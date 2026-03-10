@@ -7,7 +7,7 @@ const optionArrayFields = {
   value: { type: "text" as const, label: "Value" },
   label: { type: "text" as const, label: "Label" },
   disabled: {
-    type: "select" as const,
+    type: "radio" as const,
     label: "Disabled",
     options: [
       { label: "No", value: false },
@@ -21,10 +21,10 @@ export const selectPuckConfig = {
     label: "Select",
     fields: {
       // — Root (Select.Root)
-      defaultValue: { type: "text", label: "Default value" },
-      value: { type: "text", label: "Value (controlled)" },
+      defaultValue: { type: "text" as const, label: "Default value" },
+      value: { type: "text" as const, label: "Value (controlled)" },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
@@ -32,16 +32,16 @@ export const selectPuckConfig = {
         ],
       },
       required: {
-        type: "select",
+        type: "radio" as const,
         label: "Required",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      name: { type: "text", label: "Name" },
+      name: { type: "text" as const, label: "Name" },
       dir: {
-        type: "select",
+        type: "radio" as const,
         label: "Direction",
         options: [
           { label: "LTR", value: "ltr" },
@@ -49,12 +49,12 @@ export const selectPuckConfig = {
         ],
       },
       // — Trigger
-      triggerClassName: { type: "text", label: "Trigger class name" },
+      triggerClassName: { type: "text" as const, label: "Trigger class name" },
       // — Value (SelectValue)
-      placeholder: { type: "text", label: "Placeholder" },
+      placeholder: { type: "text" as const, label: "Placeholder" },
       // — Content (SelectContent)
       position: {
-        type: "select",
+        type: "radio" as const,
         label: "Position",
         options: [
           { label: "Popper", value: "popper" },
@@ -62,7 +62,7 @@ export const selectPuckConfig = {
         ],
       },
       side: {
-        type: "select",
+        type: "select" as const,
         label: "Side",
         options: [
           { label: "Bottom", value: "bottom" },
@@ -71,9 +71,9 @@ export const selectPuckConfig = {
           { label: "Right", value: "right" },
         ],
       },
-      sideOffset: { type: "number", label: "Side offset", min: 0 },
+      sideOffset: { type: "number" as const, label: "Side offset", min: 0 },
       align: {
-        type: "select",
+        type: "select" as const,
         label: "Align",
         options: [
           { label: "Start", value: "start" },
@@ -81,28 +81,28 @@ export const selectPuckConfig = {
           { label: "End", value: "end" },
         ],
       },
-      alignOffset: { type: "number", label: "Align offset", min: 0 },
+      alignOffset: { type: "number" as const, label: "Align offset", min: 0 },
       avoidCollisions: {
-        type: "select",
+        type: "radio" as const,
         label: "Avoid collisions",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
-      collisionPadding: { type: "number", label: "Collision padding", min: 0 },
+      collisionPadding: { type: "number" as const, label: "Collision padding", min: 0 },
       hideWhenDetached: {
-        type: "select",
+        type: "radio" as const,
         label: "Hide when detached",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      contentClassName: { type: "text", label: "Content class name" },
+      contentClassName: { type: "text" as const, label: "Content class name" },
       // — Items
       optionMode: {
-        type: "select",
+        type: "radio" as const,
         label: "Options",
         options: [
           { label: "Flat list", value: "flat" },
@@ -110,7 +110,7 @@ export const selectPuckConfig = {
         ],
       },
       options: {
-        type: "array",
+        type: "array" as const,
         label: "Options (flat)",
         getItemSummary: (item: { value?: string; label?: string }) =>
           item?.label ?? item?.value ?? "Option",
@@ -118,14 +118,14 @@ export const selectPuckConfig = {
         defaultItemProps: () => ({ value: "", label: "Option", disabled: false }),
       },
       optionGroups: {
-        type: "array",
+        type: "array" as const,
         label: "Option groups",
         getItemSummary: (item: { groupLabel?: string }) =>
           item?.groupLabel ?? "Group",
         arrayFields: {
-          groupLabel: { type: "text", label: "Group label" },
+          groupLabel: { type: "text" as const, label: "Group label" },
           options: {
-            type: "array",
+            type: "array" as const,
             label: "Options",
             getItemSummary: (opt: { value?: string; label?: string }) =>
               opt?.label ?? opt?.value ?? "Option",
@@ -139,7 +139,7 @@ export const selectPuckConfig = {
         }),
       },
       separatorBetweenGroups: {
-        type: "select",
+        type: "radio" as const,
         label: "Separator between groups",
         options: [
           { label: "No", value: false },

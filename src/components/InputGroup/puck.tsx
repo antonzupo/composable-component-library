@@ -24,17 +24,17 @@ export const inputGroupPuckConfig = {
       addonStart: { type: "text", label: "Addon (start) text" },
       addonEnd: { type: "text", label: "Addon (end) text" },
       addonStartAlign: {
-        type: "select",
+        type: "select" as const,
         label: "Addon (start) align",
         options: addonAlignOptions,
       },
       addonEndAlign: {
-        type: "select",
+        type: "select" as const,
         label: "Addon (end) align",
         options: addonAlignOptions,
       },
       addonStartType: {
-        type: "select",
+        type: "radio" as const,
         label: "Addon (start) type",
         options: [
           { label: "Text", value: "text" },
@@ -42,7 +42,7 @@ export const inputGroupPuckConfig = {
         ],
       },
       addonEndType: {
-        type: "select",
+        type: "radio" as const,
         label: "Addon (end) type",
         options: [
           { label: "Text", value: "text" },
@@ -50,18 +50,18 @@ export const inputGroupPuckConfig = {
         ],
       },
       addonStartIcon: {
-        type: "select",
+        type: "select" as const,
         label: "Addon (start) icon",
         options: lucideIconOptions,
       },
       addonEndIcon: {
-        type: "select",
+        type: "select" as const,
         label: "Addon (end) icon",
         options: lucideIconOptions,
       },
       placeholder: { type: "text", label: "Placeholder" },
       type: {
-        type: "select",
+        type: "select" as const,
         label: "Input type",
         options: [
           { label: "Text", value: "text" },
@@ -74,7 +74,7 @@ export const inputGroupPuckConfig = {
         ],
       },
       useTextarea: {
-        type: "select",
+        type: "radio" as const,
         label: "Use textarea",
         options: [
           { label: "No", value: false },
@@ -82,7 +82,7 @@ export const inputGroupPuckConfig = {
         ],
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
@@ -118,12 +118,12 @@ export const inputGroupPuckConfig = {
         addonEndType={props.addonEndType}
         addonStartIcon={props.addonStartIcon}
         addonEndIcon={props.addonEndIcon}
-        placeholder={props.placeholder || undefined}
+        placeholder={props.placeholder}
         type={props.type as React.HTMLInputTypeAttribute}
         useTextarea={props.useTextarea}
         disabled={props.disabled}
-        className={props.className || undefined}
-        id={props.id || undefined}
+        className={props.className}
+        id={props.id}
       />
     ),
   },

@@ -26,7 +26,7 @@ export const fieldPuckConfig = {
       description: { type: "textarea", label: "Description" },
       error: { type: "text", label: "Error message" },
       orientation: {
-        type: "select",
+        type: "select" as const,
         label: "Orientation",
         options: [
           { label: "Vertical", value: "vertical" },
@@ -35,7 +35,7 @@ export const fieldPuckConfig = {
         ],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Control (e.g. Input)",
         allow: [...contentAllow],
       },

@@ -48,16 +48,16 @@ export const hoverCardPuckConfig = {
     label: "Hover Card",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label (when no trigger slot)",
       },
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger (e.g. button or link that shows the card on hover)",
         allow: [...slotAllow],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Hover card content",
         allow: [...slotAllow],
       },

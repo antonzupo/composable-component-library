@@ -9,7 +9,7 @@ export const heroCardPuckConfig = {
     label: "Hero Card",
     fields: {
       dataSourceMode: {
-        type: "select",
+        type: "radio" as const,
         label: "Data source",
         options: [
           { label: "Manual", value: "manual" },
@@ -17,7 +17,7 @@ export const heroCardPuckConfig = {
         ],
       },
       dataSource: {
-        type: "external",
+        type: "external" as const,
         label: "Content from API",
         placeholder: "Select hero content",
         getItemSummary: (item: { title?: string; id?: string }) => item?.title ?? item?.id ?? "Selected",
@@ -36,11 +36,11 @@ export const heroCardPuckConfig = {
           }
         },
       },
-      title: { type: "text", label: "Title" },
-      description: { type: "text", label: "Description" },
-      ctaLabel: { type: "text", label: "Button label" },
+      title: { type: "text" as const, label: "Title" },
+      description: { type: "text" as const, label: "Description" },
+      ctaLabel: { type: "text" as const, label: "Button label" },
       ctaVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Button variant",
         options: [
           { label: "Default", value: "default" },
@@ -52,7 +52,7 @@ export const heroCardPuckConfig = {
         ],
       },
       ctaSize: {
-        type: "select",
+        type: "select" as const,
         label: "Button size",
         options: [
           { label: "Default", value: "default" },
@@ -62,7 +62,7 @@ export const heroCardPuckConfig = {
         ],
       },
       ctaAlign: {
-        type: "select",
+        type: "select" as const,
         label: "Button alignment",
         options: [
           { label: "Left", value: "left" },
@@ -70,13 +70,16 @@ export const heroCardPuckConfig = {
           { label: "Right", value: "right" },
         ],
       },
-      content: { type: "slot", label: "Extra content" },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      content: { type: "slot" as const, label: "Extra content" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
       showDescription: {
-        type: "select",
+        type: "radio" as const,
         label: "Show description",
-        options: [{ label: "Yes", value: true }, { label: "No", value: false }],
+        options: [
+          { label: "No", value: false },
+          { label: "Yes", value: true },
+        ],
       },
     },
     defaultProps: {

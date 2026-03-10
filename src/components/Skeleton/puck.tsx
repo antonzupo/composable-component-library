@@ -8,7 +8,7 @@ export const skeletonPuckConfig = {
     label: "Skeleton",
     fields: {
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Single", value: "single" },
@@ -21,44 +21,44 @@ export const skeletonPuckConfig = {
         description: "Preset layout or a single skeleton block (Single uses the props below).",
       },
       className: {
-        type: "text",
+        type: "text" as const,
         label: "Class name",
         description: "Additional CSS classes (e.g. h-4 w-[250px] for dimensions).",
       },
       id: {
-        type: "text",
+        type: "text" as const,
         label: "ID",
         description: "HTML id attribute.",
       },
       width: {
-        type: "text",
+        type: "text" as const,
         label: "Width",
         description: "Inline width (e.g. 250px, 100%, 1rem).",
       },
       height: {
-        type: "text",
+        type: "text" as const,
         label: "Height",
         description: "Inline height (e.g. 20px, 2rem).",
       },
       style: {
-        type: "text",
+        type: "text" as const,
         label: "Style (JSON)",
         description:
           'Optional inline styles as JSON object, e.g. {"minHeight": "20px", "borderRadius": "4px"}.',
       },
       role: {
-        type: "text",
+        type: "text" as const,
         label: "Role",
         description: "ARIA role attribute.",
       },
       tabIndex: {
-        type: "number",
+        type: "number" as const,
         label: "Tab index",
         description:
           "Tab order for keyboard navigation. Leave empty to omit (recommended for decorative skeletons).",
       },
       ariaLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Aria label",
         description: "Accessible label for screen readers.",
       },

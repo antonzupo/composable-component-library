@@ -8,7 +8,7 @@ import { DynamicIcon } from "lucide-react/dynamic";
 import { cn } from "@/lib/utils";
 import type { Components } from "@/puck/types";
 
-const BADGE_ICON_SIZE = 10;
+const BADGE_ICON_SIZE = 8;
 
 const badgeBaseClass =
   "absolute h-3 w-3 rounded-full border-2 border-background";
@@ -70,15 +70,21 @@ export function Avatar({
       className={cn(sizeClass[size], roundedClass[rounded], className)}
       id={id || undefined}
     >
-      <AvatarImage src={src || undefined} alt={alt} />
-      <AvatarFallback>{fallback}</AvatarFallback>
+      <AvatarImage
+        src={src || undefined}
+        alt={alt}
+        className={roundedClass[rounded]}
+      />
+      <AvatarFallback className={roundedClass[rounded]}>{fallback}</AvatarFallback>
       {showBadge && (
         <AvatarBadge
           className={cn(
             badgeBaseClass,
             badgePositionClass[badgePosition],
             badgeColor,
-            badgeHasContent &&
+            hasBadgeIcon &&
+              "flex items-center justify-center p-0 [&_svg]:size-2",
+            hasBadgeContent &&
               "flex h-5 min-h-5 w-5 min-w-5 items-center justify-center gap-0.5 p-0 text-[10px]"
           )}
         >
@@ -86,7 +92,7 @@ export function Avatar({
             <DynamicIcon
               name={badgeIcon as React.ComponentProps<typeof DynamicIcon>["name"]}
               size={BADGE_ICON_SIZE}
-              className="shrink-0 [&_svg]:size-2.5"
+              className="shrink-0"
               aria-hidden
             />
           )}

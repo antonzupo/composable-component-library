@@ -14,7 +14,9 @@ const alertIconOptions = [
   { label: "X circle", value: "x-circle" },
 ];
 
-const defaultProps: Components["Alert"] = {
+type AlertProps = Components["Alert"];
+
+const defaultProps: AlertProps = {
   title: "Alert title",
   description: "Alert description text.",
   showTitle: true,
@@ -27,57 +29,75 @@ const defaultProps: Components["Alert"] = {
   id: "",
 };
 
+const baseFields = {
+  title: { type: "text" as const, label: "Title" },
+  description: { type: "textarea" as const, label: "Description" },
+  showTitle: {
+    type: "radio" as const,
+    label: "Show title",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  variant: {
+    type: "radio" as const,
+    label: "Variant",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Destructive", value: "destructive" },
+    ],
+  },
+  showIcon: {
+    type: "radio" as const,
+    label: "Show icon",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  icon: {
+    type: "select" as const,
+    label: "Icon",
+    options: alertIconOptions,
+  },
+  showAction: {
+    type: "radio" as const,
+    label: "Show action",
+    options: [
+      { label: "No", value: false },
+      { label: "Yes", value: true },
+    ],
+  },
+  alertAction: {
+    type: "slot" as const,
+    label: "Alert action (e.g. button)",
+    allow: [...alertActionAllow],
+  },
+  className: { type: "text" as const, label: "Class name" },
+  id: { type: "text" as const, label: "ID" },
+};
+
 export const alertPuckConfig = {
   Alert: {
     label: "Alert",
-    fields: {
-      title: { type: "text", label: "Title" },
-      description: { type: "textarea", label: "Description" },
-      showTitle: {
-        type: "select",
-        label: "Show title",
-        options: [
-          { label: "Yes", value: true },
-          { label: "No", value: false },
-        ],
-      },
-      variant: {
-        type: "select",
-        label: "Variant",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Destructive", value: "destructive" },
-        ],
-      },
-      showIcon: {
-        type: "radio",
-        label: "Show icon",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      icon: {
-        type: "select",
-        label: "Icon",
-        options: alertIconOptions,
-      },
-      showAction: {
-        type: "select",
-        label: "Show action",
-        options: [
-          { label: "No", value: false },
-          { label: "Yes", value: true },
-        ],
-      },
-      alertAction: {
-        type: "slot",
-        label: "Alert action (e.g. button)",
-        allow: [...alertActionAllow],
-      },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+    resolveFields: (data: { props: AlertProps }) => {
+      const showIcon = data.props.showIcon === true;
+      const showAction = data.props.showAction === true;
+      return {
+        title: baseFields.title,
+        description: baseFields.description,
+        showTitle: baseFields.showTitle,
+        variant: baseFields.variant,
+        showIcon: baseFields.showIcon,
+        ...(showIcon ? { icon: baseFields.icon } : {}),
+        showAction: baseFields.showAction,
+        ...(showAction ? { alertAction: baseFields.alertAction } : {}),
+        className: baseFields.className,
+        id: baseFields.id,
+      };
     },
+    fields: baseFields,
     defaultProps,
     render: ({
       alertAction,
@@ -90,7 +110,7 @@ export const alertPuckConfig = {
       icon = "",
       className,
       id,
-    }: Components["Alert"]) => {
+    }: AlertProps) => {
       const ActionContent = alertAction as unknown as
         | ComponentType<AreaContentProps>
         | undefined;

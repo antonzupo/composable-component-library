@@ -13,11 +13,11 @@ export const avatarPuckConfig = {
   Avatar: {
     label: "Avatar",
     fields: {
-      src: { type: "text", label: "Image URL" },
-      alt: { type: "text", label: "Alt text" },
-      fallback: { type: "text", label: "Fallback text" },
+      src: { type: "text" as const, label: "Image URL" },
+      alt: { type: "text" as const, label: "Alt text" },
+      fallback: { type: "text" as const, label: "Fallback text" },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Small", value: "sm" },
@@ -26,7 +26,7 @@ export const avatarPuckConfig = {
         ],
       },
       rounded: {
-        type: "select",
+        type: "select" as const,
         label: "Rounded",
         options: [
           { label: "Full", value: "full" },
@@ -37,21 +37,21 @@ export const avatarPuckConfig = {
         ],
       },
       showBadge: {
-        type: "radio",
+        type: "radio" as const,
         label: "Show badge",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      badgeContent: { type: "text", label: "Badge content (leave empty for dot)" },
+      badgeContent: { type: "text" as const, label: "Badge content (leave empty for dot)" },
       badgeIcon: {
-        type: "select",
+        type: "select" as const,
         label: "Badge icon",
         options: badgeIconOptions,
       },
       badgePosition: {
-        type: "select",
+        type: "select" as const,
         label: "Badge position",
         options: [
           { label: "Top right", value: "top-right" },
@@ -61,7 +61,7 @@ export const avatarPuckConfig = {
         ],
       },
       badgeVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Badge variant",
         options: [
           { label: "Default (green)", value: "default" },
@@ -71,15 +71,12 @@ export const avatarPuckConfig = {
           { label: "Ghost", value: "ghost" },
         ],
       },
-      badgeColorClass: {
-        type: "text",
-        label: "Badge color (Tailwind class, overrides variant)",
-      },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      badgeColorClass: { type: "text" as const, label: "Badge color (Tailwind class, overrides variant)" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
-      src: "",
+      src: "https://github.com/shadcn.png",
       alt: "",
       fallback: "?",
       size: "md" as const,
@@ -92,7 +89,7 @@ export const avatarPuckConfig = {
       badgeColorClass: "",
       className: "",
       id: "",
-    },
+    } satisfies AvatarProps,
     render: (props: AvatarProps) => <Avatar {...props} />,
   },
 };

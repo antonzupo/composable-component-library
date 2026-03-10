@@ -2,13 +2,15 @@ import type { ComponentType } from "react";
 import { cn } from "@/lib/utils";
 import type { AreaContentProps, Components } from "@/puck/types";
 
+type FlexProps = Components["Flex"];
+
 export const flexPuckConfig = {
   Flex: {
     label: "Flex",
     fields: {
-      content: { type: "slot", label: "Content" },
+      content: { type: "slot" as const, label: "Content" },
       direction: {
-        type: "select",
+        type: "select" as const,
         label: "Direction",
         options: [
           { label: "Row", value: "row" },
@@ -18,7 +20,7 @@ export const flexPuckConfig = {
         ],
       },
       justify: {
-        type: "select",
+        type: "select" as const,
         label: "Justify",
         options: [
           { label: "Start", value: "start" },
@@ -29,7 +31,7 @@ export const flexPuckConfig = {
         ],
       },
       align: {
-        type: "select",
+        type: "select" as const,
         label: "Align",
         options: [
           { label: "Start", value: "start" },
@@ -39,7 +41,7 @@ export const flexPuckConfig = {
         ],
       },
       gap: {
-        type: "select",
+        type: "select" as const,
         label: "Gap",
         options: [
           { label: "None", value: "none" },
@@ -49,15 +51,15 @@ export const flexPuckConfig = {
         ],
       },
       wrap: {
-        type: "select",
+        type: "radio" as const,
         label: "Wrap",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       content: [],
@@ -68,8 +70,8 @@ export const flexPuckConfig = {
       wrap: false,
       className: "",
       id: "",
-    },
-    render: ({ content, direction, justify, align, gap, wrap, className, id }: Components["Flex"]) => {
+    } satisfies FlexProps,
+    render: ({ content, direction, justify, align, gap, wrap, className, id }: FlexProps) => {
       const Content = content as unknown as ComponentType<AreaContentProps> | undefined;
       const justifyClass =
         justify === "start" ? "justify-start" : justify === "center" ? "justify-center" : justify === "end" ? "justify-end" : justify === "between" ? "justify-between" : "justify-around";

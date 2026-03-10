@@ -10,19 +10,19 @@ export const paginationPuckConfig = {
       pageCount: { type: "number", label: "Page count", min: 1 },
       currentPage: { type: "number", label: "Current page", min: 1 },
       showPreviousNext: {
-        type: "select",
+        type: "radio" as const,
         label: "Show previous/next",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showFirstLast: {
-        type: "select",
+        type: "radio" as const,
         label: "Show first/last when not in range",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       siblingCount: { type: "number", label: "Sibling count (each side)", min: 0 },

@@ -49,7 +49,7 @@ export const emptyPuckConfig = {
       title: { type: "text", label: "Title" },
       description: { type: "textarea", label: "Description" },
       mediaVariant: {
-        type: "select",
+        type: "select" as const,
         label: "Empty media",
         options: [
           { label: "Default", value: "default" },
@@ -58,16 +58,16 @@ export const emptyPuckConfig = {
         ],
       },
       icon: {
-        type: "select",
+        type: "select" as const,
         label: "Icon (when media is Icon)",
         options: lucideIconOptions,
       },
       avatarImageUrl: {
-        type: "text",
+        type: "text" as const,
         label: "Avatar image URL (when media is Avatar)",
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Content (e.g. action button below text)",
         allow: [...slotAllow],
       },

@@ -8,7 +8,7 @@ export const toggleGroupPuckConfig = {
     label: "Toggle group",
     fields: {
       type: {
-        type: "select",
+        type: "select" as const,
         label: "Type",
         options: [
           { label: "Single", value: "single" },
@@ -16,11 +16,11 @@ export const toggleGroupPuckConfig = {
         ],
       },
       defaultValue: {
-        type: "text",
+        type: "text" as const,
         label: "Default value (single: one value; multiple: comma-separated)",
       },
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Items",
         getItemSummary: (item: { value: string; label: string }) =>
           item?.label || item?.value || "Item",
@@ -31,7 +31,7 @@ export const toggleGroupPuckConfig = {
         defaultItemProps: () => ({ value: "", label: "" }),
       },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Default", value: "default" },
@@ -39,7 +39,7 @@ export const toggleGroupPuckConfig = {
         ],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Default", value: "default" },
@@ -48,7 +48,7 @@ export const toggleGroupPuckConfig = {
         ],
       },
       spacing: {
-        type: "select",
+        type: "select" as const,
         label: "Spacing",
         options: [
           { label: "None", value: "none" },
@@ -58,7 +58,7 @@ export const toggleGroupPuckConfig = {
         ],
       },
       orientation: {
-        type: "select",
+        type: "select" as const,
         label: "Orientation",
         options: [
           { label: "Horizontal", value: "horizontal" },
@@ -66,7 +66,7 @@ export const toggleGroupPuckConfig = {
         ],
       },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },

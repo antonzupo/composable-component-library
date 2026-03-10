@@ -8,7 +8,7 @@ export const spinnerPuckConfig = {
     label: "Spinner",
     fields: {
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Size",
         options: [
           { label: "Small", value: "sm" },

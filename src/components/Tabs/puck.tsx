@@ -112,7 +112,7 @@ export const tabsPuckConfig = {
     label: "Tabs",
     fields: {
       items: {
-        type: "array",
+        type: "array" as const,
         label: "Tabs",
         getItemSummary: (item: { value: string; label: string; content: unknown }) =>
           item?.label || item?.value || "Tab",
@@ -120,7 +120,7 @@ export const tabsPuckConfig = {
           value: { type: "text", label: "Value" },
           label: { type: "text", label: "Label" },
           content: {
-            type: "slot",
+            type: "slot" as const,
             label: "Content",
             allow: [...tabContentAllow],
           },
@@ -129,7 +129,7 @@ export const tabsPuckConfig = {
       },
       defaultValue: { type: "text", label: "Default value (tab value to show first)" },
       orientation: {
-        type: "select",
+        type: "select" as const,
         label: "Orientation",
         options: [
           { label: "Horizontal", value: "horizontal" },
@@ -137,7 +137,7 @@ export const tabsPuckConfig = {
         ],
       },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: [
           { label: "Default", value: "default" },

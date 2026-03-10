@@ -7,7 +7,7 @@ export const fieldSeparatorPuckConfig = {
     fields: {
       label: { type: "text", label: "Label (optional)" },
       verticalSpace: {
-        type: "select",
+        type: "select" as const,
         label: "Up / down space",
         options: [
           { label: "None", value: "none" },

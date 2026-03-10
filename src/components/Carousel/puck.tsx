@@ -84,12 +84,12 @@ export const carouselPuckConfig = {
     label: "Carousel",
     fields: {
       slides: {
-        type: "array",
+        type: "array" as const,
         label: "Slides",
         getItemSummary: (_item: { slide: unknown }, i: number) => `Slide ${i + 1}`,
         arrayFields: {
           slide: {
-            type: "slot",
+            type: "slot" as const,
             label: "Slide content",
             allow: [...slideAllow],
           },
@@ -97,7 +97,7 @@ export const carouselPuckConfig = {
         defaultItemProps: () => ({ slide: [] }),
       },
       orientation: {
-        type: "select",
+        type: "select" as const,
         label: "Orientation",
         options: [
           { label: "Horizontal", value: "horizontal" },
@@ -105,7 +105,7 @@ export const carouselPuckConfig = {
         ],
       },
       size: {
-        type: "select",
+        type: "select" as const,
         label: "Slides per view",
         options: [
           { label: "1", value: "1" },
@@ -114,7 +114,7 @@ export const carouselPuckConfig = {
         ],
       },
       spacing: {
-        type: "select",
+        type: "select" as const,
         label: "Spacing",
         options: [
           { label: "None", value: "none" },
@@ -124,15 +124,15 @@ export const carouselPuckConfig = {
         ],
       },
       showArrows: {
-        type: "select",
+        type: "select" as const,
         label: "Show arrows",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showDots: {
-        type: "select",
+        type: "select" as const,
         label: "Show dots",
         options: [
           { label: "No", value: false },
@@ -140,7 +140,7 @@ export const carouselPuckConfig = {
         ],
       },
       autoPlay: {
-        type: "select",
+        type: "select" as const,
         label: "Autoplay",
         options: [
           { label: "No", value: false },
@@ -148,14 +148,14 @@ export const carouselPuckConfig = {
         ],
       },
       interval: {
-        type: "number",
+        type: "number" as const,
         label: "Autoplay interval (ms)",
         min: 1000,
         max: 30000,
         step: 1000,
       },
       rounded: {
-        type: "select",
+        type: "select" as const,
         label: "Rounded",
         options: [
           { label: "None", value: "none" },

@@ -8,44 +8,29 @@ export const progressPuckConfig = {
     label: "Progress",
     fields: {
       value: {
-        type: "number",
+        type: "number" as const,
         label: "Value",
         min: 0,
         max: 100,
         step: 1,
-        description: "Current progress (0 to max). Ignored when indeterminate.",
       },
       max: {
-        type: "number",
+        type: "number" as const,
         label: "Max",
         min: 1,
         step: 1,
-        description: "Maximum value (default 100).",
       },
       indeterminate: {
-        type: "select",
+        type: "radio" as const,
         label: "Indeterminate",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
-        description: "Show indeterminate (animated) state; value is ignored when on.",
       },
-      valueLabel: {
-        type: "text",
-        label: "Value label (accessibility)",
-        description: "Custom label for screen readers. Leave empty for default percentage.",
-      },
-      className: {
-        type: "text",
-        label: "Class name",
-        description: "Additional CSS classes for the progress root.",
-      },
-      id: {
-        type: "text",
-        label: "ID",
-        description: "HTML id attribute.",
-      },
+      valueLabel: { type: "text" as const, label: "Value label (accessibility)" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       value: 33,

@@ -48,16 +48,16 @@ export const drawerPuckConfig = {
     label: "Drawer",
     fields: {
       triggerLabel: {
-        type: "text",
+        type: "text" as const,
         label: "Trigger button label",
       },
       trigger: {
-        type: "slot",
+        type: "slot" as const,
         label: "Trigger (e.g. button that opens the drawer)",
         allow: [...slotAllow],
       },
       content: {
-        type: "slot",
+        type: "slot" as const,
         label: "Drawer content",
         allow: [...slotAllow],
       },
@@ -69,7 +69,7 @@ export const drawerPuckConfig = {
       className: { type: "text", label: "Trigger wrapper class name" },
       id: { type: "text", label: "ID" },
       defaultOpen: {
-        type: "select",
+        type: "radio" as const,
         label: "Default open (uncontrolled)",
         options: [
           { label: "No", value: false },
@@ -77,7 +77,7 @@ export const drawerPuckConfig = {
         ],
       },
       direction: {
-        type: "select",
+        type: "select" as const,
         label: "Direction",
         options: [
           { label: "Bottom", value: "bottom" },
@@ -87,45 +87,45 @@ export const drawerPuckConfig = {
         ],
       },
       shouldScaleBackground: {
-        type: "select",
+        type: "radio" as const,
         label: "Scale background",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       modal: {
-        type: "select",
+        type: "radio" as const,
         label: "Modal",
         options: [
-          { label: "Yes", value: true },
           { label: "No (interact outside)", value: false },
+          { label: "Yes", value: true },
         ],
       },
       dismissible: {
-        type: "select",
+        type: "radio" as const,
         label: "Dismissible (drag / click outside / ESC)",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       showHandle: {
-        type: "select",
+        type: "radio" as const,
         label: "Show drag handle",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
       title: { type: "text", label: "Title" },
       description: { type: "text", label: "Description" },
       showCloseButton: {
-        type: "select",
+        type: "radio" as const,
         label: "Show close button",
         options: [
-          { label: "Yes", value: true },
           { label: "No", value: false },
+          { label: "Yes", value: true },
         ],
       },
     },

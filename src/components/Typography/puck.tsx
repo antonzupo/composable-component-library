@@ -23,11 +23,11 @@ export const typographyPuckConfig = {
     label: "Typography",
     fields: {
       content: {
-        type: "textarea",
+        type: "textarea" as const,
         label: "Content",
       },
       variant: {
-        type: "select",
+        type: "select" as const,
         label: "Variant",
         options: typographyVariantOptions,
       },

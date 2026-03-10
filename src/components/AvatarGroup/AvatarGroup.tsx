@@ -22,11 +22,16 @@ export function AvatarGroup({
   showCount = false,
   count = "",
   countIcon = "",
+  countDisplay = "count",
   countSize = "md",
   className,
   id,
   children,
 }: AvatarGroupProps) {
+  const display = countDisplay === "icon" || countDisplay === "count" ? countDisplay : "count";
+  const showIcon = display === "icon";
+  const showCountValue = display === "count";
+
   return (
     <AvatarGroupRoot
       className={cn(className)}
@@ -37,15 +42,15 @@ export function AvatarGroup({
         <AvatarGroupCountRoot
           className={cn(countSizeClass[countSize])}
         >
-          {countIcon ? (
-            <DynamicIcon    
+          {showIcon && countIcon ? (
+            <DynamicIcon
               name={countIcon as React.ComponentProps<typeof DynamicIcon>["name"]}
               size={COUNT_ICON_SIZE}
               className="shrink-0 [&_svg]:size-3"
               aria-hidden
             />
           ) : null}
-          {count ? <span>{count}</span> : null}
+          {showCountValue && count ? <span>{count}</span> : null}
         </AvatarGroupCountRoot>
       )}
     </AvatarGroupRoot>

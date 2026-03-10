@@ -5,11 +5,13 @@ import {
   type RadioGroupContentSet,
 } from "@/data/radioGroup";
 
+type RadioGroupProps = Components["RadioGroup"];
+
 const optionArrayFields = {
   value: { type: "text" as const, label: "Value" },
   label: { type: "text" as const, label: "Label" },
   disabled: {
-    type: "select" as const,
+    type: "radio" as const,
     label: "Disabled",
     options: [
       { label: "No", value: false },
@@ -23,7 +25,7 @@ export const radioGroupPuckConfig = {
     label: "Radio Group",
     fields: {
       dataSourceMode: {
-        type: "select",
+        type: "radio" as const,
         label: "Data source",
         options: [
           { label: "Manual", value: "manual" },
@@ -31,7 +33,7 @@ export const radioGroupPuckConfig = {
         ],
       },
       dataSource: {
-        type: "external",
+        type: "external" as const,
         label: "Options from API / CMS",
         placeholder: "Select a radio group set",
         getItemSummary: (item: RadioGroupContentSet) =>
@@ -41,17 +43,17 @@ export const radioGroupPuckConfig = {
         },
       },
       options: {
-        type: "array",
+        type: "array" as const,
         label: "Options (manual)",
         getItemSummary: (item: { value?: string; label?: string }) =>
           item?.label ?? item?.value ?? "Option",
         arrayFields: optionArrayFields,
         defaultItemProps: () => ({ value: "", label: "Option", disabled: false }),
       },
-      defaultValue: { type: "text", label: "Default value" },
-      name: { type: "text", label: "Name (form)" },
+      defaultValue: { type: "text" as const, label: "Default value" },
+      name: { type: "text" as const, label: "Name (form)" },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
@@ -59,7 +61,7 @@ export const radioGroupPuckConfig = {
         ],
       },
       orientation: {
-        type: "select",
+        type: "radio" as const,
         label: "Orientation",
         options: [
           { label: "Vertical", value: "vertical" },
@@ -67,15 +69,15 @@ export const radioGroupPuckConfig = {
         ],
       },
       required: {
-        type: "select",
+        type: "radio" as const,
         label: "Required",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       dataSourceMode: "manual" as const,
@@ -92,8 +94,8 @@ export const radioGroupPuckConfig = {
       required: false,
       className: "",
       id: "",
-    },
-    resolveData: async ({ props }: { props: Components["RadioGroup"] }) => {
+    } satisfies RadioGroupProps,
+    resolveData: async ({ props }: { props: RadioGroupProps }) => {
       if (props.dataSourceMode !== "api" || !props.dataSource?.options) {
         return { props };
       }
@@ -104,7 +106,7 @@ export const radioGroupPuckConfig = {
         },
       };
     },
-    render: (props: Components["RadioGroup"]) => {
+    render: (props: RadioGroupProps) => {
       const options =
         props.dataSourceMode === "api" && props.dataSource?.options?.length
           ? props.dataSource.options

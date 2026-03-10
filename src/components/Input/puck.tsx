@@ -2,12 +2,14 @@ import type React from "react";
 import { Input } from "@/components/Input/Input";
 import type { Components } from "@/puck/types";
 
+type InputProps = Components["Input"];
+
 export const inputPuckConfig = {
   Input: {
     label: "Input",
     fields: {
       type: {
-        type: "select",
+        type: "select" as const,
         label: "Type",
         options: [
           { label: "Text", value: "text" },
@@ -19,18 +21,18 @@ export const inputPuckConfig = {
           { label: "URL", value: "url" },
         ],
       },
-      placeholder: { type: "text", label: "Placeholder" },
-      defaultValue: { type: "text", label: "Default value" },
+      placeholder: { type: "text" as const, label: "Placeholder" },
+      defaultValue: { type: "text" as const, label: "Default value" },
       disabled: {
-        type: "select",
+        type: "radio" as const,
         label: "Disabled",
         options: [
           { label: "No", value: false },
           { label: "Yes", value: true },
         ],
       },
-      className: { type: "text", label: "Class name" },
-      id: { type: "text", label: "ID" },
+      className: { type: "text" as const, label: "Class name" },
+      id: { type: "text" as const, label: "ID" },
     },
     defaultProps: {
       type: "text",
@@ -39,7 +41,7 @@ export const inputPuckConfig = {
       disabled: false,
       className: "",
       id: "",
-    },
+    } satisfies InputProps,
     render: ({
       type,
       placeholder,
@@ -47,7 +49,7 @@ export const inputPuckConfig = {
       disabled,
       className,
       id,
-    }: Components["Input"]) => (
+    }: InputProps) => (
       <Input
         type={type as React.HTMLInputTypeAttribute}
         placeholder={placeholder || undefined}
