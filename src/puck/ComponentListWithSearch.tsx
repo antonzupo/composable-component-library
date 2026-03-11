@@ -1,5 +1,3 @@
-"use client";
-
 import { Drawer, usePuck } from "@puckeditor/core";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
@@ -9,10 +7,6 @@ import { cn } from "@/lib/utils";
 type CategoryItem = { name: string; label: string };
 type CategoryGroup = { key: string; title: string; items: CategoryItem[] };
 
-/**
- * Component list drawer with search input. Used as the Puck `drawer` override.
- * Renders a search field and components grouped by category (filtered when searching).
- */
 export function ComponentListWithSearch() {
   const { config } = usePuck();
   const [search, setSearch] = useState("");

@@ -87,6 +87,7 @@ const COMPONENT_CATEGORIES: Array<{
       "FieldSeparator",
       "Flex",
       "Grid",
+      "GridItem",
       "Resizable",
       "ScrollArea",
       "Space",

@@ -198,21 +198,21 @@ export const drawerPuckConfig = {
       return (
         <Drawer
           puck={isEditMode ? { isEditing: true } : undefined}
-          contentClassName={contentClassName || undefined}
-          overlayClassName={overlayClassName || undefined}
-          headerClassName={headerClassName || undefined}
-          footerClassName={footerClassName || undefined}
-          className={className || undefined}
-          id={id || undefined}
+          contentClassName={contentClassName}
+          overlayClassName={overlayClassName}
+          headerClassName={headerClassName}
+          footerClassName={footerClassName}
+          className={className}
+          id={id}
           defaultOpen={defaultOpen}
           direction={direction}
           shouldScaleBackground={shouldScaleBackground}
           modal={modal}
           dismissible={dismissible}
           showHandle={showHandle}
-          title={title || undefined}
-          description={description || undefined}
-          contentLabel={contentLabel || undefined}
+          title={title}
+          description={description}
+          contentLabel={contentLabel}
           showCloseButton={showCloseButton}
         >
           {triggerNode}

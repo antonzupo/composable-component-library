@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { DirectionProvider as UIDirectionProvider } from "@/components/ui/direction";
 import { cn } from "@/lib/utils";

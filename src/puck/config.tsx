@@ -33,6 +33,7 @@ import { fieldSeparatorPuckConfig } from "@/components/FieldSeparator/puck";
 import { fieldsetPuckConfig } from "@/components/Fieldset/puck";
 import { flexPuckConfig } from "@/components/Flex/puck";
 import { gridPuckConfig } from "@/components/Grid/puck";
+import { gridItemPuckConfig } from "@/components/GridItem/puck";
 import { heroCardPuckConfig } from "@/components/HeroCard/puck";
 import { hoverCardPuckConfig } from "@/components/HoverCard/puck";
 import { imagePuckConfig } from "@/components/Image/puck";
@@ -193,6 +194,7 @@ export const config: Config<Components> = {
     ...sectionPuckConfig,
     ...heroCardPuckConfig,
     ...gridPuckConfig,
+    ...gridItemPuckConfig,
     ...flexPuckConfig,
     ...spacePuckConfig,
   } as Config<Components>["components"],

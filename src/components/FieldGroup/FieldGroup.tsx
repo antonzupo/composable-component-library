@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { FieldGroup as UIFieldGroup } from "@/components/ui/field";
 import { cn } from "@/lib/utils";

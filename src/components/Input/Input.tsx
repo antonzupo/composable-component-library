@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Input as UIInput } from "@/components/ui/input";
 import { cn } from "@/lib/utils";

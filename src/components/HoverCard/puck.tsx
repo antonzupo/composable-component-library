@@ -116,9 +116,9 @@ export const hoverCardPuckConfig = {
       return (
         <HoverCard
           puck={isEditMode ? { isEditing: true } : undefined}
-          contentClassName={contentClassName || undefined}
-          className={className || undefined}
-          id={id || undefined}
+          contentClassName={contentClassName}
+          className={className}
+          id={id}
           openDelay={openDelay}
           closeDelay={closeDelay}
         >

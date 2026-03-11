@@ -1,6 +1,3 @@
-"use client";
-
-import * as React from "react";
 import { Textarea as UITextarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import type { Components } from "@/puck/types";

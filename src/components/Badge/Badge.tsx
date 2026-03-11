@@ -7,7 +7,10 @@ import { cn } from "@/lib/utils";
 export type { BadgeProps } from "@/components/ui/badge";
 export { badgeVariants } from "@/components/ui/badge";
 
-export interface ComposableBadgeProps extends React.ComponentProps<typeof BaseBadge> {
+type UIBadgeVariant = NonNullable<React.ComponentProps<typeof BaseBadge>["variant"]>;
+
+export interface ComposableBadgeProps extends Omit<React.ComponentProps<typeof BaseBadge>, "variant"> {
+  variant?: UIBadgeVariant | "ghost";
   showIcon?: boolean;
   icon?: string;
   iconPosition?: "left" | "right";
@@ -20,6 +23,8 @@ export interface ComposableBadgeProps extends React.ComponentProps<typeof BaseBa
 
 const BADGE_ICON_SIZE = 12;
 
+const ghostClassName = "border-transparent bg-transparent hover:bg-accent/50 hover:text-accent-foreground";
+
 function Badge({
   showIcon,
   icon,
@@ -31,8 +36,16 @@ function Badge({
   openInNewTab,
   children,
   className,
+  variant,
   ...props
 }: ComposableBadgeProps) {
+  const isGhost = variant === "ghost";
+  const uiVariant: UIBadgeVariant =
+    variant === "ghost"
+      ? "outline"
+      : variant === "default" || variant === "secondary" || variant === "destructive" || variant === "outline"
+        ? variant
+        : "default";
   const showIconNode = Boolean(showIcon && icon);
   const iconEl = showIconNode ? (
     <DynamicIcon
@@ -62,14 +75,15 @@ function Badge({
   if (useAsLink && href) {
     return (
       <BaseBadge
-        asChild
-        className={cn(hasLeftOrRight && "gap-1", className)}
+        variant={uiVariant}
+        className={cn(hasLeftOrRight && "gap-1", isGhost && ghostClassName, className)}
         {...props}
       >
         <a
           href={href}
           target={openInNewTab ? "_blank" : undefined}
           rel={openInNewTab ? "noopener noreferrer" : undefined}
+          className="inline-flex items-center gap-1 outline-none"
         >
           {content}
         </a>
@@ -78,7 +92,11 @@ function Badge({
   }
 
   return (
-    <BaseBadge className={cn(hasLeftOrRight && "gap-1", className)} {...props}>
+    <BaseBadge
+      variant={uiVariant}
+      className={cn(hasLeftOrRight && "gap-1", isGhost && ghostClassName, className)}
+      {...props}
+    >
       {content}
     </BaseBadge>
   );

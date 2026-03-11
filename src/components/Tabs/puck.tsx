@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { Tabs as TabsRoot, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { tabsListVariantClasses, tabsTriggerVariantClasses } from "@/components/Tabs/Tabs";
 import { useIsPuckEditor } from "@/puck/editorContext";
 import { cn } from "@/lib/utils";
 import type { AreaContentProps, Components } from "@/puck/types";
@@ -63,13 +64,18 @@ function TabsPuckRender({
       id={id || undefined}
     >
       <TabsList
-        variant={variant}
         className={cn(
+          "inline-flex h-9 items-center justify-center text-muted-foreground",
+          variant === "line" ? tabsListVariantClasses.line : tabsListVariantClasses.default,
           orientation === "vertical" && "flex h-auto flex-col items-stretch justify-center"
         )}
       >
         {items.map((tab) => (
-          <TabsTrigger key={tab.value} value={tab.value} variant={variant}>
+          <TabsTrigger
+            key={tab.value}
+            value={tab.value}
+            className={variant === "line" ? tabsTriggerVariantClasses.line : tabsTriggerVariantClasses.default}
+          >
             {tab.label}
           </TabsTrigger>
         ))}
@@ -83,7 +89,7 @@ function TabsPuckRender({
           <TabsContent
             key={tab.value}
             value={tab.value}
-            forceMount={isEditor}
+            {...(isEditor && { forceMount: true as const })}
             className={isEditor ? editorOnlyContentClassName : undefined}
           >
             {isEditor && (

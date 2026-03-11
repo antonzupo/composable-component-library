@@ -7,6 +7,8 @@ export type AreaContentProps = {
   style?: React.CSSProperties;
   allow?: string[];
   disallow?: string[];
+  /** Puck slot: collision axis for drag-and-drop (grid defaults to "dynamic") */
+  collisionAxis?: "x" | "y" | "dynamic";
 };
 
 export type Components = {
@@ -104,7 +106,15 @@ export type Components = {
   Grid: {
     content: unknown[];
     columns: 2 | 3 | 4 | 6 | 12;
+    rows?: number;
     gap: "none" | "sm" | "md" | "lg";
+    className: string;
+    id: string;
+  };
+  GridItem: {
+    content: unknown[];
+    spanColumns: number;
+    spanRows: number;
     className: string;
     id: string;
   };
@@ -152,9 +162,9 @@ export type Components = {
     id: string;
   };
   Dialog: {
-    trigger: unknown[];
-    triggerLabel: string;
-    content: unknown[];
+    trigger?: unknown[];
+    triggerLabel?: string;
+    content?: unknown[];
     contentLabel: string;
     contentClassName: string;
     overlayClassName: string;
@@ -376,9 +386,9 @@ export type Components = {
     id: string;
   };
   Drawer: {
-    trigger: unknown[];
-    triggerLabel: string;
-    content: unknown[];
+    trigger?: unknown[];
+    triggerLabel?: string;
+    content?: unknown[];
     contentLabel: string;
     contentClassName: string;
     overlayClassName: string;
@@ -488,9 +498,9 @@ export type Components = {
     id: string;
   };
   HoverCard: {
-    trigger: unknown[];
-    triggerLabel: string;
-    content: unknown[];
+    trigger?: unknown[];
+    triggerLabel?: string;
+    content?: unknown[];
     contentClassName: string;
     openDelay: number;
     closeDelay: number;

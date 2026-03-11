@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { Toggle as UIToggle } from "@/components/ui/toggle";

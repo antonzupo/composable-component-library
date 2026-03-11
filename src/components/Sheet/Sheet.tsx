@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import {
   Sheet as UISheet,
@@ -26,7 +24,7 @@ export function Sheet({
   open,
   onOpenChange,
   contentClassName,
-  overlayClassName,
+  overlayClassName: _overlayClassName,
   className,
   id,
   defaultOpen,
@@ -34,7 +32,7 @@ export function Sheet({
   title,
   description,
   contentLabel,
-  showCloseButton = true,
+  showCloseButton: _showCloseButton = true,
   puck,
   children,
 }: SheetProps) {
@@ -118,8 +116,6 @@ export function Sheet({
       <SheetContent
         side={side}
         className={contentClassName || undefined}
-        overlayClassName={overlayClassName || undefined}
-        showCloseButton={showCloseButton}
         aria-label={contentLabel || undefined}
       >
         {(hasTitle || hasDescription) && (

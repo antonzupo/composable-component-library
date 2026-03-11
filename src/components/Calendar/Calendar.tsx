@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import type { DateRange } from "react-day-picker";
 import { Calendar as CalendarRoot } from "@/components/ui/calendar";

@@ -150,15 +150,15 @@ export const dialogPuckConfig = {
       return (
         <Dialog
           puck={isEditMode ? { isEditing: true } : undefined}
-          contentClassName={contentClassName || undefined}
-          overlayClassName={overlayClassName || undefined}
-          className={className || undefined}
-          id={id || undefined}
+          contentClassName={contentClassName}
+          overlayClassName={overlayClassName}
+          className={className}
+          id={id}
           defaultOpen={defaultOpen}
           modal={modal}
-          title={title || undefined}
-          description={description || undefined}
-          contentLabel={contentLabel || undefined}
+          title={title}
+          description={description}
+          contentLabel={contentLabel}
           showCloseButton={showCloseButton}
         >
           {triggerNode}

@@ -1,5 +1,3 @@
-"use client";
-
 import { ToggleGroup as UIToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
 import type { Components } from "@/puck/types";
@@ -45,30 +43,45 @@ export function ToggleGroup({
   const parsedDefault = parseDefaultValue(safeType, defaultValue ?? "");
   const spacingNum = spacing in spacingToNumber ? spacingToNumber[spacing as keyof typeof spacingToNumber] : 1;
 
+  const commonProps = {
+    id: id || undefined,
+    variant: variant ?? "default",
+    size: size ?? "default",
+    spacing: spacingNum,
+    orientation: orientation ?? "horizontal",
+    disabled: disabled ?? false,
+    className: cn(className),
+  };
+
+  const childrenEl = items.map((item) => (
+    <ToggleGroupItem
+      key={item.value}
+      value={item.value}
+      aria-label={item.label}
+    >
+      {item.label}
+    </ToggleGroupItem>
+  ));
+
+  if (safeType === "multiple") {
+    return (
+      <UIToggleGroup
+        {...commonProps}
+        type="multiple"
+        {...(parsedDefault !== undefined && { defaultValue: parsedDefault as string[] })}
+      >
+        {childrenEl}
+      </UIToggleGroup>
+    );
+  }
+
   return (
     <UIToggleGroup
-      id={id || undefined}
-      type={safeType}
-      {...(parsedDefault !== undefined &&
-        (safeType === "multiple"
-          ? { defaultValue: parsedDefault as string[] }
-          : { defaultValue: parsedDefault as string }))}
-      variant={variant ?? "default"}
-      size={size ?? "default"}
-      spacing={spacingNum}
-      orientation={orientation ?? "horizontal"}
-      disabled={disabled ?? false}
-      className={cn(className)}
+      {...commonProps}
+      type="single"
+      {...(parsedDefault !== undefined && { defaultValue: parsedDefault as string })}
     >
-      {items.map((item) => (
-        <ToggleGroupItem
-          key={item.value}
-          value={item.value}
-          aria-label={item.label}
-        >
-          {item.label}
-        </ToggleGroupItem>
-      ))}
+      {childrenEl}
     </UIToggleGroup>
   );
 }

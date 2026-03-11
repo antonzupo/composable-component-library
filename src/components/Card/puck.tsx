@@ -19,6 +19,13 @@ const imageSectionSizeClasses: Record<"sm" | "md" | "lg", string> = {
   lg: "h-44 min-h-36 sm:h-56 md:h-64 lg:h-80",
 };
 
+/** Card root border radius by size (matches image section rounding) */
+const cardSizeClasses: Record<"sm" | "default" | "lg", string> = {
+  sm: "rounded-md",
+  default: "rounded-lg",
+  lg: "rounded-xl",
+};
+
 const slotAllow = [
   "Typography",
   "Badge",
@@ -195,7 +202,10 @@ export const cardPuckConfig = {
       const imageSectionHeightClass = imageSectionSizeClasses[imageSectionSize];
       const showHeaderRow = showHeader || showCardAction;
       return (
-        <Card size={size} className={className || undefined} id={id || undefined}>
+        <Card
+          className={cn(cardSizeClasses[size], className)}
+          id={id}
+        >
           {showImageSection && (
             <div
               className={cn(
