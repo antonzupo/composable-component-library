@@ -27,7 +27,6 @@ const slotAllow = [
   "ContextMenu",
   "DataTable",
   "DatePicker",
-  "Direction",
   "Dialog",
   "Drawer",
   "DropdownMenu",

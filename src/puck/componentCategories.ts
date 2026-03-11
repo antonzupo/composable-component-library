@@ -79,7 +79,6 @@ const COMPONENT_CATEGORIES: Array<{
   {
     category: "layout",
     components: [
-      "Direction",
       "Field",
       "Fieldset",
       "FieldGroup",

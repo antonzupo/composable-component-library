@@ -5,11 +5,18 @@ import { config, getPreviewLayoutClassName, type RootLayoutProps } from "@/puck/
 import { ComponentListWithSearch } from "@/puck/ComponentListWithSearch";
 import { IsPuckEditorContext } from "@/puck/editorContext";
 import { sampleData } from "@/puck/sampleData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [data, setData] = useState(sampleData);
   const [isEdit, setIsEdit] = useState(true);
+
+  const rootProps = (data.root?.props ?? {}) as RootLayoutProps;
+  const pageName = rootProps.pageName;
+  useEffect(() => {
+    const name = pageName?.trim();
+    document.title = name ? `${name} | Composable` : "Composable";
+  }, [pageName]);
 
   const editToggleButton = (
     <button
@@ -32,6 +39,7 @@ function App() {
               setData(d);
               console.log(JSON.stringify(d));
             }}
+            headerTitle={pageName?.trim() || undefined}
             viewports={[
               { width: 360, height: "auto", icon: "Smartphone", label: "Small" },
               { width: 768, height: "auto", icon: "Tablet", label: "Medium" },
@@ -54,7 +62,7 @@ function App() {
           <div className="border-b border-border bg-muted/30 px-4 py-2 flex items-center justify-end gap-2">
             {editToggleButton}
           </div>
-          <div className={getPreviewLayoutClassName((data.root?.props ?? {}) as RootLayoutProps)}>
+          <div className={getPreviewLayoutClassName(rootProps)}>
             <Render config={config as Config} data={data} />
             <RadioGroupDataFlowDemo />
           </div>

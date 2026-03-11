@@ -178,7 +178,7 @@ export const buttonPuckConfig = {
       const textContent = (
         <>
           {displayLabel}
-          {Content ? <Content minEmptyHeight={40} /> : null}
+          {Content ? <Content minEmptyHeight={0} /> : null}
         </>
       );
       const iconEl = showIcon ? (

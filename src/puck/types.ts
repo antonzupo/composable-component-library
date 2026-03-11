@@ -379,12 +379,6 @@ export type Components = {
     className: string;
     id: string;
   };
-  Direction: {
-    dir: "ltr" | "rtl";
-    content: unknown[];
-    className: string;
-    id: string;
-  };
   Drawer: {
     trigger?: unknown[];
     triggerLabel?: string;

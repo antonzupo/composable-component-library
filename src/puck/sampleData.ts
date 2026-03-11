@@ -11,6 +11,7 @@ function localDateString(d: Date): string {
 export const sampleData: Data = {
   root: {
     props: {
+      pageName: "Home",
       maxWidth: "6xl",
       paddingX: "md",
     },
