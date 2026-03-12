@@ -78,13 +78,11 @@ export const COMPONENT_LIST: Array<{ name: keyof Components; category: PuckCateg
   { name: "Space", category: "layout" },
 ];
 
-/** Component names not allowed in generic content slots (e.g. structural-only). */
 const EXCLUDE_FROM_GENERIC_SLOT: ReadonlyArray<keyof Components> = [
   "ButtonGroupSeparator",
   "FieldSeparator",
 ];
 
-/** Default allow list for generic slots (Section, Flex, Dialog content, etc.). Spread when using: allow: [...SLOT_ALLOW_DEFAULT]. */
 export const SLOT_ALLOW_DEFAULT: ReadonlyArray<keyof Components> = COMPONENT_LIST.filter(
   (c) => !EXCLUDE_FROM_GENERIC_SLOT.includes(c.name)
 ).map((c) => c.name);
