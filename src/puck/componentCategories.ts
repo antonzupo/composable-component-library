@@ -1,101 +1,23 @@
 import type { PuckCategory } from "@/puck/categories";
 import type { Components } from "@/puck/types";
-
-const COMPONENT_CATEGORIES: Array<{
-  category: PuckCategory;
-  components: (keyof Components)[];
-}> = [
-  {
-    category: "atoms",
-    components: [
-      "AspectRatio",
-      "Avatar",
-      "Badge",
-      "Button",
-      "Checkbox",
-      "Image",
-      "Input",
-      "InputGroup",
-      "TextArea",
-      "InputOTP",
-      "Kbd",
-      "Label",
-      "NativeSelect",
-      "Progress",
-      "RadioGroup",
-      "Separator",
-      "Slider",
-      "Skeleton",
-      "Spinner",
-      "Switch",
-      "Toggle",
-      "Typography",
-    ],
-  },
-  {
-    category: "molecules",
-    components: [
-      "Accordion",
-      "Alert",
-      "AlertDialog",
-      "AvatarGroup",
-      "Breadcrumb",
-      "ButtonGroup",
-      "ButtonGroupSeparator",
-      "ToggleGroup",
-      "Calendar",
-      "Card",
-      "Carousel",
-      "Chart",
-      "Collapsible",
-      "Combobox",
-      "Command",
-      "Select",
-      "Sonner",
-      "ContextMenu",
-      "DataTable",
-      "Table",
-      "Tabs",
-      "DatePicker",
-      "Dialog",
-      "Drawer",
-      "DropdownMenu",
-      "Empty",
-      "HoverCard",
-      "Tooltip",
-      "Item",
-      "Menubar",
-      "NavigationMenu",
-      "Pagination",
-      "Popover",
-      "Sheet",
-      "Sidebar",
-    ],
-  },
-  {
-    category: "organisms",
-    components: ["HeroCard", "Section"],
-  },
-  {
-    category: "layout",
-    components: [
-      "Field",
-      "Fieldset",
-      "FieldGroup",
-      "FieldContent",
-      "FieldSeparator",
-      "Flex",
-      "Grid",
-      "GridItem",
-      "Resizable",
-      "ScrollArea",
-      "Space",
-    ],
-  },
-];
+import { COMPONENT_LIST } from "@/puck/allowLists";
 
 export const COMPONENT_CATEGORY_MAP = Object.fromEntries(
-  COMPONENT_CATEGORIES.flatMap(({ category, components }) =>
-    components.map((name) => [name, category])
-  )
+  COMPONENT_LIST.map(({ name, category }) => [name, category])
 ) as Record<keyof Components, PuckCategory>;
+
+export const COMPONENT_CATEGORIES: Array<{
+  category: PuckCategory;
+  components: (keyof Components)[];
+}> = (() => {
+  const byCategory = new Map<PuckCategory, (keyof Components)[]>();
+  for (const { name, category } of COMPONENT_LIST) {
+    const list = byCategory.get(category) ?? [];
+    list.push(name);
+    byCategory.set(category, list);
+  }
+  return Array.from(byCategory.entries()).map(([category, components]) => ({
+    category,
+    components,
+  }));
+})();

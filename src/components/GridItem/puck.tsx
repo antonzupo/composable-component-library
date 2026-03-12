@@ -1,61 +1,17 @@
 import type { ComponentType, Ref } from "react";
 import { GridItem } from "@/components/GridItem/GridItem";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type GridItemProps = Components["GridItem"];
 type PuckRenderProps = { puck?: { dragRef?: Ref<HTMLDivElement> | null } };
-
-const gridItemContentAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "DataTable",
-  "DatePicker",
-  "Dialog",
-  "Drawer",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "Flex",
-  "HeroCard",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Item",
-  "Menubar",
-  "NavigationMenu",
-  "Pagination",
-  "Popover",
-  "Progress",
-  "Resizable",
-  "ScrollArea",
-  "Section",
-  "Select",
-  "Sheet",
-  "Sidebar",
-  "Space",
-] as const;
 
 export const gridItemPuckConfig = {
   GridItem: {
     label: "Grid item",
     inline: true,
     fields: {
-      content: { type: "slot" as const, label: "Content", allow: [...gridItemContentAllow], disallow: ["GridItem"] },
+      content: { type: "slot" as const, label: "Content", allow: [...SLOT_ALLOW_DEFAULT], disallow: ["GridItem"] },
       spanColumns: {
         type: "select" as const,
         label: "Span columns",

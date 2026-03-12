@@ -1,44 +1,10 @@
 import type { ComponentType } from "react";
 import { Button } from "@/components/ui/button";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type TooltipProps = Components["Tooltip"];
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Section",
-  "Space",
-  "Tooltip",
-] as const;
 
 export const tooltipPuckConfig = {
   Tooltip: {
@@ -51,7 +17,7 @@ export const tooltipPuckConfig = {
       trigger: {
         type: "slot" as const,
         label: "Trigger",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       content: {
         type: "text" as const,
@@ -99,7 +65,7 @@ export const tooltipPuckConfig = {
         typeof TriggerContent === "function" && !Array.isArray(trigger);
       const triggerNode = triggerIsSlotComponent ? (
         <TriggerContent
-          allow={[...slotAllow]}
+          allow={[...SLOT_ALLOW_DEFAULT]}
           minEmptyHeight={44}
         />
       ) : (

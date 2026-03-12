@@ -1,40 +1,7 @@
 import type { ComponentType } from "react";
 import { Collapsible } from "@/components/Collapsible/Collapsible";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
-
-const contentAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-] as const;
 
 type CollapsibleProps = Components["Collapsible"];
 
@@ -61,7 +28,7 @@ const baseFields = {
   content: {
     type: "slot" as const,
     label: "Content",
-    allow: [...contentAllow],
+    allow: [...SLOT_ALLOW_DEFAULT],
   },
   defaultOpen: {
     type: "radio" as const,

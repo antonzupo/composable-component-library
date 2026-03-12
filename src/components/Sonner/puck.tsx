@@ -1,7 +1,46 @@
+import { Button } from "@/components/ui/button";
 import { Sonner } from "@/components/Sonner/Sonner";
+import { useIsPuckEditor } from "@/puck/editorContext";
 import type { Components } from "@/puck/types";
+import { toast } from "sonner";
+
+const PUCK_SONNER_ID = "puck-sonner";
 
 type SonnerProps = Components["Sonner"];
+
+function SonnerCanvas(props: SonnerProps) {
+  const isEditor = useIsPuckEditor();
+  const toasterId = props.id || PUCK_SONNER_ID;
+
+  const triggerButton = (
+    <Button
+      type="button"
+      size="sm"
+      variant="outline"
+      onClick={() =>
+        toast.success("Preview toast", { toasterId })
+      }
+    >
+      Preview toast
+    </Button>
+  );
+
+  return (
+    <>
+      <Sonner {...props} id={toasterId} />
+      {isEditor ? (
+        <div className="flex min-h-[80px] flex-col items-center justify-center gap-2 rounded-md border border-dashed border-muted-foreground/30 bg-muted/20 p-4">
+          <span className="text-muted-foreground text-sm">
+            Toaster ({props.position})
+          </span>
+          {triggerButton}
+        </div>
+      ) : (
+        triggerButton
+      )}
+    </>
+  );
+}
 
 export const sonnerPuckConfig = {
   Sonner: {
@@ -54,6 +93,6 @@ export const sonnerPuckConfig = {
       className: "",
       id: "",
     } satisfies SonnerProps,
-    render: (props: SonnerProps) => <Sonner {...props} />,
+    render: (props: SonnerProps) => <SonnerCanvas {...props} />,
   },
 };

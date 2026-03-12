@@ -1,43 +1,8 @@
 import type { ComponentType } from "react";
 import { Popover } from "@/components/Popover/Popover";
 import { Button } from "@/components/ui/button";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "Drawer",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Section",
-  "Space",
-  "Popover",
-] as const;
 
 export const popoverPuckConfig = {
   Popover: {
@@ -50,12 +15,12 @@ export const popoverPuckConfig = {
       trigger: {
         type: "slot" as const,
         label: "Trigger (e.g. button that opens the popover)",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       content: {
         type: "slot" as const,
         label: "Popover content",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       contentClassName: { type: "text", label: "Content class name" },
       align: {

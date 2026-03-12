@@ -7,7 +7,6 @@ function localDateString(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-/** Template data for the Puck editor. */
 export const sampleData: Data = {
   root: {
     props: {

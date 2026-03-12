@@ -1,43 +1,7 @@
 import type { ComponentType } from "react";
 import { ScrollArea } from "@/components/ScrollArea/ScrollArea";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
-
-const contentAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-  "Separator",
-  "Progress",
-  "Skeleton",
-] as const;
 
 const defaultProps: Components["ScrollArea"] = {
   type: "hover",
@@ -113,7 +77,7 @@ export const scrollAreaPuckConfig = {
         type: "slot" as const,
         label: "Content",
         description: "Content inside the scroll area.",
-        allow: [...contentAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       // Scrollbars
       showVerticalScrollbar: {

@@ -7,7 +7,6 @@ export type AreaContentProps = {
   style?: React.CSSProperties;
   allow?: string[];
   disallow?: string[];
-  /** Puck slot: collision axis for drag-and-drop (grid defaults to "dynamic") */
   collisionAxis?: "x" | "y" | "dynamic";
 };
 
@@ -344,15 +343,9 @@ export type Components = {
     className: string;
     id: string;
   };
-  DataTable: {
-    columns: Array<{ id: string; header: string }>;
-    rows: Array<{ values: string }>;
-    caption: string;
-    className: string;
-    id: string;
-  };
   Table: {
     dataSourceMode: "manual" | "api";
+    dataSourceUrl: string;
     dataSource: (TableData & { id?: string }) | null;
     columns: TableData["columns"];
     rows: TableData["rows"];
@@ -391,15 +384,10 @@ export type Components = {
     className: string;
     id: string;
     defaultOpen: boolean;
-    /** Which side the drawer opens from. @default "bottom" */
     direction: "top" | "bottom" | "left" | "right";
-    /** Scale background when drawer is open. @default true */
     shouldScaleBackground: boolean;
-    /** When false, allows interacting with elements outside without closing. @default true */
     modal: boolean;
-    /** When false, dragging/click outside/esc will not close. @default true */
     dismissible: boolean;
-    /** Show the drag handle bar at the top of the drawer. @default true */
     showHandle: boolean;
     title: string;
     description: string;
@@ -740,7 +728,6 @@ export type Components = {
     tagName: string;
     className: string;
     id: string;
-    // Group (v4): all optional props (Layout = map of panel id to percentage)
     groupDefaultLayout?: Record<string, number>;
     groupDisableCursor?: boolean;
     groupDisabled?: boolean;
@@ -750,7 +737,6 @@ export type Components = {
     groupStyle?: React.CSSProperties;
     onLayoutChange?: (layout: Record<string, number>) => void;
     onLayoutChanged?: (layout: Record<string, number>) => void;
-    // Panel 1
     panel1Content: unknown[];
     panel1DefaultSize: number;
     panel1MinSize: number;
@@ -764,13 +750,11 @@ export type Components = {
     panel1GroupResizeBehavior?: "preserve-relative-size" | "preserve-pixel-size";
     panel1Style?: React.CSSProperties;
     panel1Ref?: React.Ref<import("react-resizable-panels").PanelImperativeHandle | null>;
-    // Handle / Separator (v4)
     handleWithHandle: boolean;
     handleClassName: string;
     handleDisabled?: boolean;
     handleId?: string;
     handleStyle?: React.CSSProperties;
-    // Panel 2
     panel2Content: unknown[];
     panel2DefaultSize: number;
     panel2MinSize: number;

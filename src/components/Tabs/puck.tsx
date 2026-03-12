@@ -3,45 +3,10 @@ import { Tabs as TabsRoot, TabsList, TabsTrigger, TabsContent } from "@/componen
 import { tabsListVariantClasses, tabsTriggerVariantClasses } from "@/components/Tabs/Tabs";
 import { useIsPuckEditor } from "@/puck/editorContext";
 import { cn } from "@/lib/utils";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type TabsProps = Components["Tabs"];
-
-const tabContentAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-  "Table",
-  "Tabs",
-] as const;
 
 const editorOnlyContentClassName =
   "group [&[hidden]]:!block [&[hidden]]:!mt-4 [&[hidden]]:rounded-md [&[hidden]]:border [&[hidden]]:border-dashed [&[hidden]]:border-muted-foreground/30 [&[hidden]]:bg-muted/20 [&[hidden]]:p-3 [&[hidden]]:min-h-[44px]";
@@ -128,7 +93,7 @@ export const tabsPuckConfig = {
           content: {
             type: "slot" as const,
             label: "Content",
-            allow: [...tabContentAllow],
+            allow: [...SLOT_ALLOW_DEFAULT],
           },
         },
         defaultItemProps: () => ({ value: "", label: "", content: [] }),

@@ -1,47 +1,10 @@
 import type { ComponentType } from "react";
 import { Sheet } from "@/components/Sheet/Sheet";
 import { Button } from "@/components/ui/button";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type SheetProps = Components["Sheet"];
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "DataTable",
-  "DatePicker",
-  "Dialog",
-  "Drawer",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-  "Sheet",
-] as const;
 
 export const sheetPuckConfig = {
   Sheet: {
@@ -54,12 +17,12 @@ export const sheetPuckConfig = {
       trigger: {
         type: "slot" as const,
         label: "Trigger (e.g. button that opens the sheet)",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       content: {
         type: "slot" as const,
         label: "Sheet content",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       contentLabel: { type: "text" as const, label: "Content accessibility label" },
       contentClassName: { type: "text" as const, label: "Content class name" },
@@ -136,12 +99,12 @@ export const sheetPuckConfig = {
       const contentIsSlotComponent =
         typeof Content === "function" && !Array.isArray(content);
       const triggerNode = triggerIsSlotComponent ? (
-        <TriggerContent allow={[...slotAllow]} minEmptyHeight={40} />
+        <TriggerContent allow={[...SLOT_ALLOW_DEFAULT]} minEmptyHeight={40} />
       ) : (
         <Button type="button">{triggerLabel || "Open sheet"}</Button>
       );
       const contentNode = contentIsSlotComponent ? (
-        <Content allow={[...slotAllow]} minEmptyHeight={80} />
+        <Content allow={[...SLOT_ALLOW_DEFAULT]} minEmptyHeight={80} />
       ) : (
         <span className="text-muted-foreground text-sm">
           Add content to the sheet

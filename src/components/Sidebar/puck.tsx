@@ -1,39 +1,9 @@
 import type { ComponentType } from "react";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type SidebarProps = Components["Sidebar"];
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "DataTable",
-  "DatePicker",
-  "Dialog",
-  "Drawer",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-] as const;
 
 export const sidebarPuckConfig = {
   Sidebar: {
@@ -76,12 +46,12 @@ export const sidebarPuckConfig = {
       sidebarContent: {
         type: "slot" as const,
         label: "Sidebar content",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       mainContent: {
         type: "slot" as const,
         label: "Main content",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },

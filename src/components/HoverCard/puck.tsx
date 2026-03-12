@@ -1,46 +1,10 @@
 import type { ComponentType } from "react";
 import { HoverCard } from "@/components/HoverCard/HoverCard";
 import { Button } from "@/components/ui/button";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type HoverCardProps = Components["HoverCard"];
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "DataTable",
-  "DatePicker",
-  "Dialog",
-  "Drawer",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-] as const;
 
 export const hoverCardPuckConfig = {
   HoverCard: {
@@ -53,12 +17,12 @@ export const hoverCardPuckConfig = {
       trigger: {
         type: "slot" as const,
         label: "Trigger (e.g. button or link that shows the card on hover)",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       content: {
         type: "slot" as const,
         label: "Hover card content",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       contentClassName: { type: "text", label: "Content class name" },
       openDelay: { type: "number", label: "Open delay (ms)" },
@@ -97,14 +61,14 @@ export const hoverCardPuckConfig = {
       const contentIsSlotComponent =
         typeof Content === "function" && !Array.isArray(content);
       const triggerNode = triggerIsSlotComponent ? (
-        <TriggerContent allow={[...slotAllow]} minEmptyHeight={40} />
+        <TriggerContent allow={[...SLOT_ALLOW_DEFAULT]} minEmptyHeight={40} />
       ) : (
         <Button type="button" variant="outline" size="sm">
           {triggerLabel || "Hover me"}
         </Button>
       );
       const contentNode = contentIsSlotComponent ? (
-        <Content allow={[...slotAllow]} minEmptyHeight={80} />
+        <Content allow={[...SLOT_ALLOW_DEFAULT]} minEmptyHeight={80} />
       ) : (
         <span className="text-muted-foreground text-sm">
           Add content to the hover card

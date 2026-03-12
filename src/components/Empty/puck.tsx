@@ -1,46 +1,13 @@
 import type { ComponentType } from "react";
 import { iconNames } from "lucide-react/dynamic";
 import { Empty } from "@/components/Empty/Empty";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 const lucideIconOptions = [
   { label: "— None —", value: "" },
   ...[...iconNames].sort((a, b) => a.localeCompare(b)).map((name) => ({ label: name, value: name })),
 ];
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-] as const;
 
 export const emptyPuckConfig = {
   Empty: {
@@ -69,7 +36,7 @@ export const emptyPuckConfig = {
       content: {
         type: "slot" as const,
         label: "Content (e.g. action button below text)",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },

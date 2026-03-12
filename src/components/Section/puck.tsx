@@ -1,57 +1,13 @@
 import type { ComponentType } from "react";
 import { Section } from "@/components/Section/Section";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { Components } from "@/puck/types";
-
-const sectionContentAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "DataTable",
-  "DatePicker",
-  "Dialog",
-  "Drawer",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Item",
-  "Menubar",
-  "NavigationMenu",
-  "Pagination",
-  "Popover",
-  "Progress",
-  "Resizable",
-  "ScrollArea",
-  "Select",
-  "Sheet",
-  "Sidebar",
-  "Space",
-] as const;
 
 export const sectionPuckConfig = {
   Section: {
     label: "Section",
     fields: {
-      content: { type: "slot", label: "Content", allow: [...sectionContentAllow] },
+      content: { type: "slot", label: "Content", allow: [...SLOT_ALLOW_DEFAULT] },
       className: { type: "text", label: "Class name" },
       id: { type: "text", label: "ID" },
     },

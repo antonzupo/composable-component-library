@@ -1,60 +1,15 @@
 import type { ComponentType } from "react";
 import { cn } from "@/lib/utils";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type FlexProps = Components["Flex"];
-
-const flexContentAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "DataTable",
-  "DatePicker",
-  "Dialog",
-  "Drawer",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Item",
-  "Menubar",
-  "NavigationMenu",
-  "Pagination",
-  "Popover",
-  "Progress",
-  "Resizable",
-  "ScrollArea",
-  "Section",
-  "Select",
-  "Sheet",
-  "Sidebar",
-  "Space",
-] as const;
 
 export const flexPuckConfig = {
   Flex: {
     label: "Flex",
     fields: {
-      content: { type: "slot" as const, label: "Content", allow: [...flexContentAllow] },
+      content: { type: "slot" as const, label: "Content", allow: [...SLOT_ALLOW_DEFAULT] },
       direction: {
         type: "select" as const,
         label: "Direction",

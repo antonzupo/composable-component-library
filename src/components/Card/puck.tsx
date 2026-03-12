@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/Card/Card";
 import { cn } from "@/lib/utils";
+import { SLOT_ALLOW_DEFAULT } from "@/puck/allowLists";
 import type { AreaContentProps, Components } from "@/puck/types";
 
 type CardProps = Components["Card"];
@@ -25,40 +26,6 @@ const cardSizeClasses: Record<"sm" | "default" | "lg", string> = {
   default: "rounded-lg",
   lg: "rounded-xl",
 };
-
-const slotAllow = [
-  "Typography",
-  "Badge",
-  "Button",
-  "Image",
-  "Checkbox",
-  "Card",
-  "Accordion",
-  "Alert",
-  "AlertDialog",
-  "AspectRatio",
-  "Avatar",
-  "Breadcrumb",
-  "Calendar",
-  "Carousel",
-  "Chart",
-  "Collapsible",
-  "Combobox",
-  "Command",
-  "ContextMenu",
-  "Dialog",
-  "DropdownMenu",
-  "Empty",
-  "Field",
-  "HoverCard",
-  "Input",
-  "InputGroup",
-  "Flex",
-  "Grid",
-  "HeroCard",
-  "Section",
-  "Space",
-] as const;
 
 const footerAllow = ["Button", "Typography", "Badge"] as const;
 
@@ -113,7 +80,7 @@ export const cardPuckConfig = {
       content: {
         type: "slot" as const,
         label: "Content",
-        allow: [...slotAllow],
+        allow: [...SLOT_ALLOW_DEFAULT],
       },
       showCardAction: {
         type: "select" as const,

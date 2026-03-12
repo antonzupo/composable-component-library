@@ -63,7 +63,7 @@ Component props are defined centrally in `src/puck/types.ts` as the `Components`
 Components are grouped for the Puck editor as:
 
 - **Atoms** – Button, Badge, Input, Checkbox, Avatar, Typography, Skeleton, Spinner, etc.
-- **Molecules** – Accordion, Card, Dialog, Tabs, DataTable, DropdownMenu, DatePicker, etc.
+- **Molecules** – Accordion, Card, Dialog, Tabs, Table, DropdownMenu, DatePicker, etc.
 - **Organisms** – HeroCard, Section
 - **Layout** – Flex, Grid, GridItem, Field, Fieldset, Resizable, ScrollArea, Space
 

@@ -56,6 +56,21 @@ export async function getTableData(id?: string): Promise<TableData> {
   return id ? { ...mockTableData, caption: `Table: ${id}` } : { ...mockTableData };
 }
 
+/** Fetches table data from a URL. Expects JSON: { columns, rows, caption }. */
+export async function fetchTableDataFromUrl(url: string): Promise<TableData> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Table API error: ${res.status}`);
+  const data = (await res.json()) as TableData;
+  if (!Array.isArray(data.columns) || !Array.isArray(data.rows)) {
+    throw new Error("Invalid table API response: expected { columns, rows, caption? }");
+  }
+  return {
+    columns: data.columns,
+    rows: data.rows,
+    caption: data.caption ?? "",
+  };
+}
+
 /** Fetches list of tables for external data source picker. */
 export async function getTableList(query?: string): Promise<TableDataItem[]> {
   await Promise.resolve();

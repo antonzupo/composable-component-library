@@ -41,7 +41,6 @@ import { commandPuckConfig } from "@/components/Command/puck";
 import { selectPuckConfig } from "@/components/Select/puck";
 import { sonnerPuckConfig } from "@/components/Sonner/puck";
 import { contextMenuPuckConfig } from "@/components/ContextMenu/puck";
-import { dataTablePuckConfig } from "@/components/DataTable/puck";
 import { tablePuckConfig } from "@/components/Table/puck";
 import { tabsPuckConfig } from "@/components/Tabs/puck";
 import { datePickerPuckConfig } from "@/components/DatePicker/puck";
@@ -172,7 +171,6 @@ export const config: Config<Components> = {
     ...selectPuckConfig,
     ...sonnerPuckConfig,
     ...contextMenuPuckConfig,
-    ...dataTablePuckConfig,
     ...tablePuckConfig,
     ...tabsPuckConfig,
     ...datePickerPuckConfig,
