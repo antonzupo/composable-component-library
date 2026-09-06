@@ -1,4 +1,4 @@
-# Hi Anton, Plz contact with me - JW6344009@gmail.com
+# Composable Component Library
 
 ShadCN UI components wired for the [Puck](https://puckeditor.com/) editor. Built with TypeScript, Vite, and Tailwind CSS; composable wrappers and Puck configs let you edit pages and components visually.
 
